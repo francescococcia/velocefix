@@ -160,7 +160,7 @@ const DOT = { red: "bg-red-500", amber: "bg-amber-400", teal: "bg-brand-tint0", 
 function Chip({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="rounded-xl bg-slate-50 px-3 py-2 ring-1 ring-slate-200">
-      <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
       <p className="text-base font-semibold tabular-nums text-slate-900">{value}</p>
     </div>
   );
@@ -201,10 +201,10 @@ function Pill({
 function InfoTip({ text }: { text: string }) {
   return (
     <span className="group relative inline-flex">
-      <button type="button" className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-[11px] font-semibold text-slate-600" aria-label="About map positions" title={text}>
+      <button type="button" className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600" aria-label="About map positions" title={text}>
         i
       </button>
-      <span className="pointer-events-none absolute left-0 top-7 z-[1100] hidden w-64 rounded-lg border border-line bg-surface p-2 text-[11px] leading-snug text-slate-700 shadow-lg group-hover:block group-focus-within:block">
+      <span className="pointer-events-none absolute left-0 top-7 z-[1100] hidden w-64 rounded-lg border border-line bg-surface p-2 text-xs leading-snug text-slate-700 shadow-lg group-hover:block group-focus-within:block">
         {text}
       </span>
     </span>
@@ -372,7 +372,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                       <span className="inline-block h-2 w-2 rounded-full" style={{ background: HEALTH[healthOf(selected)].fill }} />
                       {HEALTH[healthOf(selected)].label}
                     </p>
@@ -483,7 +483,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
                 exit={reduce ? undefined : { opacity: 0, x: 16 }}
                 transition={spring}
               >
-                <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Recap</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Recap</p>
                 <p className="mt-1 text-sm text-slate-800">
                   {data.buildings.length} building{data.buildings.length === 1 ? "" : "s"} on the map, {units} units.{" "}
                   {countOf("red")} need attention, {countOf("amber")} to watch, {countOf("green")} on track.
@@ -517,7 +517,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
                   </motion.ul>
                 )}
 
-                <p className="mt-4 text-[10px] font-semibold uppercase tracking-wide text-slate-500">Buildings</p>
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-wide text-slate-500">Buildings</p>
                 <ul className="mt-1 grid gap-2">
                   {visible.map((b) => {
                     const h = healthOf(b);
@@ -531,7 +531,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
                         >
                           <span className="flex items-center gap-2">
                             <span className="font-semibold text-slate-900">{b.name}</span>
-                            <span className="ml-auto text-[10px] font-semibold uppercase tracking-wide text-slate-600">{HEALTH[h].label}</span>
+                            <span className="ml-auto text-[11px] font-semibold uppercase tracking-wide text-slate-600">{HEALTH[h].label}</span>
                           </span>
                           <span className="mt-0.5 block text-xs text-slate-600">
                             {[b.city, b.unitCount ? `${b.unitCount} units` : null, b.occupancyPercent != null ? `${b.occupancyPercent.toFixed(1)}% occupied` : null].filter(Boolean).join(" · ")}

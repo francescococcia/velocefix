@@ -24,7 +24,7 @@ export function JourneyStrip({ className = "" }: { className?: string }) {
               href={s.href}
               className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-canvas px-2.5 text-xs font-medium text-slate-700 ring-1 ring-line transition hover:-translate-y-0.5 hover:bg-brand-tint hover:shadow-sm motion-reduce:transform-none"
             >
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-semibold text-white">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[11px] font-semibold text-white">
                 {s.n}
               </span>
               {s.short}
@@ -141,7 +141,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
                 {s.icon}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Step {s.n}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Step {s.n}</p>
                 <h2 className="text-lg font-semibold text-slate-900">{s.title}</h2>
                 <p className="mt-1 text-sm text-slate-700">{s.body}</p>
                 <p className="mt-2 text-xs text-slate-600">
@@ -172,7 +172,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
             🤖
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-violet-800">Ask Grok Bot</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-violet-800">Ask Grok Bot</p>
             <h2 className="text-lg font-semibold text-slate-900">“What&apos;s urgent on the repairs desk?”</h2>
             <p className="mt-1 text-sm text-slate-700">
               Grok Bot reads the no-PII <code className="text-xs">/api/ops</code> feed — job id, building, priority, SLA and checks only. No tenant names or phone numbers.

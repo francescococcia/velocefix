@@ -15,7 +15,7 @@ export function VerifiedHistory({ work }: { work: Work }) {
   return (
     <li className="mt-2 rounded-lg border border-brand-soft bg-brand-tint p-3 text-sm">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded bg-brand px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">Verified history</span>
+        <span className="rounded bg-brand px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">Verified history</span>
         <span className="font-semibold">{workDoneLabel(work.workDone ?? "")}</span>
         {work.completedAt && <span className="text-xs text-slate-500">{formatLondon(work.completedAt)} Europe/London</span>}
       </div>
@@ -28,7 +28,7 @@ export function VerifiedHistory({ work }: { work: Work }) {
         {work.photoUrl && <div><dt className="inline font-semibold">Photo (reference, not downloaded): </dt><dd className="inline break-all">{work.photoUrl}</dd></div>}
         {work.operatorName && <div><dt className="inline font-semibold">Operator: </dt><dd className="inline">{work.operatorName}{work.operatorTrade ? ` · ${work.operatorTrade.replace(/_/g, " ")}` : ""}</dd></div>}
       </dl>
-      <p className="mt-2 text-[11px] text-slate-500">{plainSource(work.source)}</p>
+      <p className="mt-2 text-xs text-slate-500">{plainSource(work.source)}</p>
     </li>
   );
 }

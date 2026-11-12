@@ -5,13 +5,19 @@
 @theme {
   --color-canvas: #f7f9fc;       /* page background */
   --color-surface: #ffffff;      /* cards, header, map chrome */
-  --color-line: #e2e8f0;         /* hairlines and input borders */
+  --color-line: #d5dde8;         /* hairlines and card edges */
   --color-ink: #0f172a;          /* headings, body: 17:1 on surface */
-  --color-muted: #5b6b80;        /* secondary text: 5.4:1 on surface, 5.1:1 on canvas */
+  --color-muted: #4d5b70;        /* secondary text: 6.9:1 on surface */
   --color-brand: #0f766e;        /* buttons, active pills: white text 5.5:1 */
   --color-brand-strong: #115e59; /* links, hover: 7.6:1 on surface */
   --color-brand-soft: #ccfbf1;   /* chips */
   --color-brand-tint: #f0fdfa;   /* washes */
+
+  /* Legibility, applied everywhere at once: small text one step larger, secondary greys one step darker. */
+  --text-xs: 0.8125rem;            /* 13px, was 12px */
+  --text-xs--line-height: 1.5;
+  --color-slate-500: #4d5b70;      /* was #64748b: now 6.9:1 on surface */
+  --color-slate-600: #334155;      /* was #475569 */
 }
 
 html { background: var(--color-canvas); }
@@ -43,7 +49,7 @@ body:has(.vf-dash-bg) { background: transparent; }
 .vf-glass {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -16px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 10px 26px -16px rgba(15, 23, 42, 0.18);
   border-radius: 1rem;
 }
 .vf-glass { transition: transform 0.2s ease, box-shadow 0.2s ease; }

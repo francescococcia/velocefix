@@ -27,11 +27,11 @@ function buildingKind(type?: string) {
 }
 
 // Chat thread in an expanded job: tenant on the left, Velo on the right, system notes centred.
-const note = "self-center rounded-xl bg-surface px-3 py-1 text-center text-[11px] ring-1 ring-line";
+const note = "self-center rounded-xl bg-surface px-3 py-1 text-center text-xs ring-1 ring-line";
 const fromTenant = "max-w-[88%] self-start rounded-2xl rounded-bl-md bg-surface px-3 py-2 shadow-sm ring-1 ring-line";
 const fromVelo = "max-w-[92%] self-end rounded-2xl rounded-br-md bg-brand-tint px-3 py-2 ring-1 ring-brand-soft";
-const who = "text-[10px] font-semibold uppercase tracking-wide text-slate-500";
-const chip = "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide";
+const who = "text-[11px] font-semibold uppercase tracking-wide text-slate-500";
+const chip = "rounded px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide";
 const short: Intl.DateTimeFormatOptions = { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" };
 const mark = (status: string) => (status === "green" ? "🟢" : status === "amber" ? "🟠" : "🔴");
 
@@ -174,13 +174,13 @@ export default async function Dashboard() {
               )}
             </ul>
             {j.proposal.by === "grok" && (
-              <p className="mt-1 text-[11px] text-slate-500">
+              <p className="mt-1 text-xs text-slate-500">
                 Proposed by Grok{j.proposal.model ? ` (${j.proposal.model})` : ""}{j.proposal.confidence != null ? ` · confidence ${Math.round(j.proposal.confidence * 100)}%` : ""}. Proposal only — priority and checks are decided by code.
                 {j.proposal.followUpQuestion ? ` Follow-up: ${j.proposal.followUpQuestion}` : ""}
               </p>
             )}
-            {j.proposal.by === "fallback" && <p className="mt-1 text-[11px] text-slate-500">Keyword fallback — Grok was not used for this proposal. Priority and checks are decided by code.</p>}
-            {dwelly && <p className="mt-1 text-[11px] text-slate-500">Synthetic Dwelly hackathon case; ZZ postcode; original thread was not WhatsApp.</p>}
+            {j.proposal.by === "fallback" && <p className="mt-1 text-xs text-slate-500">Keyword fallback — Grok was not used for this proposal. Priority and checks are decided by code.</p>}
+            {dwelly && <p className="mt-1 text-xs text-slate-500">Synthetic Dwelly hackathon case; ZZ postcode; original thread was not WhatsApp.</p>}
           </FadeIn>
           {j.status === "booked" && slot && (
             <p className={`${note} flex flex-wrap items-center justify-center gap-2 font-semibold text-green-700`}>
@@ -196,7 +196,7 @@ export default async function Dashboard() {
           </div>
           {history.length > 0 && (
             <div className="mt-1">
-              <h3 className="text-center text-[11px] font-semibold uppercase tracking-wide text-slate-500">Unit history ({history.length})</h3>
+              <h3 className="text-center text-xs font-semibold uppercase tracking-wide text-slate-500">Unit history ({history.length})</h3>
               <ul className="mt-1 space-y-1">
                 {history.map((w) => (
                   <VerifiedHistory key={w.id} work={w} />
@@ -227,7 +227,7 @@ export default async function Dashboard() {
         <FadeIn delay={0.1} className="vf-glass p-4">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Needs attention ({attention.length})</h2>
           {attention.length === 0 && <p className="mt-1 text-sm text-slate-500">Nothing waiting on the desk.</p>}
-          <ul className="mt-1 divide-y">
+          <ul className="mt-1 divide-y divide-line">
             {attention.map((j) => {
               const { unit, building } = where(j);
               const st = statusText(j);

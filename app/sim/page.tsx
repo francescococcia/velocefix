@@ -81,11 +81,11 @@ export default function Sim() {
           <div key={i} className={`max-w-[85%] rounded-lg p-2 text-sm whitespace-pre-wrap shadow ${m.dir === "in" ? "ml-auto bg-[#dcf8c6]" : "bg-white"}`}>
             {m.text}
             {m.checks && m.checks.length > 0 && (
-              <ul className="mt-1 border-t pt-1 text-[11px]">
+              <ul className="mt-1 border-t pt-1 text-xs">
                 {m.checks.map((c) => <li key={c.id}>{c.status === "green" ? "🟢" : "🔴"} {c.label}: <span className="text-slate-600">{c.detail}</span></li>)}
               </ul>
             )}
-            {m.meta && <div className="text-[10px] text-slate-500 mt-1">{m.meta}</div>}
+            {m.meta && <div className="text-[11px] text-slate-500 mt-1">{m.meta}</div>}
           </div>
         ))}
         {busy && <div className="text-xs text-slate-600">typing…</div>}

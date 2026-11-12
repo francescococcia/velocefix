@@ -48,7 +48,7 @@ function BuildingCard({
     <section className="vf-glass p-4">
       <div className="flex items-start gap-2">
         <h3 className="text-lg font-semibold">{b.name}</h3>
-        <span className="mt-1 shrink-0 rounded bg-brand-soft px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-strong">
+        <span className="mt-1 shrink-0 rounded bg-brand-soft px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-brand-strong">
           Cortile live
         </span>
       </div>
