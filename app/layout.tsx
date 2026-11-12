@@ -9,10 +9,12 @@ export const preferredRegion = "lhr1";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB">
-      <body className="relative min-h-screen font-sans">
+      <body className="relative flex min-h-screen flex-col font-sans">
         <SiteHeader />
-        <div className="relative z-20 bg-amber-100 text-amber-900 text-xs text-center py-1">Example data: fictional buildings, tenants, certificates and slots, plus labelled Dwelly partner cases (synthetic) and Cortile live records when a key is set (synthetic, event only). Clocks are agency policy (private lets), not Awaab&apos;s Law.</div>
-        <main className="relative z-10 mx-auto max-w-6xl px-4 py-6">{children}</main>
+        <main className="relative z-10 mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
+        <footer className="relative z-10 border-t border-line bg-surface/80 px-4 py-3 text-center text-xs text-muted">
+          Demo data: the buildings, people, certificates and slots shown are fictional or synthetic. Clocks are agency policy (private lets), not Awaab&apos;s Law.
+        </footer>
       </body>
     </html>
   );

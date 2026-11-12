@@ -55,7 +55,7 @@ export function AreaPrices({ district }: { district: string }) {
         {data.from && data.to ? ` · ${formatDay(data.from)}–${formatDay(data.to)}` : " · last 24 months"}
         {data.latestSaleOn ? ` · latest recorded ${formatDay(data.latestSaleOn)}` : ""}
       </p>
-      <p className="mt-1 text-xs text-slate-400">
+      <p className="mt-1 text-xs text-slate-500">
         Source:{" "}
         <a className="underline" href={data.queryUrl ?? LAND_REGISTRY_SPARQL} target="_blank" rel="noreferrer">
           {data.source ?? LAND_REGISTRY_SOURCE}

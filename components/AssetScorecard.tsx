@@ -23,7 +23,7 @@ function hours(n: number) {
 
 function Source({ children, href = CORTILE_DOCS }: { children: ReactNode; href?: string }) {
   return (
-    <span className="text-xs text-slate-400">
+    <span className="text-xs text-slate-500">
       —{" "}
       <a className="underline" href={href} target="_blank" rel="noreferrer">
         {children}
@@ -34,7 +34,7 @@ function Source({ children, href = CORTILE_DOCS }: { children: ReactNode; href?:
 
 function Tile({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <section className="rounded-lg bg-white p-4 shadow">
+    <section className="vf-card p-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
       <div className="mt-1">{children}</div>
     </section>
@@ -89,7 +89,7 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
     <FadeIn className="space-y-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-teal-800">Asset view · investor / asset manager</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-brand-strong">Asset view · investor / asset manager</p>
           <h1 className="text-2xl font-semibold">{view.name}</h1>
           <p className="text-sm text-slate-600">
             {[
@@ -234,7 +234,7 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
           ) : vf && vf.total > 0 ? (
             <p className="mt-1 text-sm text-slate-600">No completion records yet, so time to contractor is not computed from VeloceFix jobs.</p>
           ) : null}
-          <p className="mt-1 text-xs text-slate-400">— VeloceFix in-memory store (resets on a cold start)</p>
+          <p className="mt-1 text-xs text-slate-500">— VeloceFix in-memory store (resets on a cold start)</p>
         </Tile>
 
         <Tile label="Compliance">
@@ -259,7 +259,7 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
         </Tile>
       </div>
 
-      <section className="rounded-lg bg-white p-4 shadow">
+      <section className="vf-card p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Area</p>
         {view.area?.postcodeDistrict ? (
           <>
@@ -276,7 +276,7 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
               {view.area.outcode ? (
                 <Source href={POSTCODES_IO}>postcodes.io outcodes/{view.area.outcode.outcode}</Source>
               ) : (
-                <span className="text-xs text-slate-400"> — postcodes.io lookup failed</span>
+                <span className="text-xs text-slate-500"> — postcodes.io lookup failed</span>
               )}
             </p>
             <p className="mt-1 text-xs text-slate-500">{view.area.syntheticPostcodeNote}</p>

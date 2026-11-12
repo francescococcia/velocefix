@@ -22,9 +22,9 @@ export function JourneyStrip({ className = "" }: { className?: string }) {
           <li key={s.n}>
             <Link
               href={s.href}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-white/70 px-2.5 text-xs font-medium text-slate-700 ring-1 ring-slate-200/80 hover:bg-white"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-canvas px-2.5 text-xs font-medium text-slate-700 ring-1 ring-line hover:bg-brand-tint"
             >
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-teal-700 text-[10px] font-semibold text-white">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-semibold text-white">
                 {s.n}
               </span>
               {s.short}
@@ -66,7 +66,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
       href: "/sim",
       cta: "Open Sim WhatsApp",
       extra: (
-        <p className="mt-2 rounded-lg bg-white/70 px-3 py-2 text-xs text-slate-600 ring-1 ring-white/80">
+        <p className="mt-2 rounded-lg bg-canvas px-3 py-2 text-xs text-slate-600 ring-1 ring-line">
           Sample message: “{sample}”
         </p>
       ),
@@ -120,7 +120,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-wide text-teal-800">Demo journey</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-brand-strong">Demo journey</p>
         <h1 className="text-2xl font-semibold text-slate-900">How VeloceFix works</h1>
         <p className="mt-1 max-w-2xl text-sm text-slate-600">
           Five steps from a WhatsApp report to the Asset view. Each card opens the real screen. Time saved is a labelled {times.estimateLabel}.
@@ -137,7 +137,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
             className="vf-glass scroll-mt-28 p-4 sm:p-5"
           >
             <div className="flex items-start gap-3">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/80 text-xl ring-1 ring-white/70" aria-hidden>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-tint text-xl ring-1 ring-brand-soft" aria-hidden>
                 {s.icon}
               </span>
               <div className="min-w-0 flex-1">
@@ -150,7 +150,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
                 {s.extra}
                 <Link
                   href={s.href}
-                  className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-teal-700 px-4 text-sm font-semibold text-white hover:bg-teal-800"
+                  className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-brand px-4 text-sm font-semibold text-white hover:bg-brand-strong"
                 >
                   {s.cta}
                 </Link>
@@ -182,7 +182,7 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
             </p>
             <Link
               href="/api/ops"
-              className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-slate-900 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+              className="mt-3 inline-flex min-h-11 items-center rounded-xl border border-slate-300 bg-surface px-4 text-sm font-semibold text-ink hover:bg-canvas"
             >
               Open /api/ops
             </Link>

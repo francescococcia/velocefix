@@ -10,7 +10,7 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
   const reduce = useReducedMotion();
   return (
     <motion.span whileHover={reduce ? undefined : { y: -1 }} className="inline-block">
-      <Link href={href} className="underline underline-offset-2 min-h-11 inline-flex items-center">
+      <Link href={href} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium text-ink hover:bg-brand-tint hover:text-brand-strong">
         {children}
       </Link>
     </motion.span>
@@ -19,22 +19,22 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
 
 export function SiteHeader() {
   return (
-    <header className="relative z-20 bg-slate-900 text-white">
+    <header className="relative z-20 border-b border-line bg-surface text-ink">
       <div className="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-3">
-        <span className="text-2xl" aria-hidden>
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-xl" aria-hidden>
           🔧
         </span>
         <div className="min-w-0">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold text-ink">
             {APP.name}
           </Link>
-          <p className="text-xs text-slate-300">{APP.tagline}</p>
+          <p className="text-xs text-muted">{APP.tagline}</p>
         </div>
-        <div className="ml-auto w-full sm:w-auto text-left sm:text-right text-xs text-slate-300">
+        <div className="ml-auto w-full sm:w-auto text-left sm:text-right text-xs text-muted">
           <div>
-            <b className="text-white">{APP.mascot.name}</b> says: “{APP.mascot.line}”
+            <b className="text-ink">{APP.mascot.name}</b> says: “{APP.mascot.line}”
           </div>
-          <nav className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+          <nav className="-mx-3 mt-1 flex flex-wrap gap-x-1 sm:mx-0 sm:justify-end">
             <NavLink href="/">Dashboard</NavLink>
             <NavLink href="/journey">How it works</NavLink>
             <NavLink href="/sim">Sim WhatsApp</NavLink>
@@ -52,7 +52,7 @@ export function PrimaryButton({
 }: ComponentProps<typeof MotionButton>) {
   return (
     <MotionButton
-      className={`min-h-11 w-full rounded-lg bg-teal-700 px-4 py-3 text-base font-semibold text-white disabled:bg-slate-300 disabled:text-slate-600 disabled:cursor-not-allowed ${className}`}
+      className={`min-h-11 w-full rounded-lg bg-brand px-4 py-3 text-base font-semibold text-white disabled:bg-slate-300 disabled:text-slate-600 disabled:cursor-not-allowed ${className}`}
       {...rest}
     >
       {children}

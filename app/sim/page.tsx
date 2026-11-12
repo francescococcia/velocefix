@@ -67,16 +67,16 @@ export default function Sim() {
 
   return (
     <FadeIn className="max-w-xl mx-auto">
-      <div className="bg-yellow-300 text-yellow-950 font-semibold text-center rounded p-2 mb-3">Simulated WhatsApp — Twilio sandbox unavailable</div>
-      <div className="flex gap-2 mb-2">
-        <select className="border rounded p-1 text-sm flex-1" value={from} onChange={(e) => { setFrom(e.target.value); setMsgs([]); }}>
+      <div className="border border-amber-200 bg-amber-50 text-amber-900 text-sm font-semibold text-center rounded-xl p-2 mb-3">Simulated WhatsApp — Twilio sandbox unavailable</div>
+      <div className="flex flex-wrap gap-2 mb-2">
+        <select className="min-h-11 min-w-0 border border-slate-300 bg-surface rounded-lg p-1 text-sm flex-1" value={from} onChange={(e) => { setFrom(e.target.value); setMsgs([]); }}>
           {tenants.map((t) => <option key={t.phone} value={t.phone}>{t.label}</option>)}
         </select>
-        <input className="border rounded p-1 text-xs w-36" type="password" value={resetToken} onChange={(e) => setResetToken(e.target.value)} placeholder="Reset token" autoComplete="off" />
-        <button onClick={reset} className="text-xs border rounded px-2">Reset demo data</button>
+        <input className="min-h-11 border border-slate-300 bg-surface rounded-lg p-1 text-xs w-36" type="password" value={resetToken} onChange={(e) => setResetToken(e.target.value)} placeholder="Reset token" autoComplete="off" />
+        <button onClick={reset} className="min-h-11 text-xs border border-slate-300 bg-surface rounded-lg px-2">Reset demo data</button>
       </div>
       {resetMsg && <p className="text-xs text-slate-600 mb-2">{resetMsg}</p>}
-      <div className="bg-[#e5ddd5] rounded p-3 h-[420px] overflow-y-auto space-y-2">
+      <div className="bg-[#efeae2] rounded-xl border border-line p-3 h-[420px] overflow-y-auto space-y-2">
         {msgs.map((m, i) => (
           <div key={i} className={`max-w-[85%] rounded-lg p-2 text-sm whitespace-pre-wrap shadow ${m.dir === "in" ? "ml-auto bg-[#dcf8c6]" : "bg-white"}`}>
             {m.text}
@@ -92,14 +92,14 @@ export default function Sim() {
       </div>
       <p className="text-xs text-slate-600 mt-2">If the agency has asked you to rate a completed job, reply with two scores (speed then quality), for example 5 4, or send them as two messages.</p>
       <div className="flex flex-wrap gap-1 my-2">
-        {QUICK.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-white border rounded px-2 py-1">{q}</MotionButton>)}
+        {QUICK.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-surface border border-slate-300 rounded-lg px-2 py-1">{q}</MotionButton>)}
       </div>
       <div className="flex flex-wrap gap-1 mb-2">
-        {RATE.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-teal-50 border border-teal-200 rounded px-2 py-1">Rate {q}</MotionButton>)}
+        {RATE.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-brand-tint border border-brand-soft rounded-lg px-2 py-1">Rate {q}</MotionButton>)}
       </div>
       <form onSubmit={(e) => { e.preventDefault(); send(text); }} className="flex flex-wrap gap-2">
-        <input className="flex-1 min-h-11 border rounded p-2 text-sm" value={text} onChange={(e) => setText(e.target.value)} placeholder="Type a repair or rating, e.g. 5 4" />
-        <label className="inline-flex min-h-11 cursor-pointer items-center rounded border bg-white px-3 text-xs font-medium">
+        <input className="flex-1 min-w-0 min-h-11 border border-slate-300 bg-surface rounded-lg p-2 text-sm" value={text} onChange={(e) => setText(e.target.value)} placeholder="Type a repair or rating, e.g. 5 4" />
+        <label className="inline-flex min-h-11 cursor-pointer items-center rounded-lg border border-slate-300 bg-surface px-3 text-xs font-medium">
           {photoBusy ? "Shrinking…" : photoName ? photoName : "Add photo"}
           <input
             type="file"
@@ -121,7 +121,7 @@ export default function Sim() {
             }}
           />
         </label>
-        <MotionButton type="submit" className="min-h-11 bg-green-600 text-white rounded px-4 text-sm font-semibold">Send</MotionButton>
+        <MotionButton type="submit" className="min-h-11 bg-brand text-white rounded-lg px-4 text-sm font-semibold">Send</MotionButton>
       </form>
     </FadeIn>
   );

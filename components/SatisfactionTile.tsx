@@ -6,14 +6,13 @@ function Figures({
   avgSpeed,
   avgQuality,
   csatPercent,
-  example,
-}: SatisfactionSummary & { example?: boolean }) {
+}: SatisfactionSummary) {
   if (n === 0) return null;
   return (
     <>
-      <p className={`text-2xl font-semibold tabular-nums ${example ? "text-slate-600" : ""}`}>
+      <p className="text-2xl font-semibold tabular-nums">
         <CountUp value={avgSpeed ?? 0} decimals={1} suffix=" / 5" />
-        <span className="mx-1 text-slate-400 font-normal">·</span>
+        <span className="mx-1 text-slate-500 font-normal">·</span>
         <CountUp value={avgQuality ?? 0} decimals={1} suffix=" / 5" />
       </p>
       <p className="text-sm text-slate-600">
@@ -24,9 +23,23 @@ function Figures({
             · CSAT <CountUp value={csatPercent} decimals={0} suffix="%" className="font-semibold tabular-nums" />
           </>
         ) : null}
-        {" "}(n={n}{example ? ", example data" : ""})
+        {" "}(n={n})
       </p>
     </>
+  );
+}
+
+// Seeded ratings stay out of the live score (lib/rating.ts); say so in one quiet line.
+function SeededNote({ summary }: { summary: SatisfactionSummary }) {
+  if (summary.exampleN === 0) return null;
+  return (
+    <p className="mt-1 text-xs text-slate-500">
+      Plus {summary.exampleN} seeded rating{summary.exampleN === 1 ? "" : "s"}
+      {summary.exampleAvgSpeed != null && summary.exampleAvgQuality != null
+        ? ` (avg ${summary.exampleAvgSpeed.toFixed(1)} / ${summary.exampleAvgQuality.toFixed(1)})`
+        : ""}
+      , not included in the live score.
+    </p>
   );
 }
 
@@ -44,22 +57,7 @@ export function SatisfactionTile({ summary }: { summary: SatisfactionSummary }) 
         CSAT is the share of ratings whose average of speed and quality is 4 or 5. Scores come from tenants after the
         agency asks them to rate a completed job.
       </p>
-      {summary.exampleN > 0 && (
-        <div className="mt-2 rounded border border-dashed border-slate-300 bg-slate-50 p-2">
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">Example data</p>
-          <Figures
-            n={summary.exampleN}
-            avgSpeed={summary.exampleAvgSpeed}
-            avgQuality={summary.exampleAvgQuality}
-            csatPercent={summary.exampleCsatPercent}
-            exampleN={0}
-            exampleAvgSpeed={null}
-            exampleAvgQuality={null}
-            exampleCsatPercent={null}
-            example
-          />
-        </div>
-      )}
+      <SeededNote summary={summary} />
     </section>
   );
 }
@@ -77,16 +75,8 @@ export function SatisfactionCard({ summary }: { summary: SatisfactionSummary }) 
         <p className="mt-1 text-xs text-slate-500">
           VeloceFix jobs for this building. CSAT = share averaging 4 or 5 on speed and quality.
         </p>
-        {summary.exampleN > 0 && (
-          <p className="mt-1 text-xs text-slate-500">
-            Plus {summary.exampleN} example-data rating{summary.exampleN === 1 ? "" : "s"}
-            {summary.exampleAvgSpeed != null && summary.exampleAvgQuality != null
-              ? ` (avg ${summary.exampleAvgSpeed.toFixed(1)} / ${summary.exampleAvgQuality.toFixed(1)})`
-              : ""}
-            , not included in the live score.
-          </p>
-        )}
-        <p className="mt-1 text-xs text-slate-400">— VeloceFix tenant ratings</p>
+        <SeededNote summary={summary} />
+        <p className="mt-1 text-xs text-slate-500">— VeloceFix tenant ratings</p>
       </div>
     </section>
   );

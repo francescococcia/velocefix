@@ -48,13 +48,13 @@ function BuildingCard({
     <section className="vf-glass p-4">
       <div className="flex items-start gap-2">
         <h3 className="text-lg font-semibold">{b.name}</h3>
-        <span className="mt-1 shrink-0 rounded bg-teal-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-800">
+        <span className="mt-1 shrink-0 rounded bg-brand-soft px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-strong">
           Cortile live
         </span>
       </div>
       <p className="text-xs text-slate-500">Cortile {b.id}</p>
       <p className="mt-1 text-sm">
-        <Link className="text-sm font-medium text-teal-800 underline" href={`/buildings/${b.id}`}>
+        <Link className="text-sm font-medium text-brand-strong underline" href={`/buildings/${b.id}`}>
           Asset view
         </Link>
       </p>
@@ -73,7 +73,7 @@ function BuildingCard({
                   ? ` — overdue (due ${formatLondonDate(gas.nextDueOn)})`
                   : ""}
             {" "}
-            <span className="text-slate-400">
+            <span className="text-slate-500">
               — <a className="underline" href={CORTILE_DOCS} target="_blank" rel="noreferrer">Cortile {gas.id}</a>
             </span>
           </p>
@@ -107,7 +107,7 @@ export function CortileLive({ data }: { data: CortileDemoData }) {
               ? ` · insurance expires ${formatLondonDate(contractor.insuranceExpiresOn)}`
               : ""}
             {" "}
-            <span className="text-slate-400">
+            <span className="text-slate-500">
               — <a className="underline" href={CORTILE_DOCS} target="_blank" rel="noreferrer">Cortile {contractor.id}</a>
             </span>
           </p>
@@ -124,7 +124,7 @@ export function CortileLive({ data }: { data: CortileDemoData }) {
             {ticket.status ? ` · ${ticket.status}` : ""}
             {ticket.reportedAt ? ` · ${formatLondonDate(ticket.reportedAt)}` : ""}
             {" "}
-            <span className="text-slate-400">
+            <span className="text-slate-500">
               — <a className="underline" href={CORTILE_DOCS} target="_blank" rel="noreferrer">Cortile {ticket.id}</a>
             </span>
           </p>

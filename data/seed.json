@@ -6,24 +6,24 @@
   "buildings": [
     {
       "id": "b-old-house",
-      "name": "Albion Terrace (example)",
+      "name": "Albion Terrace",
       "area": "North London (rough area only)",
       "type": "period",
       "yearBuilt": 1892,
       "tenure": "private",
-      "description": "Victorian period terrace converted into two flats. Private tenancies. Example data.",
+      "description": "Victorian period terrace converted into two flats. Private tenancies.",
       "exampleData": true
     },
     {
       "id": "b-new-build",
-      "name": "Riverside Wharf (example)",
+      "name": "Riverside Wharf",
       "area": "East London (rough area only)",
       "type": "new_build",
       "yearBuilt": 2024,
       "tenure": "private",
       "warrantyUntil": "2034-06-30",
-      "warrantyProvider": "Developer / new-home warranty (example)",
-      "description": "2024 new-build apartment block, still under developer warranty. Private tenancy. Example data.",
+      "warrantyProvider": "Developer / new-home warranty",
+      "description": "2024 new-build apartment block, still under developer warranty. Private tenancy.",
       "exampleData": true
     },
     {
@@ -129,22 +129,22 @@
     {
       "id": "t-old-2",
       "unitId": "u-old-2",
-      "displayName": "Tenant A (example)",
+      "displayName": "Tenant A",
       "phoneHash": "b1e7c34f8f2731a143d8b4fdfdaf3a5c07eeae72a9ff3fee323da77936ff2d01",
       "vulnerableOccupant": true,
-      "vulnerabilityNote": "Agency-policy flag (example): household includes a young child. Not a medical record and not an HHSRS assessment."
+      "vulnerabilityNote": "Agency-policy flag: household includes a young child. Not a medical record and not an HHSRS assessment."
     },
     {
       "id": "t-old-1",
       "unitId": "u-old-1",
-      "displayName": "Tenant B (example)",
+      "displayName": "Tenant B",
       "phoneHash": "d9bd7c0121582cb4a3e4ea4d5c41b9ae5bb10c18467ea3238738e7c897cb6786",
       "vulnerableOccupant": false
     },
     {
       "id": "t-new-403",
       "unitId": "u-new-403",
-      "displayName": "Tenant C (example)",
+      "displayName": "Tenant C",
       "phoneHash": "738591552cbeb39087e91b524a0d94d71d62e40cc5f25aa32cba2dc5cc8a3174",
       "vulnerableOccupant": false
     },
@@ -187,21 +187,21 @@
       "buildingId": "b-old-house",
       "unitId": "u-old-2",
       "type": "boiler",
-      "make": "Worcester Bosch (example)",
-      "model": "Greenstar combi (example)",
+      "make": "Worcester Bosch",
+      "model": "Greenstar combi",
       "fuel": "gas",
       "yearInstalled": 2012,
       "gasSafeCertDate": "2026-01-15",
       "gasSafeNextDue": "2027-01-15",
-      "notes": "14-year-old gas combi boiler. Example data."
+      "notes": "14-year-old gas combi boiler."
     },
     {
       "id": "a-old-1-boiler",
       "buildingId": "b-old-house",
       "unitId": "u-old-1",
       "type": "boiler",
-      "make": "Vaillant (example)",
-      "model": "ecoTEC combi (example)",
+      "make": "Vaillant",
+      "model": "ecoTEC combi",
       "fuel": "gas",
       "yearInstalled": 2019,
       "gasSafeCertDate": "2026-02-03",
@@ -214,7 +214,7 @@
       "yearInstalled": 1998,
       "eicrDate": "2022-03-10",
       "eicrExpiry": "2027-03-10",
-      "notes": "EICR at least every 5 years (England). Example dates."
+      "notes": "EICR at least every 5 years (England)."
     },
     {
       "id": "a-old-2-floor",
@@ -222,21 +222,21 @@
       "unitId": "u-old-2",
       "type": "flooring",
       "yearInstalled": 1892,
-      "notes": "Original timber floorboards, hallway. Example data."
+      "notes": "Original timber floorboards, hallway."
     },
     {
       "id": "a-new-403-boiler",
       "buildingId": "b-new-build",
       "unitId": "u-new-403",
       "type": "boiler",
-      "make": "Ideal (example)",
-      "model": "Logic combi (example)",
+      "make": "Ideal",
+      "model": "Logic combi",
       "fuel": "gas",
       "yearInstalled": 2024,
       "gasSafeCertDate": "2026-05-20",
       "gasSafeNextDue": "2027-05-20",
       "warrantyUntil": "2031-05-20",
-      "notes": "New boiler, manufacturer warranty plus developer warranty. Example data."
+      "notes": "New boiler, manufacturer warranty plus developer warranty."
     },
     {
       "id": "a-new-eicr",
@@ -250,7 +250,7 @@
   "operators": [
     {
       "id": "op-plumber",
-      "name": "Hartley Plumbing & Heating (example)",
+      "name": "Hartley Plumbing & Heating",
       "trade": "plumbing_heating",
       "gasSafeRegNo": "000000-EXAMPLE",
       "gasSafeRegNoLabel": "Example registration number — not a real Gas Safe ID",
@@ -309,7 +309,7 @@
     },
     {
       "id": "op-handyman",
-      "name": "Northside Floors & Handyman (example)",
+      "name": "Northside Floors & Handyman",
       "trade": "flooring_general",
       "slots": [
         {
@@ -340,7 +340,7 @@
     },
     {
       "id": "op-dwelly-locksmith",
-      "name": "Arthur Stuart (Dwelly case 022, example)",
+      "name": "Arthur Stuart (Dwelly case 022)",
       "trade": "locksmith",
       "source": "Dwelly case 022",
       "slots": [
@@ -379,7 +379,7 @@
       "date": "2025-12-02",
       "trade": "plumbing_heating",
       "category": "no_heating",
-      "summary": "Boiler lost pressure; repressurised, replaced PRV. Example.",
+      "summary": "Boiler lost pressure; repressurised, replaced PRV.",
       "source": "seed"
     },
     {
@@ -389,7 +389,7 @@
       "date": "2026-01-15",
       "trade": "plumbing_heating",
       "category": "other",
-      "summary": "Annual gas safety check — pass. Example.",
+      "summary": "Annual gas safety check — pass.",
       "source": "seed"
     },
     {
@@ -398,7 +398,7 @@
       "date": "2025-06-10",
       "trade": "flooring_general",
       "category": "floor_damage",
-      "summary": "Kitchen vinyl patched. Example.",
+      "summary": "Kitchen vinyl patched.",
       "source": "seed"
     },
     {
@@ -408,7 +408,7 @@
       "date": "2026-08-21",
       "trade": "plumbing_heating",
       "category": "no_hot_water",
-      "summary": "Intermittent no hot water — developer's engineer reset, no fault found. Example.",
+      "summary": "Intermittent no hot water — developer's engineer reset, no fault found.",
       "intermittent": true,
       "source": "seed"
     },
@@ -419,7 +419,7 @@
       "date": "2026-10-09",
       "trade": "plumbing_heating",
       "category": "no_hot_water",
-      "summary": "Intermittent no hot water again — logged with developer warranty, monitoring. Example.",
+      "summary": "Intermittent no hot water again — logged with developer warranty, monitoring.",
       "intermittent": true,
       "source": "seed"
     },
@@ -500,7 +500,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           }
         ],
         "clock": {
@@ -557,7 +557,7 @@
             "label": "Urgent repair clock: 3 days",
             "effect": "P2, 72h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_002",
@@ -597,7 +597,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -661,7 +661,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_037",
@@ -701,7 +701,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -765,7 +765,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_022",
@@ -805,7 +805,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
+          "detail": "Arthur Stuart (Dwelly case 022) — locksmith",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -908,7 +908,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -939,7 +939,7 @@
         {
           "at": "2026-11-12T20:31:12Z",
           "direction": "out",
-          "body": "✅ Booked: Hartley Plumbing & Heating (example), Fri 13 Nov, 08:00–10:00. Seeded demo replay.",
+          "body": "✅ Booked: Hartley Plumbing & Heating, Fri 13 Nov, 08:00–10:00. Seeded demo replay.",
           "channel": "whatsapp"
         }
       ],
@@ -959,7 +959,7 @@
         "room": "unspecified",
         "trade": "plumbing_heating",
         "hazardType": "excess_cold",
-        "summary": "No heating or hot water, boiler showing low pressure. Example data.",
+        "summary": "No heating or hot water, boiler showing low pressure.",
         "by": "seed"
       },
       "priority": {
@@ -1018,7 +1018,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1049,7 +1049,7 @@
           "at": "2026-09-08T07:52:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -1061,7 +1061,7 @@
         "followUp": "None",
         "workDone": "Repressurised boiler, checked expansion vessel",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {
@@ -1085,7 +1085,7 @@
         "room": "bathroom",
         "trade": "plumbing_heating",
         "hazardType": "none",
-        "summary": "Toilet blocked and slow to drain. Example data.",
+        "summary": "Toilet blocked and slow to drain.",
         "by": "seed"
       },
       "priority": {
@@ -1104,7 +1104,7 @@
             "label": "Urgent repair clock: 3 days",
             "effect": "P2, 72h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_002",
@@ -1144,7 +1144,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1175,7 +1175,7 @@
           "at": "2026-09-15T18:11:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -1187,7 +1187,7 @@
         "followUp": "None",
         "workDone": "Cleared blockage with drain rods",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {
@@ -1211,7 +1211,7 @@
         "room": "bathroom",
         "trade": "plumbing_heating",
         "hazardType": "none",
-        "summary": "Shower leaking at the tray seal. Example data.",
+        "summary": "Shower leaking at the tray seal.",
         "by": "seed"
       },
       "priority": {
@@ -1230,7 +1230,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_037",
@@ -1270,7 +1270,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1301,7 +1301,7 @@
           "at": "2026-09-22T08:38:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -1313,7 +1313,7 @@
         "followUp": "None",
         "workDone": "Removed and resealed shower tray",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {
@@ -1337,7 +1337,7 @@
         "room": "hallway",
         "trade": "locksmith",
         "hazardType": "none",
-        "summary": "Front door lock sticking, key hard to turn. Example data.",
+        "summary": "Front door lock sticking, key hard to turn.",
         "by": "seed"
       },
       "priority": {
@@ -1356,7 +1356,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_022",
@@ -1396,7 +1396,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
+          "detail": "Arthur Stuart (Dwelly case 022) — locksmith",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1427,7 +1427,7 @@
           "at": "2026-10-01T21:21:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Arthur Stuart (Dwelly case 022, example). Example data."
+          "body": "Booked with Arthur Stuart (Dwelly case 022)."
         }
       ],
       "operatorId": "op-dwelly-locksmith",
@@ -1439,7 +1439,7 @@
         "followUp": "None",
         "workDone": "Replaced cylinder, issued 3 keys",
         "followUpNeeded": false,
-        "operatorName": "Arthur Stuart (Dwelly case 022, example)",
+        "operatorName": "Arthur Stuart (Dwelly case 022)",
         "operatorTrade": "locksmith"
       },
       "rating": {
@@ -1463,7 +1463,7 @@
         "room": "unspecified",
         "trade": "plumbing_heating",
         "hazardType": "excess_cold",
-        "summary": "Radiators cold in living room. Example data.",
+        "summary": "Radiators cold in living room.",
         "by": "seed"
       },
       "priority": {
@@ -1522,7 +1522,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1553,7 +1553,7 @@
           "at": "2026-10-07T07:07:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -1565,7 +1565,7 @@
         "followUp": "None",
         "workDone": "Bled radiators, balanced system",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {
@@ -1589,7 +1589,7 @@
         "room": "bathroom",
         "trade": "plumbing_heating",
         "hazardType": "none",
-        "summary": "Water dripping through ceiling under the shower. Example data.",
+        "summary": "Water dripping through ceiling under the shower.",
         "by": "seed"
       },
       "priority": {
@@ -1608,7 +1608,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_037",
@@ -1648,7 +1648,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1679,7 +1679,7 @@
           "at": "2026-10-13T12:40:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -1691,7 +1691,7 @@
         "followUp": "None",
         "workDone": "Replaced waste trap, tested for leaks",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {
@@ -1715,7 +1715,7 @@
         "room": "hallway",
         "trade": "locksmith",
         "hazardType": "none",
-        "summary": "Back door will not lock. Example data.",
+        "summary": "Back door will not lock.",
         "by": "seed"
       },
       "priority": {
@@ -1734,7 +1734,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_022",
@@ -1774,7 +1774,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
+          "detail": "Arthur Stuart (Dwelly case 022) — locksmith",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -1805,7 +1805,7 @@
           "at": "2026-10-20T19:42:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Arthur Stuart (Dwelly case 022, example). Example data."
+          "body": "Booked with Arthur Stuart (Dwelly case 022)."
         }
       ],
       "operatorId": "op-dwelly-locksmith",
@@ -1817,7 +1817,7 @@
         "followUp": "None",
         "workDone": "Realigned keep and adjusted hinges",
         "followUpNeeded": false,
-        "operatorName": "Arthur Stuart (Dwelly case 022, example)",
+        "operatorName": "Arthur Stuart (Dwelly case 022)",
         "operatorTrade": "locksmith"
       },
       "rating": {
@@ -1840,7 +1840,7 @@
         "room": "hallway",
         "trade": "flooring_general",
         "hazardType": "falls_on_level_surfaces",
-        "summary": "Loose floorboard in the bedroom. Example data.",
+        "summary": "Loose floorboard in the bedroom.",
         "by": "seed"
       },
       "priority": {
@@ -1859,7 +1859,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           }
         ],
         "clock": {
@@ -1883,7 +1883,7 @@
           "at": "2026-10-27T11:00:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Northside Floors & Handyman (example). Example data."
+          "body": "Booked with Northside Floors & Handyman."
         }
       ],
       "source": "seed",
@@ -1896,7 +1896,7 @@
         "followUp": "None",
         "workDone": "Screwed board down to joist",
         "followUpNeeded": false,
-        "operatorName": "Northside Floors & Handyman (example)",
+        "operatorName": "Northside Floors & Handyman",
         "operatorTrade": "flooring_general"
       },
       "rating": {
@@ -1920,7 +1920,7 @@
         "room": "bathroom",
         "trade": "plumbing_heating",
         "hazardType": "none",
-        "summary": "Kitchen sink not draining. Example data.",
+        "summary": "Kitchen sink not draining.",
         "by": "seed"
       },
       "priority": {
@@ -1939,7 +1939,7 @@
             "label": "Urgent repair clock: 3 days",
             "effect": "P2, 72h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_002",
@@ -1979,7 +1979,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -2010,7 +2010,7 @@
           "at": "2026-11-03T08:51:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -2022,7 +2022,7 @@
         "followUp": "None",
         "workDone": "Cleared trap and flushed waste",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {
@@ -2046,7 +2046,7 @@
         "room": "bathroom",
         "trade": "plumbing_heating",
         "hazardType": "none",
-        "summary": "Bath tap dripping constantly. Example data.",
+        "summary": "Bath tap dripping constantly.",
         "by": "seed"
       },
       "priority": {
@@ -2065,7 +2065,7 @@
             "label": "Routine repair clock: 7 days",
             "effect": "P3, 168h agency-policy clock",
             "kind": "agency-policy",
-            "source": "Agency repair policy (example)"
+            "source": "Agency repair policy"
           },
           {
             "id": "DWELLY_CASE_037",
@@ -2105,7 +2105,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "detail": "Hartley Plumbing & Heating — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -2136,7 +2136,7 @@
           "at": "2026-11-06T09:48:00Z",
           "direction": "out",
           "channel": "whatsapp",
-          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+          "body": "Booked with Hartley Plumbing & Heating."
         }
       ],
       "operatorId": "op-plumber",
@@ -2148,7 +2148,7 @@
         "followUp": "None",
         "workDone": "Replaced washer, tap tested",
         "followUpNeeded": false,
-        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorName": "Hartley Plumbing & Heating",
         "operatorTrade": "plumbing_heating"
       },
       "rating": {

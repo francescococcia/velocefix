@@ -136,7 +136,7 @@ function timeline(b: MapBuilding) {
     if (j.rating) {
       ev.push({
         at: j.completedAt ?? j.createdAt,
-        label: `Rated speed ${j.rating.speed}/5, quality ${j.rating.quality}/5${j.rating.exampleData ? " (example data)" : ""}`,
+        label: `Rated speed ${j.rating.speed}/5, quality ${j.rating.quality}/5`,
         source: j.id,
         tone: "slate",
       });
@@ -155,7 +155,7 @@ function timeline(b: MapBuilding) {
   return ev.sort((a, b) => b.at.localeCompare(a.at));
 }
 
-const DOT = { red: "bg-red-500", amber: "bg-amber-400", teal: "bg-teal-500", slate: "bg-slate-400" };
+const DOT = { red: "bg-red-500", amber: "bg-amber-400", teal: "bg-brand-tint0", slate: "bg-slate-400" };
 
 function Chip({ label, value }: { label: string; value: ReactNode }) {
   return (
@@ -189,7 +189,7 @@ function Pill({
       {active && (
         <motion.span
           layoutId={reduce ? undefined : `vf-pill-${group}`}
-          className="absolute inset-0 rounded-full bg-slate-900 shadow"
+          className="absolute inset-0 rounded-full bg-brand shadow-sm"
           transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
@@ -204,7 +204,7 @@ function InfoTip({ text }: { text: string }) {
       <button type="button" className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 text-[11px] font-semibold text-slate-600" aria-label="About map positions" title={text}>
         i
       </button>
-      <span className="pointer-events-none absolute left-0 top-7 z-[1100] hidden w-64 rounded-lg bg-slate-900/95 p-2 text-[11px] leading-snug text-slate-100 shadow-lg group-hover:block group-focus-within:block">
+      <span className="pointer-events-none absolute left-0 top-7 z-[1100] hidden w-64 rounded-lg border border-line bg-surface p-2 text-[11px] leading-snug text-slate-700 shadow-lg group-hover:block group-focus-within:block">
         {text}
       </span>
     </span>
@@ -448,7 +448,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
                       {selected.compliance.length === 0 && <li className="text-slate-600">No compliance records.</li>}
                       {selected.compliance.map((c) => (
                         <li key={c.id}>
-                          <span className={`mr-2 inline-block h-2 w-2 rounded-full ${c.status === "overdue" ? "bg-red-500" : c.status === "due_soon" ? "bg-amber-400" : "bg-teal-500"}`} />
+                          <span className={`mr-2 inline-block h-2 w-2 rounded-full ${c.status === "overdue" ? "bg-red-500" : c.status === "due_soon" ? "bg-amber-400" : "bg-brand-tint0"}`} />
                           {c.label} · {c.status.replaceAll("_", " ")}
                           {c.nextDueOn ? ` · due ${formatWhen(c.nextDueOn)}` : ""}
                           <span className="block text-xs text-slate-500">Cortile {c.id}</span>
@@ -470,7 +470,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
 
                 <Link
                   href={`/buildings/${selected.id}`}
-                  className="mt-4 flex min-h-11 items-center justify-center rounded-xl bg-teal-700 px-4 text-sm font-semibold text-white shadow hover:bg-teal-800"
+                  className="mt-4 flex min-h-11 items-center justify-center rounded-xl bg-brand px-4 text-sm font-semibold text-white shadow hover:bg-brand-strong"
                 >
                   Open asset view
                 </Link>
@@ -495,7 +495,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
                       type="button"
                       aria-pressed={asked === i}
                       onClick={() => setAsked(asked === i ? null : i)}
-                      className={`min-h-9 rounded-full px-3 text-xs font-medium ring-1 ${asked === i ? "bg-teal-700 text-white ring-teal-700" : "bg-white text-slate-700 ring-slate-300 hover:bg-slate-50"}`}
+                      className={`min-h-9 rounded-full px-3 text-xs font-medium ring-1 ${asked === i ? "bg-brand text-white ring-brand" : "bg-white text-slate-700 ring-slate-300 hover:bg-slate-50"}`}
                     >
                       {x.q}
                     </button>
@@ -526,7 +526,7 @@ export default function PortfolioMap({ data }: { data: MapData }) {
                         <button
                           type="button"
                           onClick={() => setSelectedId(b.id)}
-                          className="w-full rounded-xl border border-slate-200 p-3 text-left hover:border-teal-600 hover:bg-slate-50"
+                          className="w-full rounded-xl border border-slate-200 p-3 text-left hover:border-brand hover:bg-slate-50"
                           style={{ borderLeft: `4px solid ${HEALTH[h].fill}` }}
                         >
                           <span className="flex items-center gap-2">

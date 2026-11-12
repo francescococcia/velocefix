@@ -67,13 +67,13 @@ export function WorkQueue({ items }: { items: WorkItem[] }) {
               aria-pressed={filter === f.id}
               onClick={() => setFilter(f.id)}
               className={`relative min-h-9 rounded-full px-3 text-sm font-medium transition-colors ${
-                filter === f.id ? "text-white" : "text-slate-700 hover:bg-white"
+                filter === f.id ? "text-white" : "text-slate-700 hover:bg-brand-tint"
               }`}
             >
               {filter === f.id && (
                 <motion.span
                   layoutId="work-filter-pill"
-                  className="absolute inset-0 rounded-full bg-teal-700"
+                  className="absolute inset-0 rounded-full bg-brand"
                   transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 35 }}
                 />
               )}
@@ -100,17 +100,17 @@ export function WorkQueue({ items }: { items: WorkItem[] }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
                 transition={{ duration: reduce ? 0 : 0.22 }}
-                className={`scroll-mt-28 rounded-xl border bg-white/70 ${open ? "border-teal-600 shadow-md" : "border-slate-200"}`}
+                className={`scroll-mt-28 rounded-xl border bg-white/70 ${open ? "border-brand shadow-md" : "border-slate-200"}`}
               >
                 <button
                   type="button"
                   aria-expanded={open}
                   aria-controls={`job-body-${item.id}`}
                   onClick={() => setOpenId(open ? null : item.id)}
-                  className="flex min-h-12 w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm hover:bg-white focus-visible:outline-2 focus-visible:outline-teal-700"
+                  className="flex min-h-12 w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm hover:bg-brand-tint focus-visible:outline-2 focus-visible:outline-brand"
                 >
                   <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">{item.head}</span>
-                  <motion.span aria-hidden animate={{ rotate: open ? 180 : 0 }} transition={{ duration: reduce ? 0 : 0.2 }} className="shrink-0 text-slate-400">
+                  <motion.span aria-hidden animate={{ rotate: open ? 180 : 0 }} transition={{ duration: reduce ? 0 : 0.2 }} className="shrink-0 text-slate-500">
                     ▾
                   </motion.span>
                 </button>

@@ -1,3 +1,4 @@
+import { plainSource } from "@/components/plain";
 import { getStore } from "@/lib/store";
 import { dueAt } from "@/lib/priority";
 import { PriorityBadge } from "@/components/PriorityBadge";
@@ -51,7 +52,7 @@ export default async function Dashboard() {
     { label: "Overdue", value: live.filter(isOverdue).length, tone: "text-red-600", show: "overdue" },
     { label: "High priority", value: live.filter(isHigh).length, tone: "text-orange-600", show: "urgent" },
     { label: "Booked", value: live.filter((j) => j.status === "booked").length, tone: "text-green-700", show: "booked" },
-    { label: "Completed", value: jobs.length - live.length, tone: "text-teal-700", show: "completed" },
+    { label: "Completed", value: jobs.length - live.length, tone: "text-brand", show: "completed" },
   ];
   const where = (j: Job) => {
     const unit = s.units.find((u) => u.id === j.unitId);
@@ -59,7 +60,7 @@ export default async function Dashboard() {
   };
   const statusText = (j: Job) => {
     const due = dueAt(j.createdAt, j.priority.clock.hours);
-    if (j.status === "completed") return { text: "Completed", cls: "text-teal-700" };
+    if (j.status === "completed") return { text: "Completed", cls: "text-brand" };
     if (j.status === "booked") return { text: "Booked", cls: "text-green-700" };
     if (isOverdue(j)) return { text: `Overdue ${Math.round((now - due.getTime()) / 86400000)} days`, cls: "text-red-600" };
     return { text: `Due ${due.toLocaleString("en-GB", short)}`, cls: "text-slate-500" };
@@ -95,7 +96,7 @@ export default async function Dashboard() {
           <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
           <span className="text-slate-500">· {building?.name} · {unit?.label}</span>
           {dwelly && <span className={`${chip} bg-sky-100 text-sky-800`}>Dwelly</span>}
-          {j.source?.startsWith("Cortile") && <span className={`${chip} bg-teal-100 text-teal-800`}>Cortile demo replay</span>}
+          {j.source?.startsWith("Cortile") && <span className={`${chip} bg-brand-soft text-brand-strong`}>Cortile demo replay</span>}
           {j.proposal.by === "grok" && <span className={`${chip} bg-violet-100 text-violet-800`}>Proposed by Grok</span>}
           {j.proposal.by === "fallback" && <span className={`${chip} bg-slate-200 text-slate-700`}>Keyword fallback</span>}
           <RatingBadge job={j} />
@@ -117,17 +118,17 @@ export default async function Dashboard() {
             {j.status === "booked" && slot && (
               <p className="flex flex-wrap items-center gap-2 font-semibold text-green-700">
                 <span>✅ Booked: {op?.name}, {new Date(slot.start).toLocaleString("en-GB", short)}</span>
-                <Link href={`/jobs/${j.id}/complete`} className="text-teal-800 underline">Complete job</Link>
+                <Link href={`/jobs/${j.id}/complete`} className="text-brand-strong underline">Complete job</Link>
               </p>
             )}
             {j.status === "completed" && (
-              <p><Link href={`/jobs/${j.id}/complete`} className="text-teal-800 underline">View completion record</Link></p>
+              <p><Link href={`/jobs/${j.id}/complete`} className="text-brand-strong underline">View completion record</Link></p>
             )}
             <TimeSavedLine job={j} now={new Date(now)} />
             {photo && (
               <p className="flex items-center gap-2">
                 {/^data:image\//i.test(photo) || /^https:\/\//i.test(photo) ? (
-                  <a href={photo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-teal-800">
+                  <a href={photo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-brand-strong">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={photo} alt="" className="h-14 w-14 rounded object-cover ring-1 ring-slate-200" />
                     <span className="underline">tenant photo</span>
@@ -146,7 +147,7 @@ export default async function Dashboard() {
                 {rows.map((c) => (
                   <li key={c.id}>
                     {mark(c.status)} {c.label}: <span className="text-slate-600">{c.detail}</span>{" "}
-                    <span className="text-slate-400">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank" rel="noreferrer">{c.source}</a> : c.source}</span>
+                    <span className="text-slate-500">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank" rel="noreferrer">{plainSource(c.source)}</a> : plainSource(c.source)}</span>
                   </li>
                 ))}
               </ul>
@@ -158,7 +159,7 @@ export default async function Dashboard() {
               {j.priority.firedRules.map((r) => (
                 <li key={r.id} className="mt-0.5">
                   {r.label} → {r.effect}{" "}
-                  <span className="text-slate-500">[{r.kind}] {r.sourceUrl ? <a className="underline" href={r.sourceUrl} target="_blank" rel="noreferrer">{r.source}</a> : r.source}</span>
+                  <span className="text-slate-500">[{r.kind}] {r.sourceUrl ? <a className="underline" href={r.sourceUrl} target="_blank" rel="noreferrer">{plainSource(r.source)}</a> : plainSource(r.source)}</span>
                   {r.quote && <blockquote className="mt-0.5 border-l-2 border-sky-200 pl-2 italic text-slate-600">“{r.quote}”</blockquote>}
                 </li>
               ))}
@@ -201,7 +202,7 @@ export default async function Dashboard() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3">
           {stats.map((k, i) => (
             <FadeIn key={k.label} delay={i * 0.04}>
-              <a href={`#show-${k.show}`} className="vf-glass block p-3 focus-visible:outline-2 focus-visible:outline-teal-700">
+              <a href={`#show-${k.show}`} className="vf-glass block p-3 focus-visible:outline-2 focus-visible:outline-brand">
                 <p className={`text-3xl font-bold tabular-nums ${k.tone}`}>{k.value}</p>
                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{k.label}</p>
               </a>
@@ -217,7 +218,7 @@ export default async function Dashboard() {
               const st = statusText(j);
               return (
                 <li key={j.id}>
-                  <a href={`#job-${j.id}`} className="flex min-h-11 flex-wrap items-center gap-2 rounded py-1.5 text-sm hover:bg-white/70">
+                  <a href={`#job-${j.id}`} className="flex min-h-11 flex-wrap items-center gap-2 rounded py-1.5 text-sm hover:bg-brand-tint">
                     <PriorityBadge p={j.priority.priority} />
                     <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
                     <span className="text-slate-500">· {building?.name} · {unit?.label}</span>
@@ -266,7 +267,7 @@ export default async function Dashboard() {
                 <ul className="mt-1 grid gap-1">
                   {mine.map((j) => (
                     <li key={j.id}>
-                      <a href={`#job-${j.id}`} className="flex min-h-9 items-center gap-2 rounded text-sm hover:bg-white/70">
+                      <a href={`#job-${j.id}`} className="flex min-h-9 items-center gap-2 rounded text-sm hover:bg-brand-tint">
                         <PriorityBadge p={j.priority.priority} />
                         <span className="truncate">{j.proposal.issue.replace(/_/g, " ")}</span>
                         <span className={`ml-auto shrink-0 text-xs ${statusText(j).cls}`}>{j.status}</span>
@@ -276,7 +277,7 @@ export default async function Dashboard() {
                 </ul>
                 {b.id.startsWith("bld_") && (
                   <p className="mt-2 text-sm">
-                    <Link className="font-medium text-teal-800 underline" href={`/buildings/${b.id}`}>Asset view</Link>
+                    <Link className="font-medium text-brand-strong underline" href={`/buildings/${b.id}`}>Asset view</Link>
                   </p>
                 )}
               </FadeIn>
