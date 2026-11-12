@@ -1,6 +1,7 @@
 import { plainSource } from "@/components/plain";
-import { getStore } from "@/lib/store";
-import { dueAt } from "@/lib/priority";
+import { getStore, unitContext } from "@/lib/store";
+import { dueAt, prioritise } from "@/lib/priority";
+import { TicketCompare, type CompareRow } from "@/components/TicketCompare";
 import { PriorityBadge } from "@/components/PriorityBadge";
 import { CortileLive } from "@/components/CortileLive";
 import { cortileGasCertCheck, loadCortileDemo } from "@/lib/cortile";
@@ -16,7 +17,23 @@ import { loadMapData } from "@/lib/mapData";
 import { PortfolioMapClient } from "@/components/PortfolioMapClient";
 import { JourneyStrip } from "@/components/Journey";
 import { WorkQueue, type WorkFilter, type WorkItem } from "@/components/WorkQueue";
-import type { Job } from "@/lib/types";
+import type { IssueCategory, Job } from "@/lib/types";
+
+// Reports offered in the same-report compare. The engine only ever sees the category, never tenant text.
+const COMPARE: { issue: IssueCategory; label: string }[] = [
+  { issue: "no_hot_water", label: "No hot water" },
+  { issue: "no_heating", label: "No heating" },
+  { issue: "water_leak", label: "Water leak" },
+  { issue: "blocked_toilet", label: "Blocked toilet" },
+  { issue: "gas_smell", label: "I can smell gas" },
+];
+const NEXT: Record<string, string> = {
+  book: "Offers contractor slots once every fact check is green.",
+  refer_developer: "Referred to the developer under warranty; no contractor is booked.",
+  gas_emergency: "No booking. The tenant is told to call 0800 111 999.",
+  question: "Asks the tenant a question before anything is booked.",
+};
+const KIND: Record<string, string> = { statute: "Statute", "agency-policy": "Agency policy", safety: "Safety", "partner-data": "Partner data" };
 
 export const dynamic = "force-dynamic";
 
@@ -209,6 +226,36 @@ export default async function Dashboard() {
     };
   });
 
+  // One unit per building that has a type on record: the one with a boiler, preferring a vulnerable-occupant flag.
+  const compareUnits = s.buildings.flatMap((b) => {
+    if (!b.type) return [];
+    const ctxs = s.units.filter((u) => u.buildingId === b.id).map((u) => unitContext(s, u.id)).filter((c) => c.unit && c.boiler);
+    const ctx = ctxs.find((c) => c.tenant?.vulnerableOccupant) ?? ctxs[0];
+    return ctx ? [{ b, ctx }] : [];
+  });
+  const compareRows: CompareRow[] = COMPARE.map(({ issue, label }) => ({
+    issue,
+    label,
+    cells: compareUnits.map(({ b, ctx }) => {
+      const r = prioritise({ issue, building: b, tenant: ctx.tenant, boiler: ctx.boiler, works: ctx.works, now: new Date(now) });
+      return {
+        building: b.name,
+        unit: ctx.unit!.label,
+        facts: [
+          buildingKind(b.type),
+          b.yearBuilt ? `built ${b.yearBuilt}` : null,
+          b.warrantyUntil ? `warranty to ${b.warrantyUntil}` : null,
+          ctx.boiler ? `boiler ${new Date(now).getUTCFullYear() - ctx.boiler.yearInstalled}y old` : null,
+          ctx.tenant?.vulnerableOccupant ? "vulnerable-occupant flag (agency policy)" : null,
+        ].filter(Boolean).join(" · "),
+        priority: r.priority,
+        clock: r.clock.label,
+        next: NEXT[r.destination] ?? r.destination,
+        rules: r.firedRules.map((x) => ({ id: x.id, label: x.label, effect: x.effect, kind: KIND[x.kind] ?? x.kind })),
+      };
+    }),
+  }));
+
   return (
     <div className="space-y-6">
       <div className="vf-dash-bg" aria-hidden />
@@ -246,6 +293,7 @@ export default async function Dashboard() {
         </FadeIn>
       </section>
       <WorkQueue items={items} />
+      {compareUnits.length > 1 && <TicketCompare rows={compareRows} />}
       <PortfolioMapClient data={mapData} />
       <div className="grid gap-4 sm:grid-cols-2">
         <FadeIn>

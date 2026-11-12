@@ -147,6 +147,12 @@ Code freeze **23:00** Europe/London. Feature freeze **~22:10**. Work in parallel
 - Done when: the map is a card inside the page (not full-bleed, about 26rem tall) with the building panel beside it instead of on top of it; buildings are classed by colour (needs attention / watch / on track) with counts, a filter and a plain "why this colour" line; the panel opens on a recap with three question buttons answered from the records (what is overdue, what is open, where repairs are slowest) and a clickable building list.
 - Note: the ticket / compliance / priority pill groups were replaced by the one colour filter. Checked locally with sample buildings only, because the real map needs `CORTILE_API_KEY`. Not done: 3D view (needs MapLibre GL in place of Leaflet — split into its own card), and the phone-width zoom-out seen on live before this card.
 
+### UI11 — Same report, different building ✅ (done 23:22)
+- Lane: UI
+- Files: `components/TicketCompare.tsx` (new), `app/page.tsx`
+- Done when: a dashboard section runs one report (no hot water, no heating, water leak, blocked toilet, gas smell) through `prioritise()` for each building's own record and shows priority, clock, what happens next and the rules that fired, side by side. Preview only; nothing is logged or booked.
+- Note: this is the spec's "how the same ticket would score elsewhere". "No hot water" shows P1 on Albion Terrace and P3 refer-to-developer on Riverside Wharf. Only buildings with a type and a boiler on record appear, so Gorse House and the Dwelly book are not in it. Still not built: in-app Grok ops assistant, Complete job form redesign, unit page, override control, role banner.
+
 ### SEC1 — Identity hash, no-PII logs, role banner (time-box 15 min)
 - Lane: API for hashing/logging helpers (`lib/privacy.ts` + do not weaken `/api/ops`); UI may add a `?role=` banner in `components/role-banner.tsx` only
 - Files: `lib/privacy.ts`, `components/role-banner.tsx`
