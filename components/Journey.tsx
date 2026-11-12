@@ -22,7 +22,7 @@ export function JourneyStrip({ className = "" }: { className?: string }) {
           <li key={s.n}>
             <Link
               href={s.href}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-canvas px-2.5 text-xs font-medium text-slate-700 ring-1 ring-line hover:bg-brand-tint"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-canvas px-2.5 text-xs font-medium text-slate-700 ring-1 ring-line transition hover:-translate-y-0.5 hover:bg-brand-tint hover:shadow-sm motion-reduce:transform-none"
             >
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-semibold text-white">
                 {s.n}

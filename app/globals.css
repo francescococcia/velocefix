@@ -81,3 +81,54 @@ body:has(.vf-dash-bg) { background: transparent; }
   .vf-pin-ring { animation: none; opacity: 0.3; }
   .vf-pin-wrap { animation: none; }
 }
+
+/* ---- Motion pass: keep the light page from sitting still ---- */
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+
+/* Two soft colour fields drift behind the cards. Opacity is capped so muted text on the page still clears AA. */
+.vf-dash-bg::before,
+.vf-dash-bg::after {
+  content: "";
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.vf-dash-bg::before { top: -12vmax; left: -8vmax; background: var(--color-brand-soft); animation: vf-drift-a 24s ease-in-out infinite alternate; }
+.vf-dash-bg::after { bottom: -16vmax; right: -10vmax; background: #e0f2fe; animation: vf-drift-b 30s ease-in-out infinite alternate; }
+@keyframes vf-drift-a { to { transform: translate(22vw, 16vh) scale(1.2); } }
+@keyframes vf-drift-b { to { transform: translate(-20vw, -14vh) scale(1.15); } }
+
+/* Moving accent under the header. */
+.vf-accent-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-brand-soft), var(--color-brand), #38bdf8, var(--color-brand), var(--color-brand-soft));
+  background-size: 200% 100%;
+  animation: vf-slide 7s linear infinite;
+}
+@keyframes vf-slide { to { background-position: -200% 0; } }
+
+header:hover .vf-logo { animation: vf-wiggle 0.6s ease; }
+@keyframes vf-wiggle {
+  0%, 100% { transform: rotate(0); }
+  30% { transform: rotate(-14deg); }
+  60% { transform: rotate(10deg); }
+}
+
+.vf-glass { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.vf-glass:hover { border-color: #99f6e4; box-shadow: 0 1px 2px rgba(15, 118, 110, 0.06), 0 16px 32px -16px rgba(15, 118, 110, 0.28); }
+
+/* P1 badges breathe so the urgent jobs catch the eye. */
+.vf-p1 { animation: vf-p1 2s ease-out infinite; }
+@keyframes vf-p1 {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 7px rgba(220, 38, 38, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vf-dash-bg::before, .vf-dash-bg::after, .vf-accent-line, .vf-p1, header:hover .vf-logo { animation: none; }
+  .vf-glass { transition: none; }
+}

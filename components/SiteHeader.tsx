@@ -2,15 +2,22 @@
 
 import type { ComponentProps, ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { APP } from "@/config/app";
 import { MotionButton } from "./Motion";
 import { motion, useReducedMotion } from "framer-motion";
 
 function NavLink({ href, children }: { href: string; children: ReactNode }) {
   const reduce = useReducedMotion();
+  const path = usePathname();
+  const active = href === "/" ? path === "/" : path.startsWith(href);
   return (
-    <motion.span whileHover={reduce ? undefined : { y: -1 }} className="inline-block">
-      <Link href={href} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium text-ink hover:bg-brand-tint hover:text-brand-strong">
+    <motion.span whileHover={reduce ? undefined : { y: -2 }} whileTap={reduce ? undefined : { scale: 0.96 }} className="inline-block">
+      <Link
+        href={href}
+        aria-current={active ? "page" : undefined}
+        className={`inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium transition-colors hover:bg-brand-tint hover:text-brand-strong ${active ? "bg-brand-soft text-brand-strong" : "text-ink"}`}
+      >
         {children}
       </Link>
     </motion.span>
@@ -19,9 +26,9 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
 
 export function SiteHeader() {
   return (
-    <header className="relative z-20 border-b border-line bg-surface text-ink">
+    <header className="relative z-20 bg-surface text-ink">
       <div className="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-xl" aria-hidden>
+        <span className="vf-logo flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-xl" aria-hidden>
           🔧
         </span>
         <div className="min-w-0">
@@ -41,6 +48,7 @@ export function SiteHeader() {
           </nav>
         </div>
       </div>
+      <div className="vf-accent-line" aria-hidden />
     </header>
   );
 }

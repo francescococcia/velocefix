@@ -9,7 +9,7 @@ import { TimeSavedLine, TimeSavedWeekTile } from "@/components/TimeSaved";
 import { VerifiedHistory } from "@/components/VerifiedHistory";
 import { SatisfactionTile } from "@/components/SatisfactionTile";
 import { RatingBadge } from "@/components/RatingBadge";
-import { FadeIn } from "@/components/Motion";
+import { CountUp, FadeIn } from "@/components/Motion";
 import { summariseRatings } from "@/lib/rating";
 import Link from "next/link";
 import { loadMapData } from "@/lib/mapData";
@@ -203,7 +203,7 @@ export default async function Dashboard() {
           {stats.map((k, i) => (
             <FadeIn key={k.label} delay={i * 0.04}>
               <a href={`#show-${k.show}`} className="vf-glass block p-3 focus-visible:outline-2 focus-visible:outline-brand">
-                <p className={`text-3xl font-bold tabular-nums ${k.tone}`}>{k.value}</p>
+                <p className={`text-3xl font-bold tabular-nums ${k.tone}`}><CountUp value={k.value} /></p>
                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{k.label}</p>
               </a>
             </FadeIn>
