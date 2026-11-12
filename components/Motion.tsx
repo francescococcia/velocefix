@@ -91,14 +91,17 @@ export function MotionItem({
   children,
   className,
   layoutId,
+  id,
 }: {
   children: ReactNode;
   className?: string;
   layoutId?: string;
+  id?: string;
 }) {
   const reduce = useReducedMotion();
   return (
     <motion.li
+      id={id}
       layout={!reduce}
       layoutId={reduce ? undefined : layoutId}
       className={className}

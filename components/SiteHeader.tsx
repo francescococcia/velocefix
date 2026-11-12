@@ -36,6 +36,7 @@ export function SiteHeader() {
           </div>
           <nav className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
             <NavLink href="/">Dashboard</NavLink>
+            <NavLink href="/journey">How it works</NavLink>
             <NavLink href="/sim">Sim WhatsApp</NavLink>
           </nav>
         </div>

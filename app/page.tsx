@@ -13,6 +13,7 @@ import { summariseRatings } from "@/lib/rating";
 import Link from "next/link";
 import { loadMapData } from "@/lib/mapData";
 import { PortfolioMapClient } from "@/components/PortfolioMapClient";
+import { JourneyStrip } from "@/components/Journey";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,7 @@ export default async function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="vf-dash-bg" aria-hidden />
+      <JourneyStrip />
       <PortfolioMapClient data={mapData} />
       <div className="grid gap-4 sm:grid-cols-2">
         <FadeIn>
@@ -78,7 +80,7 @@ export default async function Dashboard() {
                   const dwelly = !!(j.source?.startsWith("Dwelly") || unit?.source?.startsWith("Dwelly"));
                   const history = s.works.filter((w) => w.unitId === j.unitId);
                   return (
-                    <MotionItem key={j.id} layoutId={j.id} className="py-2 text-sm">
+                    <MotionItem key={j.id} id={`job-${j.id}`} layoutId={j.id} className="scroll-mt-28 py-2 text-sm">
                       <div className="flex items-center gap-2 flex-wrap">
                         <PriorityBadge p={j.priority.priority} />
                         <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
