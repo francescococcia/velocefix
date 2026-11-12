@@ -1,6 +1,6 @@
 {
   "meta": {
-    "label": "EXAMPLE DATA \u2014 two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call \u2014 the demo intake channel is WhatsApp.",
+    "label": "EXAMPLE DATA — two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call — the demo intake channel is WhatsApp. Also a labelled demo replay of Cortile ticket tkt_000096 on Gorse House unit 103 (no leaseholder names).",
     "seededAt": "2026-11-12T20:15:00Z"
   },
   "buildings": [
@@ -35,6 +35,18 @@
       "description": "Synthetic private-let cases from the Dwelly hackathon partner pack (cases 002, 037, 022). Property strings and ZZ postcodes are as supplied. Referenced photos and invoices in those histories were unavailable in the download.",
       "exampleData": true,
       "source": "Dwelly cases 002, 037, 022"
+    },
+    {
+      "id": "bld_0006",
+      "name": "Gorse House",
+      "label": "Cortile demo replay (synthetic)",
+      "area": "Manchester (M4)",
+      "type": "period",
+      "yearBuilt": 1972,
+      "tenure": "private",
+      "description": "Demo replay of Cortile building bld_0006, unit 103 (unt_00164), so the live communal gas-safety check can sit on a heating job card. Synthetic hackathon data. No leaseholder names.",
+      "exampleData": true,
+      "source": "Cortile bld_0006"
     }
   ],
   "units": [
@@ -104,6 +116,13 @@
         "hallway"
       ],
       "source": "Dwelly case 022"
+    },
+    {
+      "id": "unt_00164",
+      "buildingId": "bld_0006",
+      "label": "Unit 103",
+      "rooms": [],
+      "source": "Cortile unt_00164"
     }
   ],
   "tenants": [
@@ -152,6 +171,14 @@
       "phoneHash": "b37fa6f6da109f73af47e27395bdbadcc6cf1c72a16e863feb5f896d70789453",
       "vulnerableOccupant": false,
       "source": "Dwelly case 022"
+    },
+    {
+      "id": "t-cortile-000096",
+      "unitId": "unt_00164",
+      "displayName": "Tenant (Cortile tkt_000096 demo replay)",
+      "phoneHash": "522ae938c5827566dc4f221d3f24abfeb8ef19125abac413244c17c5c5914372",
+      "vulnerableOccupant": false,
+      "source": "Cortile tkt_000096"
     }
   ],
   "assets": [
@@ -226,7 +253,7 @@
       "name": "Hartley Plumbing & Heating (example)",
       "trade": "plumbing_heating",
       "gasSafeRegNo": "000000-EXAMPLE",
-      "gasSafeRegNoLabel": "Example registration number \u2014 not a real Gas Safe ID",
+      "gasSafeRegNoLabel": "Example registration number — not a real Gas Safe ID",
       "gasSafeVerified": true,
       "slots": [
         {
@@ -337,7 +364,7 @@
       "date": "2026-01-15",
       "trade": "plumbing_heating",
       "category": "other",
-      "summary": "Annual gas safety check \u2014 pass. Example.",
+      "summary": "Annual gas safety check — pass. Example.",
       "source": "seed"
     },
     {
@@ -356,7 +383,7 @@
       "date": "2026-08-21",
       "trade": "plumbing_heating",
       "category": "no_hot_water",
-      "summary": "Intermittent no hot water \u2014 developer's engineer reset, no fault found. Example.",
+      "summary": "Intermittent no hot water — developer's engineer reset, no fault found. Example.",
       "intermittent": true,
       "source": "seed"
     },
@@ -367,7 +394,7 @@
       "date": "2026-10-09",
       "trade": "plumbing_heating",
       "category": "no_hot_water",
-      "summary": "Intermittent no hot water again \u2014 logged with developer warranty, monitoring. Example.",
+      "summary": "Intermittent no hot water again — logged with developer warranty, monitoring. Example.",
       "intermittent": true,
       "source": "seed"
     },
@@ -510,7 +537,7 @@
           {
             "id": "DWELLY_CASE_002",
             "label": "Prior agency ticket: blocked toilet, no backup WC during works",
-            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Dwelly case 002",
             "sourceRef": "Real Estate Agency Synthetic/002/index.md",
@@ -545,7 +572,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -553,7 +580,7 @@
           "label": "Gas Safe registered engineer",
           "status": "green",
           "detail": "Not gas work",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -614,7 +641,7 @@
           {
             "id": "DWELLY_CASE_037",
             "label": "Prior agency ticket: leaking shower hose replaced by Birch Utilities",
-            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Dwelly case 037",
             "sourceRef": "Real Estate Agency Synthetic/037/index.md",
@@ -649,7 +676,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -657,7 +684,7 @@
           "label": "Gas Safe registered engineer",
           "status": "green",
           "detail": "Not gas work",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -718,7 +745,7 @@
           {
             "id": "DWELLY_CASE_022",
             "label": "Prior agency ticket: front door lock changed; new key added to the office set",
-            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Dwelly case 022",
             "sourceRef": "Real Estate Agency Synthetic/022/index.md",
@@ -753,7 +780,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Arthur Stuart (Dwelly case 022, example) \u2014 locksmith",
+          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -761,7 +788,7 @@
           "label": "Gas Safe registered engineer",
           "status": "green",
           "detail": "Not gas work",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -778,6 +805,109 @@
           "at": "2026-11-12T19:10:00Z",
           "direction": "in",
           "body": "Front door lock, the keys gets very hard to turn to unlock, thos sometimes leads to me standing at the door fiddling with the keys for a couple of minutes just so I can go outside.",
+          "hasMedia": false,
+          "channel": "whatsapp"
+        }
+      ]
+    },
+    {
+      "id": "j-cortile-000096",
+      "unitId": "unt_00164",
+      "createdAt": "2026-11-12T20:30:00Z",
+      "lastAgencyReplyAt": null,
+      "status": "open",
+      "exampleData": true,
+      "source": "Cortile tkt_000096",
+      "quote": "The heating isn't coming on at all. Thermostat shows it calling for heat.",
+      "proposal": {
+        "issue": "no_heating",
+        "room": "unspecified",
+        "trade": "plumbing_heating",
+        "hazardType": "excess_cold",
+        "summary": "Demo replay of Cortile ticket tkt_000096: heating not working. Thermostat shows it calling for heat.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P1",
+        "firedRules": [
+          {
+            "id": "S11_HEATING_HOT_WATER",
+            "label": "Landlord must keep heating and hot water installations in repair",
+            "effect": "Landlord responsibility",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "SEASON_WINTER",
+            "label": "Winter window (1 Oct – 31 Mar)",
+            "effect": "Escalate to P1",
+            "kind": "agency-policy",
+            "source": "Shelter Legal — heating, hot water and power problems (reasonable time can depend on season)",
+            "sourceUrl": "https://england.shelter.org.uk/professional_resources/legal/housing_conditions/responsibility_for_repairs/heating_hot_water_and_power_problems"
+          },
+          {
+            "id": "CORTILE_TKT_000096",
+            "label": "Demo replay of Cortile ticket tkt_000096 (Heating not working, unit 103)",
+            "effect": "Cite partner ticket; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Cortile tkt_000096",
+            "sourceUrl": "https://hackathon.cortile.com/"
+          }
+        ],
+        "clock": {
+          "hours": 24,
+          "label": "P1: 24h (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit unt_00164",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(c): installations for space heating and heating water",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Reg 000000-EXAMPLE (example — not a real registration)",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-12T20:30:00Z",
+          "direction": "in",
+          "body": "The heating isn't coming on at all. Thermostat shows it calling for heat.",
           "hasMedia": false,
           "channel": "whatsapp"
         }

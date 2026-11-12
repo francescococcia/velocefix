@@ -12,6 +12,7 @@ const SIM_TENANTS = [
   { phone: "+447700900422", label: "Tenant (Dwelly case 002) — Flat 3, 15 Willowdale Road (blocked toilet)" },
   { phone: "+447700900758", label: "Tenant (Dwelly case 037) — Flat 14, 44 Lamplight Quay (shower hose)" },
   { phone: "+447700900246", label: "Tenant (Dwelly case 022) — Flat 23, 155 Willowdale Road (front door lock)" },
+  { phone: "+447700900103", label: "Tenant (Cortile tkt_000096 demo replay) — Gorse House unit 103 (heating)" },
   { phone: "+447700900999", label: "Unknown number" },
 ];
 

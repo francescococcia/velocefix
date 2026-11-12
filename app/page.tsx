@@ -4,6 +4,7 @@ import { PriorityBadge } from "@/components/PriorityBadge";
 import { CortileLive } from "@/components/CortileLive";
 import { cortileGasCertCheck, loadCortileDemo } from "@/lib/cortile";
 import { isGasWork } from "@/lib/checks";
+import { TimeSavedLine, TimeSavedWeekTile } from "@/components/TimeSaved";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,7 @@ export default async function Dashboard() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Agency desk — portfolio</h1>
+      <TimeSavedWeekTile jobs={s.jobs} now={new Date(now)} />
       <CortileLive data={cortile} />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {s.buildings.map((b) => {
@@ -58,6 +60,7 @@ export default async function Dashboard() {
                         <PriorityBadge p={j.priority.priority} />
                         <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
                         {dwelly && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">Dwelly</span>}
+                        {j.source?.startsWith("Cortile") && <span className="rounded bg-teal-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-800">Cortile demo replay</span>}
                         <span className="text-slate-500">· {unit?.label} · {j.proposal.room}</span>
                         <span className="ml-auto text-xs">{j.status}</span>
                       </div>
@@ -65,6 +68,7 @@ export default async function Dashboard() {
                         {overdue ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days` : `Due ${due.toLocaleString("en-GB", { timeZone: "Europe/London" })}`} · {j.priority.clock.label}
                         {j.lastAgencyReplyAt === null ? " · no agency reply yet" : ""}
                       </div>
+                      <TimeSavedLine job={j} now={new Date(now)} />
                       {j.status === "booked" && j.slotId && (() => {
                         const op = s.operators.find((o) => o.id === j.operatorId);
                         const slot = op?.slots.find((x) => x.id === j.slotId);
