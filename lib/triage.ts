@@ -73,7 +73,12 @@ function inboundMsg(input: { body: string; channel: "whatsapp" | "sim"; mediaUrl
 function awaitingJob(store: StoreData, unitId: string): Job | undefined {
   const open = [...store.jobs].reverse().find((j) => j.unitId === unitId && j.status === "slots_offered");
   if (open) return open;
-  return [...store.jobs].reverse().find((j) => j.unitId === unitId && j.status === "booked");
+  const booked = [...store.jobs].reverse().find((j) => j.unitId === unitId && j.status === "booked");
+  if (booked) return booked;
+  // Fallback: latest real repair on this unit that is not finished (offer may have been superseded)
+  return [...store.jobs].reverse().find(
+    (j) => j.unitId === unitId && j.proposal?.issue && j.proposal.issue !== "other" && j.status !== "completed" && !j.selfHelpOffered,
+  );
 }
 
 function selfHelpJob(store: StoreData, unitId: string, convJobId?: string): Job | undefined {
@@ -252,8 +257,12 @@ async function handleKnown(
     return cancelJob(store, open, tenant, input, now);
   }
 
-  if (intent === "reschedule" && open) {
+  if ((intent === "reschedule" || isRescheduleText(body)) && open && !isDangerText(body) && !isCoText(body)) {
     return rescheduleJob(store, open, tenant, input, now, parseSlotHint(body, now));
+  }
+  if (!open && isRescheduleText(body) && !looksLikeRepairText(body)) {
+    const reply = "I can't see a visit waiting for you right now, so there's nothing to move. Tell me what needs fixing and I'll find times.";
+    return { reply };
   }
 
   if (intent === "pick_slot" && isBookAgainText(body)) {
@@ -596,4 +605,8 @@ function takeRatingReply(
   job.messages.push({ at: now.toISOString(), direction: "out", body: reply, channel });
   saveStore();
   return { reply, job };
+}
+
+function looksLikeRepairText(t: string) {
+  return /leak|boiler|heat|hot water|tap|toilet|lock|door|window|mould|damp|electric|socket|light|fuse|shower|sink|drain|roof|gas|smell|broken|not working|stopped/.test(t.toLowerCase());
 }
