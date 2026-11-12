@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 
-type Msg = { dir: "in" | "out"; text: string; meta?: string };
+type Check = { id: string; label: string; status: "green" | "red"; detail: string };
+type Msg = { dir: "in" | "out"; text: string; meta?: string; checks?: Check[] };
 const QUICK = [
   "No hot water, the tap is stuck so we shut the water off",
   "I can smell gas in the kitchen",
@@ -24,7 +25,7 @@ export default function Sim() {
     const r = await fetch("/api/sim", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ from, body }) });
     const d = await r.json();
     setBusy(false);
-    setMsgs((m) => [...m, { dir: "out", text: d.reply ?? d.error, meta: d.priority ? `${d.priority.priority} · ${d.priority.destination} · proposal by ${d.proposal?.by}` : undefined }]);
+    setMsgs((m) => [...m, { dir: "out", text: d.reply ?? d.error, meta: d.priority ? `${d.priority.priority} · ${d.status} · proposal by ${d.proposal?.by}` : undefined, checks: d.checks }]);
   }
 
   async function reset() {
@@ -45,6 +46,11 @@ export default function Sim() {
         {msgs.map((m, i) => (
           <div key={i} className={`max-w-[85%] rounded-lg p-2 text-sm whitespace-pre-wrap shadow ${m.dir === "in" ? "ml-auto bg-[#dcf8c6]" : "bg-white"}`}>
             {m.text}
+            {m.checks && m.checks.length > 0 && (
+              <ul className="mt-1 border-t pt-1 text-[11px]">
+                {m.checks.map((c) => <li key={c.id}>{c.status === "green" ? "🟢" : "🔴"} {c.label}: <span className="text-slate-600">{c.detail}</span></li>)}
+              </ul>
+            )}
             {m.meta && <div className="text-[10px] text-slate-500 mt-1">{m.meta}</div>}
           </div>
         ))}

@@ -21,5 +21,5 @@ export async function POST(req: Request) {
   if (reset) { resetStore(); return NextResponse.json({ reply: "Demo data reset to seed." }); }
   if (!from || !body) return NextResponse.json({ error: "from and body required" }, { status: 400 });
   const r = await handleInbound({ from, body, channel: "sim" });
-  return NextResponse.json({ reply: r.reply, priority: r.job?.priority, proposal: r.job?.proposal });
+  return NextResponse.json({ reply: r.reply, priority: r.job?.priority, proposal: r.job?.proposal, checks: r.job?.checks ?? [], status: r.job?.status });
 }

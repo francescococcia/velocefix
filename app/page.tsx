@@ -43,6 +43,18 @@ export default function Dashboard() {
                         {overdue ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days` : `Due ${due.toLocaleString("en-GB", { timeZone: "Europe/London" })}`} · {j.priority.clock.label}
                         {j.lastAgencyReplyAt === null ? " · no agency reply yet" : ""}
                       </div>
+                      {j.status === "booked" && j.slotId && (() => {
+                        const op = s.operators.find((o) => o.id === j.operatorId);
+                        const slot = op?.slots.find((x) => x.id === j.slotId);
+                        return <div className="text-xs text-green-700 font-semibold">✅ Booked: {op?.name}, {slot && new Date(slot.start).toLocaleString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</div>;
+                      })()}
+                      {j.checks.length > 0 && (
+                        <ul className="text-xs mt-1 grid gap-0.5">
+                          {j.checks.map((c) => (
+                            <li key={c.id}>{c.status === "green" ? "🟢" : "🔴"} {c.label}: <span className="text-slate-600">{c.detail}</span> <span className="text-slate-400">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank">{c.source}</a> : c.source}</span></li>
+                          ))}
+                        </ul>
+                      )}
                       <details className="text-xs mt-1">
                         <summary className="cursor-pointer text-slate-600">Why {j.priority.priority}?</summary>
                         <ul className="ml-4 list-disc">
