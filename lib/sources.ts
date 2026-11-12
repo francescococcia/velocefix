@@ -23,4 +23,5 @@ export const SRC = {
   dwelly002: { source: "Dwelly case 002", sourceRef: "Real Estate Agency Synthetic/002/index.md" },
   dwelly037: { source: "Dwelly case 037", sourceRef: "Real Estate Agency Synthetic/037/index.md" },
   dwelly022: { source: "Dwelly case 022", sourceRef: "Real Estate Agency Synthetic/022/index.md" },
+  cortile: { source: "Cortile hackathon API (synthetic, event only)", url: "https://hackathon.cortile.com/" },
 } as const;

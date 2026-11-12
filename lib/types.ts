@@ -139,9 +139,9 @@ export interface PriorityResult {
   autoBookAllowed: boolean;
 }
 
-export type CheckStatus = "green" | "red";
+export type CheckStatus = "green" | "amber" | "red";
 export interface CheckRow {
-  id: "UNIT_MATCH" | "RESPONSIBILITY" | "TRADE_MATCH" | "GAS_SAFE" | "SLOT_AVAILABLE";
+  id: "UNIT_MATCH" | "RESPONSIBILITY" | "TRADE_MATCH" | "GAS_SAFE" | "GAS_CERT" | "SLOT_AVAILABLE";
   label: string;
   status: CheckStatus;
   detail: string;

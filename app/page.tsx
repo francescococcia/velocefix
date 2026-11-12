@@ -1,6 +1,9 @@
 import { getStore } from "@/lib/store";
 import { dueAt } from "@/lib/priority";
 import { PriorityBadge } from "@/components/PriorityBadge";
+import { CortileLive } from "@/components/CortileLive";
+import { cortileGasCertCheck, loadCortileDemo } from "@/lib/cortile";
+import { isGasWork } from "@/lib/checks";
 
 export const dynamic = "force-dynamic";
 
@@ -10,12 +13,16 @@ function buildingKind(type?: string) {
   return null;
 }
 
-export default function Dashboard() {
+export default async function Dashboard() {
   const s = getStore();
   const now = Date.now();
+  const cortile = await loadCortileDemo();
+  const gorseGas = cortile.buildings.find((b) => b.id === "bld_0006")?.gasSafety;
+  const cortileCert = cortileGasCertCheck(gorseGas);
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Agency desk — portfolio</h1>
+      <CortileLive data={cortile} />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {s.buildings.map((b) => {
           const units = s.units.filter((u) => u.buildingId === b.id);
@@ -63,13 +70,20 @@ export default function Dashboard() {
                         const slot = op?.slots.find((x) => x.id === j.slotId);
                         return <div className="text-xs text-green-700 font-semibold">✅ Booked: {op?.name}, {slot && new Date(slot.start).toLocaleString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</div>;
                       })()}
-                      {j.checks.length > 0 && (
+                      {(() => {
+                        const boiler = s.assets.find((a) => a.unitId === j.unitId && a.type === "boiler") ?? s.assets.find((a) => a.buildingId === unit?.buildingId && a.type === "boiler" && !a.unitId);
+                        const extra = cortileCert && isGasWork(j.proposal.issue, boiler) ? [cortileCert] : [];
+                        const rows = [...j.checks, ...extra.filter((c) => !j.checks.some((x) => x.id === c.id))];
+                        if (rows.length === 0) return null;
+                        const mark = (status: string) => status === "green" ? "🟢" : status === "amber" ? "🟠" : "🔴";
+                        return (
                         <ul className="text-xs mt-1 grid gap-0.5">
-                          {j.checks.map((c) => (
-                            <li key={c.id}>{c.status === "green" ? "🟢" : "🔴"} {c.label}: <span className="text-slate-600">{c.detail}</span> <span className="text-slate-400">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank">{c.source}</a> : c.source}</span></li>
+                          {rows.map((c) => (
+                            <li key={c.id}>{mark(c.status)} {c.label}: <span className="text-slate-600">{c.detail}</span> <span className="text-slate-400">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank">{c.source}</a> : c.source}</span></li>
                           ))}
                         </ul>
-                      )}
+                        );
+                      })()}
                       <details className="text-xs mt-1">
                         <summary className="cursor-pointer text-slate-600">Why {j.priority.priority}?</summary>
                         <ul className="ml-4 list-disc">
@@ -80,6 +94,12 @@ export default function Dashboard() {
                               {r.quote && <blockquote className="mt-0.5 border-l-2 border-sky-200 pl-2 text-slate-600 italic">“{r.quote}”</blockquote>}
                             </li>
                           ))}
+                          {cortileCert && isGasWork(j.proposal.issue, s.assets.find((a) => a.unitId === j.unitId && a.type === "boiler") ?? s.assets.find((a) => a.buildingId === unit?.buildingId && a.type === "boiler" && !a.unitId)) && (
+                            <li className="mt-0.5">
+                              {cortileCert.detail}{" "}
+                              <span className="text-slate-500">[partner-data] {cortileCert.sourceUrl ? <a className="underline" href={cortileCert.sourceUrl} target="_blank">{cortileCert.source}</a> : cortileCert.source}</span>
+                            </li>
+                          )}
                         </ul>
                         {dwelly && <p className="mt-1 text-[11px] text-slate-500">Synthetic Dwelly hackathon case; ZZ postcode; original thread was not WhatsApp.</p>}
                       </details>
