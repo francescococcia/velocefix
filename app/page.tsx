@@ -29,10 +29,58 @@ export default async function Dashboard() {
   const [cortile, mapData] = await Promise.all([loadCortileDemo(), loadMapData()]);
   const gorseGas = cortile.buildings.find((b) => b.id === "bld_0006")?.gasSafety;
   const cortileCert = cortileGasCertCheck(gorseGas);
+  const isOverdue = (j: (typeof s.jobs)[number]) =>
+    j.status !== "completed" && j.priority.clock.hours > 0 && dueAt(j.createdAt, j.priority.clock.hours).getTime() < now;
+  const byUrgency = (a: (typeof s.jobs)[number], b: (typeof s.jobs)[number]) =>
+    Number(isOverdue(b)) - Number(isOverdue(a)) || a.priority.priority.localeCompare(b.priority.priority);
+  const live = s.jobs.filter((j) => j.status !== "completed");
+  const attention = live.filter((j) => j.status !== "booked").sort(byUrgency);
+  const stats = [
+    { label: "Open jobs", value: live.length, tone: "text-slate-900" },
+    { label: "Overdue", value: live.filter(isOverdue).length, tone: "text-red-600" },
+    { label: "P1 / P2 open", value: live.filter((j) => j.priority.priority <= "P2").length, tone: "text-orange-600" },
+    { label: "Booked", value: live.filter((j) => j.status === "booked").length, tone: "text-green-700" },
+    { label: "Completed", value: s.jobs.length - live.length, tone: "text-teal-700" },
+  ];
   return (
     <div className="space-y-6">
       <div className="vf-dash-bg" aria-hidden />
       <JourneyStrip />
+      <section className="grid gap-4 lg:grid-cols-[2fr_3fr]">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-3">
+          {stats.map((k) => (
+            <div key={k.label} className="vf-glass p-3">
+              <p className={`text-3xl font-bold tabular-nums ${k.tone}`}>{k.value}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{k.label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="vf-glass p-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Needs attention ({attention.length})</h2>
+          {attention.length === 0 && <p className="mt-1 text-sm text-slate-500">Nothing waiting on the desk.</p>}
+          <ul className="mt-1 divide-y">
+            {attention.map((j) => {
+              const unit = s.units.find((u) => u.id === j.unitId);
+              const building = s.buildings.find((b) => b.id === unit?.buildingId);
+              const due = dueAt(j.createdAt, j.priority.clock.hours);
+              return (
+                <li key={j.id}>
+                  <a href={`#job-${j.id}`} className="flex min-h-11 flex-wrap items-center gap-2 py-1.5 text-sm hover:bg-white/60">
+                    <PriorityBadge p={j.priority.priority} />
+                    <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
+                    <span className="text-slate-500">· {building?.name} · {unit?.label}</span>
+                    <span className={`ml-auto text-xs ${isOverdue(j) ? "font-semibold text-red-600" : "text-slate-500"}`}>
+                      {isOverdue(j)
+                        ? `Overdue ${Math.round((now - due.getTime()) / 86400000)} days`
+                        : `Due ${due.toLocaleString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}`}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
       <PortfolioMapClient data={mapData} />
       <div className="grid gap-4 sm:grid-cols-2">
         <FadeIn>
@@ -48,7 +96,7 @@ export default async function Dashboard() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {s.buildings.map((b) => {
           const units = s.units.filter((u) => u.buildingId === b.id);
-          const jobs = s.jobs.filter((j) => units.some((u) => u.id === j.unitId));
+          const jobs = s.jobs.filter((j) => units.some((u) => u.id === j.unitId)).sort(byUrgency);
           const boilers = s.assets.filter((a) => a.buildingId === b.id && a.type === "boiler");
           const kind = buildingKind(b.type);
           return (
@@ -93,13 +141,11 @@ export default async function Dashboard() {
                         <RatingBadge job={j} />
                       </div>
                       <div className={`text-xs ${overdue ? "text-red-600 font-semibold" : "text-slate-500"}`}>
-                        {overdue ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days` : `Due ${due.toLocaleString("en-GB", { timeZone: "Europe/London" })}`} · {j.priority.clock.label}
+                        {j.status === "completed" && j.completion
+                          ? `Completed ${new Date(j.completion.at).toLocaleString("en-GB", { timeZone: "Europe/London" })}`
+                          : overdue ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days` : `Due ${due.toLocaleString("en-GB", { timeZone: "Europe/London" })}`} · {j.priority.clock.label}
                         {j.lastAgencyReplyAt === null ? " · no agency reply yet" : ""}
                       </div>
-                      <TimeSavedLine job={j} now={new Date(now)} />
-                      {j.messages.some((m) => m.mediaUrl) && (
-                        <p className="text-xs text-slate-500">Photo reference (not downloaded): {j.messages.find((m) => m.mediaUrl)?.mediaUrl}</p>
-                      )}
                       {j.status === "booked" && j.slotId && (() => {
                         const op = s.operators.find((o) => o.id === j.operatorId);
                         const slot = op?.slots.find((x) => x.id === j.slotId);
@@ -117,14 +163,24 @@ export default async function Dashboard() {
                         const boiler = s.assets.find((a) => a.unitId === j.unitId && a.type === "boiler") ?? s.assets.find((a) => a.buildingId === unit?.buildingId && a.type === "boiler" && !a.unitId);
                         const extra = cortileCert && isGasWork(j.proposal.issue, boiler) ? [cortileCert] : [];
                         const rows = [...j.checks, ...extra.filter((c) => !j.checks.some((x) => x.id === c.id))];
-                        if (rows.length === 0) return null;
                         const mark = (status: string) => status === "green" ? "🟢" : status === "amber" ? "🟠" : "🔴";
+                        const count = (st: string) => rows.filter((c) => c.status === st).length;
+                        const photo = j.messages.find((m) => m.mediaUrl)?.mediaUrl;
                         return (
-                        <ul className="text-xs mt-1 grid gap-0.5">
-                          {rows.map((c) => (
-                            <li key={c.id}>{mark(c.status)} {c.label}: <span className="text-slate-600">{c.detail}</span> <span className="text-slate-400">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank">{c.source}</a> : c.source}</span></li>
-                          ))}
-                        </ul>
+                        <details className="text-xs mt-1">
+                          <summary className="cursor-pointer text-slate-600">
+                            {rows.length === 0
+                              ? "Evidence and time saved"
+                              : `Fact checks: ${[count("green") && `🟢 ${count("green")}`, count("amber") && `🟠 ${count("amber")}`, count("red") && `🔴 ${count("red")}`].filter(Boolean).join(" ")}`}
+                          </summary>
+                          <ul className="mt-1 grid gap-0.5">
+                            {rows.map((c) => (
+                              <li key={c.id}>{mark(c.status)} {c.label}: <span className="text-slate-600">{c.detail}</span> <span className="text-slate-400">— {c.sourceUrl ? <a className="underline" href={c.sourceUrl} target="_blank">{c.source}</a> : c.source}</span></li>
+                            ))}
+                          </ul>
+                          <TimeSavedLine job={j} now={new Date(now)} />
+                          {photo && <p className="text-slate-500">Photo reference (not downloaded): {photo}</p>}
+                        </details>
                         );
                       })()}
                       <details className="text-xs mt-1">

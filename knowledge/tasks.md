@@ -129,6 +129,12 @@ Code freeze **23:00** Europe/London. Feature freeze **~22:10**. Work in parallel
 - Done when: portfolio strip shows both buildings with open P1–P4 and overdue counts; a building page shows type, age, certs, units, open jobs; a unit page shows assets (boiler make/age, Gas Safe, EICR), previous works, open jobs, WHY panel; a control reapplies the same "no hot water" ticket to the other building. Fired rules show source type and link. Policy clocks are not labelled Awaab on private lets. Viewer role hides phone numbers if a role banner is present.
 - Critical: **yes for the standout**
 
+### UI5 — Dashboard desk strip + live KPI tiles ✅ (done 22:00)
+- Lane: UI + seed
+- Files: `app/page.tsx`, `components/CortileLive.tsx`, `components/TimeSaved.tsx`, `lib/timeSaved.ts`, `data/seed.json`
+- Done when: top strip shows open / overdue / P1–P2 / booked / completed and a "Needs attention" queue linking to each job; fact checks and time-saved fold into one expander per job; time-saved and satisfaction tiles are no longer empty; a missing Cortile key says so once.
+- Note: tiles were empty because the seeded Cortile booking had no booking timestamp and no job had a rating. Added a labelled example booking message and one finished example job (`j-tap-example`, rated 5/4). Completed jobs now keep their booking time in the weekly tile. Local dev has no `CORTILE_API_KEY`, so Cortile cards only show on Vercel. Not done: `app/units/[id]`, role banner (SEC1), reapply-ticket control (UI4).
+
 ### SEC1 — Identity hash, no-PII logs, role banner (time-box 15 min)
 - Lane: API for hashing/logging helpers (`lib/privacy.ts` + do not weaken `/api/ops`); UI may add a `?role=` banner in `components/role-banner.tsx` only
 - Files: `lib/privacy.ts`, `components/role-banner.tsx`

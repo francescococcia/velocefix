@@ -1,6 +1,6 @@
 {
   "meta": {
-    "label": "EXAMPLE DATA — two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call — the demo intake channel is WhatsApp. Also a labelled demo replay of Cortile ticket tkt_000096 on Gorse House unit 103 (no leaseholder names).",
+    "label": "EXAMPLE DATA — two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call — the demo intake channel is WhatsApp. Also a labelled demo replay of Cortile ticket tkt_000096 on Gorse House unit 103 (no leaseholder names). Plus one seeded finished job (j-tap-example) with an example tenant rating, and a seeded booking timestamp on the Cortile replay.",
     "seededAt": "2026-11-12T20:15:00Z"
   },
   "buildings": [
@@ -815,7 +815,7 @@
       "id": "j-cortile-000096",
       "unitId": "unt_00164",
       "createdAt": "2026-11-12T20:30:00Z",
-      "lastAgencyReplyAt": null,
+      "lastAgencyReplyAt": "2026-11-12T20:31:12Z",
       "status": "booked",
       "exampleData": true,
       "source": "Cortile tkt_000096",
@@ -911,10 +911,101 @@
           "body": "The heating isn't coming on at all. Thermostat shows it calling for heat.",
           "hasMedia": false,
           "channel": "whatsapp"
+        },
+        {
+          "at": "2026-11-12T20:31:12Z",
+          "direction": "out",
+          "body": "✅ Booked: Hartley Plumbing & Heating (example), Fri 13 Nov, 08:00–10:00. Seeded demo replay.",
+          "channel": "whatsapp"
         }
       ],
       "operatorId": "op-plumber",
       "slotId": "s-pl-1"
+    },
+    {
+      "id": "j-tap-example",
+      "unitId": "u-old-1",
+      "createdAt": "2026-11-09T08:40:00Z",
+      "lastAgencyReplyAt": "2026-11-09T08:41:05Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "Seed job j-tap-example (finished example)",
+      "proposal": {
+        "issue": "water_leak",
+        "room": "kitchen",
+        "trade": "plumbing_heating",
+        "hazardType": "water_supply",
+        "summary": "Hot-water tap stuck on at the kitchen sink. Seeded example of a finished job.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P2",
+        "firedRules": [
+          {
+            "id": "S11_WATER",
+            "label": "Landlord must keep installations for the supply of water in repair",
+            "effect": "Landlord responsibility",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "URGENT_CLOCK",
+            "label": "Urgent repair clock: 72h",
+            "effect": "P2, 72h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          }
+        ],
+        "clock": {
+          "hours": 72,
+          "label": "Urgent: 72h / 3 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-09T08:40:00Z",
+          "direction": "in",
+          "body": "The hot tap in the kitchen is stuck on and will not turn off.",
+          "hasMedia": false,
+          "channel": "whatsapp"
+        },
+        {
+          "at": "2026-11-09T08:41:05Z",
+          "direction": "out",
+          "body": "✅ Booked: Hartley Plumbing & Heating (example), Tue 10 Nov, 09:00–11:00. Seeded example.",
+          "channel": "whatsapp"
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-11-10T10:05:00Z",
+        "cause": "Seized tap cartridge (example)",
+        "parts": "Ceramic cartridge (example)",
+        "fixed": true,
+        "followUp": "",
+        "workDone": "replaced_part",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "ratingAsk": {
+        "requestedAt": "2026-11-10T12:00:00Z",
+        "pending": false,
+        "sent": false
+      },
+      "rating": {
+        "speed": 5,
+        "quality": 4,
+        "at": "2026-11-10T12:20:00Z",
+        "channel": "sim",
+        "exampleData": true
+      }
     }
   ],
   "notices": [],
