@@ -85,7 +85,7 @@ body:has(.vf-dash-bg) { background: transparent; }
 /* ---- Motion pass: keep the light page from sitting still ---- */
 :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
 
-/* Two soft colour fields drift behind the cards. Opacity is capped so muted text on the page still clears AA. */
+/* Two soft colour fields drift behind the cards; kept faint so text sitting on the page stays readable. */
 .vf-dash-bg::before,
 .vf-dash-bg::after {
   content: "";
@@ -94,7 +94,7 @@ body:has(.vf-dash-bg) { background: transparent; }
   height: 46vmax;
   border-radius: 50%;
   filter: blur(70px);
-  opacity: 0.5;
+  opacity: 0.35;
   will-change: transform;
 }
 .vf-dash-bg::before { top: -12vmax; left: -8vmax; background: var(--color-brand-soft); animation: vf-drift-a 24s ease-in-out infinite alternate; }
