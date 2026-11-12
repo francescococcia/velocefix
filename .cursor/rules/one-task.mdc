@@ -1,0 +1,1 @@
+Take exactly one card from knowledge/tasks.md. Do only that card. Always git pull first. Run tests or the card's fixture before committing if they exist. Commit as Francesco Coccia, no secrets, push, tick the card, one-line note, and stop. If the card is bigger than 20 minutes, split it. Don't touch files owned by another lane. See knowledge/flow.md.

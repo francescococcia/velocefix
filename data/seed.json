@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "label": "EXAMPLE DATA — two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo.",
+    "seededAt": "2026-11-12T20:15:00Z"
+  },
+  "buildings": [
+    {
+      "id": "b-old-house",
+      "name": "Albion Terrace (example)",
+      "area": "North London (rough area only)",
+      "type": "period",
+      "yearBuilt": 1892,
+      "tenure": "private",
+      "description": "Victorian period terrace converted into two flats. Private tenancies. Example data.",
+      "exampleData": true
+    },
+    {
+      "id": "b-new-build",
+      "name": "Riverside Wharf (example)",
+      "area": "East London (rough area only)",
+      "type": "new_build",
+      "yearBuilt": 2024,
+      "tenure": "private",
+      "warrantyUntil": "2034-06-30",
+      "warrantyProvider": "Developer / new-home warranty (example)",
+      "description": "2024 new-build apartment block, still under developer warranty. Private tenancy. Example data.",
+      "exampleData": true
+    }
+  ],
+  "units": [
+    { "id": "u-old-1", "buildingId": "b-old-house", "label": "Flat 1 (ground floor)", "bedrooms": 1, "rooms": ["kitchen", "bathroom", "living room", "bedroom", "hallway"] },
+    { "id": "u-old-2", "buildingId": "b-old-house", "label": "Flat 2 (first floor)", "bedrooms": 2, "rooms": ["kitchen", "bathroom", "living room", "bedroom 1", "bedroom 2", "hallway"] },
+    { "id": "u-new-403", "buildingId": "b-new-build", "label": "Flat 4.03", "bedrooms": 2, "rooms": ["kitchen", "bathroom", "living room", "bedroom 1", "bedroom 2"] }
+  ],
+  "tenants": [
+    {
+      "id": "t-old-2",
+      "unitId": "u-old-2",
+      "displayName": "Tenant A (example)",
+      "phoneHash": "b1e7c34f8f2731a143d8b4fdfdaf3a5c07eeae72a9ff3fee323da77936ff2d01",
+      "vulnerableOccupant": true,
+      "vulnerabilityNote": "Agency-policy flag (example): household includes a young child. Not a medical record and not an HHSRS assessment."
+    },
+    {
+      "id": "t-old-1",
+      "unitId": "u-old-1",
+      "displayName": "Tenant B (example)",
+      "phoneHash": "d9bd7c0121582cb4a3e4ea4d5c41b9ae5bb10c18467ea3238738e7c897cb6786",
+      "vulnerableOccupant": false
+    },
+    {
+      "id": "t-new-403",
+      "unitId": "u-new-403",
+      "displayName": "Tenant C (example)",
+      "phoneHash": "738591552cbeb39087e91b524a0d94d71d62e40cc5f25aa32cba2dc5cc8a3174",
+      "vulnerableOccupant": false
+    }
+  ],
+  "assets": [
+    {
+      "id": "a-old-2-boiler",
+      "buildingId": "b-old-house",
+      "unitId": "u-old-2",
+      "type": "boiler",
+      "make": "Worcester Bosch (example)",
+      "model": "Greenstar combi (example)",
+      "fuel": "gas",
+      "yearInstalled": 2012,
+      "gasSafeCertDate": "2026-01-15",
+      "gasSafeNextDue": "2027-01-15",
+      "notes": "14-year-old gas combi boiler. Example data."
+    },
+    {
+      "id": "a-old-1-boiler",
+      "buildingId": "b-old-house",
+      "unitId": "u-old-1",
+      "type": "boiler",
+      "make": "Vaillant (example)",
+      "model": "ecoTEC combi (example)",
+      "fuel": "gas",
+      "yearInstalled": 2019,
+      "gasSafeCertDate": "2026-02-03",
+      "gasSafeNextDue": "2027-02-03"
+    },
+    {
+      "id": "a-old-eicr",
+      "buildingId": "b-old-house",
+      "type": "electrical_installation",
+      "yearInstalled": 1998,
+      "eicrDate": "2022-03-10",
+      "eicrExpiry": "2027-03-10",
+      "notes": "EICR at least every 5 years (England). Example dates."
+    },
+    {
+      "id": "a-old-2-floor",
+      "buildingId": "b-old-house",
+      "unitId": "u-old-2",
+      "type": "flooring",
+      "yearInstalled": 1892,
+      "notes": "Original timber floorboards, hallway. Example data."
+    },
+    {
+      "id": "a-new-403-boiler",
+      "buildingId": "b-new-build",
+      "unitId": "u-new-403",
+      "type": "boiler",
+      "make": "Ideal (example)",
+      "model": "Logic combi (example)",
+      "fuel": "gas",
+      "yearInstalled": 2024,
+      "gasSafeCertDate": "2026-05-20",
+      "gasSafeNextDue": "2027-05-20",
+      "warrantyUntil": "2031-05-20",
+      "notes": "New boiler, manufacturer warranty plus developer warranty. Example data."
+    },
+    {
+      "id": "a-new-eicr",
+      "buildingId": "b-new-build",
+      "type": "electrical_installation",
+      "yearInstalled": 2024,
+      "eicrDate": "2024-06-01",
+      "eicrExpiry": "2029-06-01"
+    }
+  ],
+  "operators": [
+    {
+      "id": "op-plumber",
+      "name": "Hartley Plumbing & Heating (example)",
+      "trade": "plumbing_heating",
+      "gasSafeRegNo": "000000-EXAMPLE",
+      "gasSafeRegNoLabel": "Example registration number — not a real Gas Safe ID",
+      "gasSafeVerified": true,
+      "slots": [
+        { "id": "s-pl-1", "start": "2026-11-13T08:00:00Z", "end": "2026-11-13T10:00:00Z", "booked": false },
+        { "id": "s-pl-2", "start": "2026-11-13T12:00:00Z", "end": "2026-11-13T14:00:00Z", "booked": false },
+        { "id": "s-pl-3", "start": "2026-11-13T16:00:00Z", "end": "2026-11-13T18:00:00Z", "booked": false },
+        { "id": "s-pl-4", "start": "2026-11-14T09:00:00Z", "end": "2026-11-14T11:00:00Z", "booked": false }
+      ]
+    },
+    {
+      "id": "op-handyman",
+      "name": "Northside Floors & Handyman (example)",
+      "trade": "flooring_general",
+      "slots": [
+        { "id": "s-hm-1", "start": "2026-11-13T09:00:00Z", "end": "2026-11-13T11:00:00Z", "booked": false },
+        { "id": "s-hm-2", "start": "2026-11-13T14:00:00Z", "end": "2026-11-13T16:00:00Z", "booked": false },
+        { "id": "s-hm-3", "start": "2026-11-16T09:00:00Z", "end": "2026-11-16T11:00:00Z", "booked": false },
+        { "id": "s-hm-4", "start": "2026-11-17T13:00:00Z", "end": "2026-11-17T15:00:00Z", "booked": false }
+      ]
+    }
+  ],
+  "works": [
+    { "id": "w-1", "unitId": "u-old-2", "assetId": "a-old-2-boiler", "date": "2025-12-02", "trade": "plumbing_heating", "category": "no_heating", "summary": "Boiler lost pressure; repressurised, replaced PRV. Example.", "source": "seed" },
+    { "id": "w-2", "unitId": "u-old-2", "assetId": "a-old-2-boiler", "date": "2026-01-15", "trade": "plumbing_heating", "category": "other", "summary": "Annual gas safety check — pass. Example.", "source": "seed" },
+    { "id": "w-3", "unitId": "u-old-1", "date": "2025-06-10", "trade": "flooring_general", "category": "floor_damage", "summary": "Kitchen vinyl patched. Example.", "source": "seed" },
+    { "id": "w-4", "unitId": "u-new-403", "assetId": "a-new-403-boiler", "date": "2026-08-21", "trade": "plumbing_heating", "category": "no_hot_water", "summary": "Intermittent no hot water — developer's engineer reset, no fault found. Example.", "intermittent": true, "source": "seed" },
+    { "id": "w-5", "unitId": "u-new-403", "assetId": "a-new-403-boiler", "date": "2026-10-09", "trade": "plumbing_heating", "category": "no_hot_water", "summary": "Intermittent no hot water again — logged with developer warranty, monitoring. Example.", "intermittent": true, "source": "seed" }
+  ],
+  "jobs": [
+    {
+      "id": "j-floor",
+      "unitId": "u-old-2",
+      "createdAt": "2026-10-22T09:12:00Z",
+      "lastAgencyReplyAt": null,
+      "status": "open",
+      "exampleData": true,
+      "proposal": {
+        "issue": "floor_damage",
+        "room": "hallway",
+        "trade": "flooring_general",
+        "hazardType": "falls_on_level_surfaces",
+        "summary": "Broken / lifting floorboards in the hallway; photos sent via the portal. No reply for 3 weeks.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_STRUCTURE",
+            "label": "Landlord repairs structure and exterior (incl. floors)",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          }
+        ],
+        "clock": { "hours": 168, "label": "Routine: 7 days (agency policy)", "basis": "agency-policy" },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [],
+      "overrides": [],
+      "messages": [
+        { "at": "2026-10-22T09:12:00Z", "direction": "in", "body": "Floorboards in the hallway are broken and lifting, photos attached.", "hasMedia": true, "channel": "portal" }
+      ]
+    }
+  ],
+  "notices": [],
+  "sessions": {}
+}
