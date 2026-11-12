@@ -20,6 +20,7 @@ export function opsJob(store: StoreData, job: Job, now = new Date()) {
     id: job.id,
     buildingName: building?.name ?? null,
     unitLabel: unit?.label ?? null,
+    issue: job.proposal.issue,
     priority: job.priority.priority,
     status: job.status,
     sla: {

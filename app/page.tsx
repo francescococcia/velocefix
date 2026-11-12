@@ -2,6 +2,7 @@ import { plainSource } from "@/components/plain";
 import { getStore, unitContext } from "@/lib/store";
 import { dueAt, prioritise } from "@/lib/priority";
 import { TicketCompare, type CompareRow } from "@/components/TicketCompare";
+import { OpsAssistant } from "@/components/OpsAssistant";
 import { PriorityBadge } from "@/components/PriorityBadge";
 import { CortileLive } from "@/components/CortileLive";
 import { cortileGasCertCheck, loadCortileDemo } from "@/lib/cortile";
@@ -292,6 +293,7 @@ export default async function Dashboard() {
           </ul>
         </FadeIn>
       </section>
+      <OpsAssistant />
       <WorkQueue items={items} />
       {compareUnits.length > 1 && <TicketCompare rows={compareRows} />}
       <PortfolioMapClient data={mapData} />

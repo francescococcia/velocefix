@@ -92,7 +92,8 @@ Code freeze **23:00** Europe/London. Feature freeze **~22:10**. Work in parallel
 - Done when: `GET /api/ops` returns a no-secret JSON summary (job counts, overdue titles, pending approvals). No phone numbers, no tokens.
 - Critical: no (do after 21:20 if core works)
 
-### UI3 — Dashboard ops assistant
+### UI3 — Dashboard ops assistant ✅ (done 23:30, as "Ask the desk")
+- Note: `POST /api/ask` answers from the no-PII `opsFeed`; with `XAI_API_KEY` set it goes through `grokOpsAnswer` in `lib/grok.ts`, otherwise (or on a Grok failure) the answer is computed from the feed and labelled "Grok is not connected on this server". `components/OpsAssistant.tsx` is mounted above the work queue. `/api/ops` now also carries each job's `issue`. The Grok path itself was not run (no key locally); 20 questions a minute per server instance.
 - Lane: UI
 - Files: `components/ops-assistant.tsx`, `app/dashboard/page.tsx` (append only, don't rewrite UI2's layout)
 - Done when: Priya can ask "what's overdue?" and get an answer from `/api/ops` + xAI, labelled as the ops assistant. If this fights UI2, stop and use a tiny `/ops` page instead.
