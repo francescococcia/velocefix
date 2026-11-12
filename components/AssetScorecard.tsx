@@ -4,6 +4,8 @@ import { CORTILE_DOCS, formatLondonDate } from "@/lib/cortile";
 import { POSTCODES_IO } from "@/lib/areaPrices";
 import { ASSET_DEMO, type AssetView } from "@/lib/assetView";
 import { AreaPrices } from "./AreaPrices";
+import { SatisfactionCard } from "./SatisfactionTile";
+import { CountUp, FadeIn } from "./Motion";
 
 function gbp(n: number, digits = 2) {
   return new Intl.NumberFormat("en-GB", {
@@ -84,7 +86,7 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
   const tenure = view.development?.tenureModel?.replaceAll("_", " ");
 
   return (
-    <div className="space-y-4">
+    <FadeIn className="space-y-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-teal-800">Asset view · investor / asset manager</p>
@@ -133,7 +135,7 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <Tile label="Occupancy">
           <p className="text-2xl font-semibold tabular-nums">
-            {occ?.percent != null ? `${occ.percent.toFixed(1)}%` : "—"}
+            {occ?.percent != null ? <CountUp value={occ.percent} decimals={1} suffix="%" /> : "—"}
           </p>
           <p className="text-sm text-slate-600">
             {occ ? `${occ.occupied} occupied · ${occ.vacant} vacant${occ.other ? ` · ${occ.other} other` : ""} of ${occ.total} units` : "No unit records"}
@@ -218,6 +220,8 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
           <Source>Cortile tickets on {view.id}{tickets?.contractorTicketIds.length ? ` · first contractor update on e.g. ${tickets.contractorTicketIds[0]}` : ""}</Source>
         </Tile>
 
+        {view.satisfaction && <SatisfactionCard summary={view.satisfaction} />}
+
         <Tile label="VeloceFix jobs">
           <p className="text-2xl font-semibold tabular-nums">{vf?.total ?? 0}</p>
           <p className="text-sm text-slate-600">
@@ -284,6 +288,6 @@ export function AssetScorecard({ view, compare }: { view: AssetView; compare?: s
           <p className="mt-1 text-sm text-slate-600">No postcode district on the Cortile development record.</p>
         )}
       </section>
-    </div>
+    </FadeIn>
   );
 }

@@ -37,6 +37,8 @@ export interface OutcodeArea {
   outcode: string;
   adminDistricts: string[];
   country?: string;
+  latitude?: number;
+  longitude?: number;
   source: "postcodes.io";
 }
 
@@ -55,7 +57,7 @@ export interface AreaPrices {
 export async function fetchOutcodeArea(outcode: string): Promise<OutcodeArea | null> {
   const oc = normaliseOutcode(outcode);
   if (!oc) return null;
-  const key = `outcode:${oc}`;
+  const key = `outcode:v2:${oc}`;
   const cached = cacheGet<OutcodeArea | null>(key, OUTCODE_TTL_MS);
   if (cached !== undefined) return cached;
 
@@ -77,7 +79,7 @@ export async function fetchOutcodeArea(outcode: string): Promise<OutcodeArea | n
   }
   let body: {
     status?: number;
-    result?: { outcode?: string; admin_district?: string[]; country?: string[] };
+    result?: { outcode?: string; admin_district?: string[]; country?: string[]; latitude?: number; longitude?: number };
   };
   try {
     body = (await res.json()) as typeof body;
@@ -92,10 +94,14 @@ export async function fetchOutcodeArea(outcode: string): Promise<OutcodeArea | n
   }
   const districts = Array.isArray(r.admin_district) ? r.admin_district.filter(Boolean) : [];
   const country = Array.isArray(r.country) ? r.country[0] : undefined;
+  const lat = typeof r.latitude === "number" ? r.latitude : undefined;
+  const lon = typeof r.longitude === "number" ? r.longitude : undefined;
   const out: OutcodeArea = {
     outcode: r.outcode ?? oc,
     adminDistricts: districts,
     country,
+    latitude: lat,
+    longitude: lon,
     source: "postcodes.io",
   };
   cacheSet(key, out);

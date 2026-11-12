@@ -6,7 +6,13 @@ import { cortileGasCertCheck, loadCortileDemo } from "@/lib/cortile";
 import { isGasWork } from "@/lib/checks";
 import { TimeSavedLine, TimeSavedWeekTile } from "@/components/TimeSaved";
 import { VerifiedHistory } from "@/components/VerifiedHistory";
+import { SatisfactionTile } from "@/components/SatisfactionTile";
+import { RatingBadge } from "@/components/RatingBadge";
+import { FadeIn, MotionItem } from "@/components/Motion";
+import { summariseRatings } from "@/lib/rating";
 import Link from "next/link";
+import { loadMapData } from "@/lib/mapData";
+import { PortfolioMapClient } from "@/components/PortfolioMapClient";
 
 export const dynamic = "force-dynamic";
 
@@ -19,14 +25,26 @@ function buildingKind(type?: string) {
 export default async function Dashboard() {
   const s = getStore();
   const now = Date.now();
-  const cortile = await loadCortileDemo();
+  const [cortile, mapData] = await Promise.all([loadCortileDemo(), loadMapData()]);
   const gorseGas = cortile.buildings.find((b) => b.id === "bld_0006")?.gasSafety;
   const cortileCert = cortileGasCertCheck(gorseGas);
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Agency desk — portfolio</h1>
-      <TimeSavedWeekTile jobs={s.jobs} now={new Date(now)} />
-      <CortileLive data={cortile} />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FadeIn>
+          <TimeSavedWeekTile jobs={s.jobs} now={new Date(now)} />
+        </FadeIn>
+        <FadeIn delay={0.06}>
+          <SatisfactionTile summary={summariseRatings(s.jobs)} />
+        </FadeIn>
+      </div>
+      <FadeIn delay={0.1}>
+        <PortfolioMapClient data={mapData} />
+      </FadeIn>
+      <FadeIn delay={0.14}>
+        <CortileLive data={cortile} />
+      </FadeIn>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {s.buildings.map((b) => {
           const units = s.units.filter((u) => u.buildingId === b.id);
@@ -34,7 +52,7 @@ export default async function Dashboard() {
           const boilers = s.assets.filter((a) => a.buildingId === b.id && a.type === "boiler");
           const kind = buildingKind(b.type);
           return (
-            <section key={b.id} className="bg-white rounded-lg shadow p-4">
+            <FadeIn key={b.id} layout className="bg-white rounded-lg shadow p-4">
               <div className="flex items-start gap-2">
                 <h2 className="text-lg font-semibold">{b.name}</h2>
                 {b.label && <span className="mt-1 shrink-0 rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">{b.label}</span>}
@@ -62,7 +80,7 @@ export default async function Dashboard() {
                   const dwelly = !!(j.source?.startsWith("Dwelly") || unit?.source?.startsWith("Dwelly"));
                   const history = s.works.filter((w) => w.unitId === j.unitId);
                   return (
-                    <li key={j.id} className="py-2 text-sm">
+                    <MotionItem key={j.id} layoutId={j.id} className="py-2 text-sm">
                       <div className="flex items-center gap-2 flex-wrap">
                         <PriorityBadge p={j.priority.priority} />
                         <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
@@ -72,6 +90,7 @@ export default async function Dashboard() {
                         {j.proposal.by === "grok" && <span className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-violet-800">Proposed by Grok{j.proposal.model ? ` · ${j.proposal.model}` : ""}</span>}
                         {j.proposal.by === "fallback" && <span className="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-700">Keyword fallback</span>}
                         <span className="ml-auto text-xs">{j.status}</span>
+                        <RatingBadge job={j} />
                       </div>
                       <div className={`text-xs ${overdue ? "text-red-600 font-semibold" : "text-slate-500"}`}>
                         {overdue ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days` : `Due ${due.toLocaleString("en-GB", { timeZone: "Europe/London" })}`} · {j.priority.clock.label}
@@ -144,11 +163,11 @@ export default async function Dashboard() {
                           </ul>
                         </details>
                       )}
-                    </li>
+                    </MotionItem>
                   );
                 })}
               </ul>
-            </section>
+            </FadeIn>
           );
         })}
       </div>

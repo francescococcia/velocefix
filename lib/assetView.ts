@@ -4,6 +4,7 @@ import { cortileGet, CortileError, hasCortileKey, type CortileComplianceStatus }
 import { fetchOutcodeArea, type OutcodeArea } from "./areaPrices";
 import { getStore } from "./store";
 import type { Job } from "./types";
+import { summariseRatings, type SatisfactionSummary } from "./rating";
 
 export const ASSET_DEMO = {
   gorseId: "bld_0006",
@@ -199,6 +200,7 @@ export interface AssetView {
     overdue: Array<{ id: string; label: string; nextDueOn: string }>;
   };
   veloceFix?: VeloceFixJobsSummary;
+  satisfaction?: SatisfactionSummary;
   area?: {
     postcodeDistrict?: string;
     districtSource?: string;
@@ -403,6 +405,10 @@ export async function loadAssetView(id: string): Promise<AssetView> {
         overdue,
       },
       veloceFix: veloceFixJobs(id),
+      satisfaction: summariseRatings(getStore().jobs.filter((j) => {
+        const unit = getStore().units.find((u) => u.id === j.unitId);
+        return unit?.buildingId === id;
+      })),
       area: {
         postcodeDistrict,
         districtSource: postcodeDistrict && development?.id ? `Cortile ${development.id} postcode_district` : undefined,

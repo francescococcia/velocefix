@@ -4,6 +4,9 @@ import { getStore } from "@/lib/store";
 import { WORK_DONE } from "@/lib/complete";
 import { VerifiedHistory } from "@/components/VerifiedHistory";
 import { PriorityBadge } from "@/components/PriorityBadge";
+import { RatingBadge } from "@/components/RatingBadge";
+import { FadeIn, MotionButton } from "@/components/Motion";
+import { ratingRequestBody } from "@/lib/twilio";
 
 export const dynamic = "force-dynamic";
 
@@ -15,10 +18,10 @@ export default async function CompleteJobPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; asked?: string }>;
 }) {
   const { id } = await params;
-  const { error } = await searchParams;
+  const { error, asked } = await searchParams;
   const s = getStore();
   const job = s.jobs.find((j) => j.id === id);
   if (!job) notFound();
@@ -40,23 +43,57 @@ export default async function CompleteJobPage({
           <span className="text-slate-500">· {building?.name} · {unit?.label}</span>
         </div>
         <p className="mt-1 text-xs text-slate-500">Ref {job.id} · {job.status}{op ? ` · assigned ${op.name}` : ""}</p>
+        <div className="mt-2"><RatingBadge job={job} /></div>
       </section>
 
       {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-800">{error}</p>}
 
       {done && work && notice ? (
-        <div className="space-y-4">
+        <FadeIn className="space-y-4">
           <h2 className="text-lg font-semibold">Verified history</h2>
           <ul><VerifiedHistory work={work} /></ul>
           <section className="rounded-lg bg-white p-4 shadow space-y-3">
             <h2 className="text-lg font-semibold">Tenant notice</h2>
             <p className="text-xs text-amber-800">Draft only. The agency must approve send. This is never sent automatically.</p>
             <pre className="whitespace-pre-wrap rounded-lg bg-slate-50 p-3 text-sm">{notice.body}</pre>
-            <button type="button" disabled className="w-full rounded-lg bg-slate-300 px-4 py-3 text-base font-semibold text-slate-600 cursor-not-allowed">
+            <button type="button" disabled className="min-h-11 w-full rounded-lg bg-slate-300 px-4 py-3 text-base font-semibold text-slate-600 cursor-not-allowed">
               Draft, agency approves send
             </button>
           </section>
-        </div>
+          <section className="rounded-lg bg-white p-4 shadow space-y-3">
+            <h2 className="text-lg font-semibold">Tenant satisfaction</h2>
+            {job.rating ? (
+              <p className="text-sm text-slate-700">
+                Rated speed {job.rating.speed}/5 and fix quality {job.rating.quality}/5
+                {job.rating.exampleData ? " (example data)" : ""}.
+              </p>
+            ) : (
+              <>
+                {asked && (
+                  <p className="rounded-lg bg-teal-50 p-3 text-sm text-teal-900">
+                    Rating request prepared{job.ratingAsk?.sent ? " and sent on WhatsApp." : "."}
+                    {job.ratingAsk?.sendError ? ` ${job.ratingAsk.sendError}` : ""}
+                    {" "}The tenant can reply in WhatsApp or Sim with two scores, for example 5 4.
+                  </p>
+                )}
+                {job.ratingAsk && !asked && (
+                  <p className="text-sm text-slate-600">
+                    Last asked {job.ratingAsk.sent ? "and sent on WhatsApp" : "— WhatsApp not sent"}
+                    {job.ratingAsk.sendError ? `: ${job.ratingAsk.sendError}` : "."}
+                    {job.ratingAsk.pending ? " Waiting for the tenant to reply." : ""}
+                  </p>
+                )}
+                <pre className="whitespace-pre-wrap rounded-lg bg-slate-50 p-3 text-sm">{ratingRequestBody(job.id, job.proposal.issue)}</pre>
+                <form action={`/api/jobs/${job.id}/ask-rating`} method="post">
+                  <MotionButton type="submit" className="min-h-11 w-full rounded-lg bg-teal-700 px-4 py-3 text-base font-semibold text-white">
+                    {job.ratingAsk?.pending ? "Ask tenant to rate again" : "Ask tenant to rate"}
+                  </MotionButton>
+                </form>
+                <p className="text-xs text-slate-500">This message is only sent when you press the button. It is never sent automatically on completion.</p>
+              </>
+            )}
+          </section>
+        </FadeIn>
       ) : job.status !== "booked" ? (
         <p className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">Only a booked job can be completed from this form. Current status: {job.status}.</p>
       ) : (
@@ -111,7 +148,7 @@ export default async function CompleteJobPage({
               </select>
             </div>
           </div>
-          <button type="submit" className="w-full rounded-lg bg-teal-700 px-4 py-3 text-base font-semibold text-white">Save verified record</button>
+          <MotionButton type="submit" className="min-h-11 w-full rounded-lg bg-teal-700 px-4 py-3 text-base font-semibold text-white">Save verified record</MotionButton>
         </form>
       )}
     </div>

@@ -7,6 +7,7 @@ import {
   type TimeSavedComparison,
 } from "@/lib/timeSaved";
 import type { Job } from "@/lib/types";
+import { CountUp } from "./Motion";
 
 export function TimeSavedWeekTile({ jobs, now }: { jobs: Job[]; now: Date }) {
   const week = timeSavedThisWeek(jobs, now);
@@ -16,9 +17,12 @@ export function TimeSavedWeekTile({ jobs, now }: { jobs: Job[]; now: Date }) {
       <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
         Time saved this week ({label})
       </h2>
-      <p className="mt-1 text-2xl font-semibold">
-        {week.jobCount === 0 ? "0 hours" : formatDuration(week.savedMs)}
+      <p className="mt-1 text-2xl font-semibold tabular-nums">
+        {week.jobCount === 0 ? "0 hours" : <CountUp value={week.savedMs / 3_600_000} decimals={1} suffix=" hours" />}
       </p>
+      {week.jobCount > 0 && (
+        <p className="text-xs text-slate-500">{formatDuration(week.savedMs)}</p>
+      )}
       <p className="mt-1 text-xs text-slate-500">
         {week.jobCount === 0
           ? `No VeloceFix offer or booking in the last ${week.windowHours / 24} days. The tile sums realised savings only, once a job has both an old-path date and a VeloceFix offer or booking timestamp.`

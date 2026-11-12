@@ -4,7 +4,15 @@ import { getStore, findTenantByPhone, unitContext, saveStore } from "./store";
 import { prioritise } from "./priority";
 import { runChecks, TRADE_FOR_ISSUE } from "./checks";
 import { grokProposal, hazardForIssue } from "./grok";
-import type { Asset, IssueCategory, Job, Proposal, Tenant } from "./types";
+import type { Asset, IssueCategory, Job, Proposal, RatingScore, Tenant } from "./types";
+import { rememberInboundPhone } from "./phones";
+import {
+  applyTenantRating,
+  findPendingRatingJob,
+  parseRatingText,
+  qualityPrompt,
+  thanksBody,
+} from "./rating";
 
 
 export function keywordProposal(text: string, rooms: string[] = []): Proposal {
@@ -38,8 +46,12 @@ export async function handleInbound(input: { from: string; body: string; channel
   const body = input.body ?? "";
   const tenant = findTenantByPhone(store, input.from);
   if (!tenant) return { reply: "We can't match this number to a tenancy. Please contact your letting agency directly." };
+  rememberInboundPhone(input.from);
   const ctx = unitContext(store, tenant.unitId);
   if (!ctx.building || !ctx.unit) return { reply: "Unit record missing." };
+
+  const ratingReply = takeRatingReply(store.jobs, tenant, body, input.channel, now);
+  if (ratingReply) return ratingReply;
 
   // Reply "1".."9" books from the saved offer (session keyed by phone hash, never the raw number).
   const pick = body.trim().match(/^([1-9])$/);
@@ -109,6 +121,43 @@ function bookFromOffer(n: number, session: { jobId: string; offeredSlotIds: stri
     const red = re.rows.filter((r) => r.status === "red").map((r) => r.detail).join("; ");
     reply = `Sorry, we couldn't book that slot: ${red || "booking not allowed"}. Reply with another number.`;
   }
+  job.messages.push({ at: now.toISOString(), direction: "out", body: reply, channel });
+  saveStore();
+  return { reply, job };
+}
+
+function takeRatingReply(
+  jobs: Job[],
+  tenant: Tenant,
+  body: string,
+  channel: "whatsapp" | "sim",
+  now: Date,
+): InboundResult | undefined {
+  const job = findPendingRatingJob(jobs, tenant.unitId);
+  if (!job) return undefined;
+  const parsed = parseRatingText(body);
+  if (!parsed) return undefined;
+
+  job.messages.push({ at: now.toISOString(), direction: "in", body, channel });
+
+  let speed: RatingScore | undefined;
+  let quality: RatingScore | undefined;
+  if ("speed" in parsed) {
+    speed = parsed.speed;
+    quality = parsed.quality;
+  } else if (job.ratingAsk?.partialSpeed) {
+    speed = job.ratingAsk.partialSpeed;
+    quality = parsed.score;
+  } else {
+    job.ratingAsk = { ...(job.ratingAsk ?? { requestedAt: now.toISOString(), pending: true }), pending: true, partialSpeed: parsed.score };
+    const reply = qualityPrompt();
+    job.messages.push({ at: now.toISOString(), direction: "out", body: reply, channel });
+    saveStore();
+    return { reply, job };
+  }
+
+  const rating = applyTenantRating(job, { speed, quality, channel }, now);
+  const reply = thanksBody(rating);
   job.messages.push({ at: now.toISOString(), direction: "out", body: reply, channel });
   saveStore();
   return { reply, job };

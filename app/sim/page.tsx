@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { FadeIn, MotionButton } from "@/components/Motion";
 
 type Check = { id: string; label: string; status: "green" | "red"; detail: string };
 type Msg = { dir: "in" | "out"; text: string; meta?: string; checks?: Check[] };
@@ -8,6 +9,7 @@ const QUICK = [
   "I can smell gas in the kitchen",
   "The hallway floor is broken",
 ];
+const RATE = ["5 4", "4 4", "3 5"];
 
 export default function Sim() {
   const [tenants, setTenants] = useState<{ phone: string; label: string }[]>([]);
@@ -39,7 +41,7 @@ export default function Sim() {
   }
 
   return (
-    <div className="max-w-xl mx-auto">
+    <FadeIn className="max-w-xl mx-auto">
       <div className="bg-yellow-300 text-yellow-950 font-semibold text-center rounded p-2 mb-3">Simulated WhatsApp — Twilio sandbox unavailable</div>
       <div className="flex gap-2 mb-2">
         <select className="border rounded p-1 text-sm flex-1" value={from} onChange={(e) => { setFrom(e.target.value); setMsgs([]); }}>
@@ -63,13 +65,17 @@ export default function Sim() {
         ))}
         {busy && <div className="text-xs text-slate-600">typing…</div>}
       </div>
+      <p className="text-xs text-slate-600 mt-2">If the agency has asked you to rate a completed job, reply with two scores (speed then quality), for example 5 4, or send them as two messages.</p>
       <div className="flex flex-wrap gap-1 my-2">
-        {QUICK.map((q) => <button key={q} onClick={() => send(q)} className="text-xs bg-white border rounded px-2 py-1">{q}</button>)}
+        {QUICK.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-white border rounded px-2 py-1">{q}</MotionButton>)}
+      </div>
+      <div className="flex flex-wrap gap-1 mb-2">
+        {RATE.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-teal-50 border border-teal-200 rounded px-2 py-1">Rate {q}</MotionButton>)}
       </div>
       <form onSubmit={(e) => { e.preventDefault(); send(text); }} className="flex gap-2">
-        <input className="flex-1 border rounded p-2 text-sm" value={text} onChange={(e) => setText(e.target.value)} placeholder="Type a repair message…" />
-        <button className="bg-green-600 text-white rounded px-4 text-sm">Send</button>
+        <input className="flex-1 min-h-11 border rounded p-2 text-sm" value={text} onChange={(e) => setText(e.target.value)} placeholder="Type a repair or rating, e.g. 5 4" />
+        <MotionButton type="submit" className="min-h-11 bg-green-600 text-white rounded px-4 text-sm font-semibold">Send</MotionButton>
       </form>
-    </div>
+    </FadeIn>
   );
 }

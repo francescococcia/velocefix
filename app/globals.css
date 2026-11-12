@@ -1,2 +1,6 @@
 @import "tailwindcss";
 body { background: #f6f7f9; color: #111827; }
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto; }
+}

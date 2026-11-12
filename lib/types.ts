@@ -215,6 +215,27 @@ export interface Completion {
   operatorTrade?: Trade;
 }
 
+export type RatingScore = 1 | 2 | 3 | 4 | 5;
+
+export interface TenantRating {
+  speed: RatingScore;
+  quality: RatingScore;
+  at: string;
+  channel: "whatsapp" | "sim";
+  /** Seeded or pack figures only — live KPI tiles ignore these when any real rating exists. */
+  exampleData?: boolean;
+}
+
+export interface RatingAsk {
+  requestedAt: string;
+  pending: boolean;
+  /** True only if the WhatsApp send actually left this server. */
+  sent?: boolean;
+  sendError?: string;
+  /** Speed received; waiting for a second message with quality. */
+  partialSpeed?: RatingScore;
+}
+
 export interface Job {
   id: string;
   unitId: string;
@@ -230,6 +251,8 @@ export interface Job {
   overrides: Override[];
   messages: Message[];
   completion?: Completion;
+  rating?: TenantRating;
+  ratingAsk?: RatingAsk;
   exampleData?: boolean;
   source?: string;
   sourceRef?: string;
