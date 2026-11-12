@@ -120,7 +120,6 @@ export function JourneyView({ times }: { times: JourneyTimes }) {
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-wide text-brand-strong">Demo journey</p>
         <h1 className="text-2xl font-semibold text-slate-900">How VeloceFix works</h1>
         <p className="mt-1 max-w-2xl text-sm text-slate-600">
           Five steps from a WhatsApp report to the Asset view. Each card opens the real screen. Time saved is a labelled {times.estimateLabel}.

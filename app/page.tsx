@@ -47,11 +47,16 @@ function buildingKind(type?: string) {
 // Chat thread in an expanded job: tenant on the left, Velo on the right, system notes centred.
 const note = "self-center rounded-xl bg-surface px-3 py-1 text-center text-xs ring-1 ring-line";
 const fromTenant = "max-w-[88%] self-start rounded-2xl rounded-bl-md bg-surface px-3 py-2 shadow-sm ring-1 ring-line";
-const fromVelo = "max-w-[92%] self-end rounded-2xl rounded-br-md bg-brand-tint px-3 py-2 ring-1 ring-brand-soft";
+const fromVelo = "vf-velo max-w-[92%] self-end rounded-2xl rounded-br-md bg-brand-tint px-3 py-2 ring-1 ring-brand-soft";
 const who = "text-[11px] font-semibold uppercase tracking-wide text-slate-500";
 const chip = "rounded px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide";
 const short: Intl.DateTimeFormatOptions = { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" };
-const mark = (status: string) => (status === "green" ? "🟢" : status === "amber" ? "🟠" : "🔴");
+const mark = (status: string) => (
+  <>
+    <span aria-hidden className={`vf-dot vf-dot-${status === "green" ? "green" : status === "amber" ? "amber" : "red"}`} />
+    <span className="sr-only">{status === "green" ? "Pass" : status === "amber" ? "Warning" : "Fail"}: </span>
+  </>
+);
 
 export default async function Dashboard() {
   const s = getStore();
@@ -272,7 +277,7 @@ export default async function Dashboard() {
             </FadeIn>
           ))}
         </div>
-        <FadeIn delay={0.1} className="vf-glass p-4">
+        <FadeIn delay={0.1} className="vf-glass vf-attention p-4">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Needs attention ({attention.length})</h2>
           {attention.length === 0 && <p className="mt-1 text-sm text-slate-500">Nothing waiting on the desk.</p>}
           <ul className="mt-1 divide-y divide-line">
