@@ -50,7 +50,7 @@ export default async function Dashboard() {
           const boilers = s.assets.filter((a) => a.buildingId === b.id && a.type === "boiler");
           const kind = buildingKind(b.type);
           return (
-            <FadeIn key={b.id} layout className="vf-glass p-4">
+            <FadeIn key={b.id} className="vf-glass p-4">
               <div className="flex items-start gap-2">
                 <h2 className="text-lg font-semibold">{b.name}</h2>
                 {b.label && <span className="mt-1 shrink-0 rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">{b.label}</span>}

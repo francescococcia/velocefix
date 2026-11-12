@@ -21,7 +21,7 @@ export function FadeIn({
     <motion.div
       className={className}
       layout={layout}
-      initial={reduce ? false : { opacity: 0, y: 8 }}
+      initial={reduce ? false : { y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduce ? { duration: 0 } : { duration: 0.35, delay, ease }}
     >
@@ -102,7 +102,7 @@ export function MotionItem({
       layout={!reduce}
       layoutId={reduce ? undefined : layoutId}
       className={className}
-      initial={reduce ? false : { opacity: 0, y: 6 }}
+      initial={reduce ? false : { y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={reduce ? { duration: 0 } : { duration: 0.3, ease }}
     >

@@ -64,6 +64,7 @@ function Fit({ buildings, locked }: { buildings: MapBuilding[]; locked: boolean 
   const map = useMap();
   useEffect(() => {
     if (locked || buildings.length === 0) return;
+    map.invalidateSize();
     if (buildings.length === 1) {
       map.fitBounds([[buildings[0]!.lat, buildings[0]!.lng]], { maxZoom: 10, padding: [48, 48] });
       return;
@@ -77,6 +78,17 @@ function Fit({ buildings, locked }: { buildings: MapBuilding[]; locked: boolean 
       ],
       { padding: [56, 56], maxZoom: 8 },
     );
+    const t = setTimeout(() => {
+      map.invalidateSize();
+      map.fitBounds(
+        [
+          [Math.min(...lats), Math.min(...lngs)],
+          [Math.max(...lats), Math.max(...lngs)],
+        ],
+        { padding: [56, 56], maxZoom: 8 },
+      );
+    }, 400);
+    return () => clearTimeout(t);
   }, [buildings, map, locked]);
   return null;
 }
@@ -258,8 +270,8 @@ export default function PortfolioMap({ data }: { data: MapData }) {
         >
 
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <ZoomControl position="bottomleft" />
           <Fit buildings={visible} locked={Boolean(selected)} />
