@@ -251,7 +251,11 @@ export default function PortfolioMap({ data }: { data: MapData }) {
     return (
       <section className="rounded-2xl bg-slate-900 p-6 text-white shadow-lg">
         <h2 className="text-lg font-semibold">Portfolio map</h2>
-        <p className="mt-2 text-sm text-amber-200">Cortile live data unavailable, so the map has no building locations.</p>
+        <p className="mt-2 text-sm text-amber-200">
+          {data.reason === "missing_key"
+            ? "Cortile key is not set on this server (CORTILE_API_KEY), so the map has no building locations. Add it to .env.local to see the map here."
+            : "Cortile live data unavailable, so the map has no building locations."}
+        </p>
       </section>
     );
   }

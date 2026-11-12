@@ -135,6 +135,12 @@ Code freeze **23:00** Europe/London. Feature freeze **~22:10**. Work in parallel
 - Done when: top strip shows open / overdue / P1–P2 / booked / completed and a "Needs attention" queue linking to each job; fact checks and time-saved fold into one expander per job; time-saved and satisfaction tiles are no longer empty; a missing Cortile key says so once.
 - Note: tiles were empty because the seeded Cortile booking had no booking timestamp and no job had a rating. Added a labelled example booking message and one finished example job (`j-tap-example`, rated 5/4). Completed jobs now keep their booking time in the weekly tile. Local dev has no `CORTILE_API_KEY`, so Cortile cards only show on Vercel. Not done: `app/units/[id]`, role banner (SEC1), reapply-ticket control (UI4).
 
+### UI6 — Clickable work queue with motion ✅ (done 22:10)
+- Lane: UI
+- Files: `components/WorkQueue.tsx` (new), `app/page.tsx`, `app/globals.css`, `components/PortfolioMap.tsx`, `app/layout.tsx`, `components/SiteHeader.tsx`
+- Done when: every job sits in one filterable list (All / Open / Overdue / High priority / Booked / Completed); a job opens on click with its fact checks, WHY and unit history; stat tiles, the needs-attention list and building cards all jump to the right filter or job; Framer Motion on filter pill, list and expand, off under reduced motion.
+- Note: the list is driven by the URL hash (`#show-overdue`, `#job-<id>`), so server-rendered links control it with no shared state. Also fixed the fixed gradient layer painting over the header, example-data banner and the map's fallback panel. Map and Cortile cards still need `CORTILE_API_KEY` in `.env.local` on a dev machine.
+
 ### SEC1 — Identity hash, no-PII logs, role banner (time-box 15 min)
 - Lane: API for hashing/logging helpers (`lib/privacy.ts` + do not weaken `/api/ops`); UI may add a `?role=` banner in `components/role-banner.tsx` only
 - Files: `lib/privacy.ts`, `components/role-banner.tsx`
