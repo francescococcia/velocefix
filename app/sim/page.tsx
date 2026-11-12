@@ -67,13 +67,13 @@ export default function Sim() {
 
   return (
     <FadeIn className="max-w-xl mx-auto">
-      <div className="border border-amber-200 bg-amber-50 text-amber-900 text-sm font-semibold text-center rounded-xl p-2 mb-3">Simulated WhatsApp — Twilio sandbox unavailable</div>
+      <div className="hidden border border-amber-200 bg-amber-50 text-amber-900 text-sm font-semibold text-center rounded-xl p-2 mb-3">Simulated WhatsApp — Twilio sandbox unavailable</div>
       <div className="flex flex-wrap gap-2 mb-2">
         <select className="min-h-11 min-w-0 border border-slate-300 bg-surface rounded-lg p-1 text-sm flex-1" value={from} onChange={(e) => { setFrom(e.target.value); setMsgs([]); }}>
           {tenants.map((t) => <option key={t.phone} value={t.phone}>{t.label}</option>)}
         </select>
-        <input className="min-h-11 border border-slate-300 bg-surface rounded-lg p-1 text-xs w-36" type="password" value={resetToken} onChange={(e) => setResetToken(e.target.value)} placeholder="Reset token" autoComplete="off" />
-        <button onClick={reset} className="min-h-11 text-xs border border-slate-300 bg-surface rounded-lg px-2">Reset demo data</button>
+        <input className="hidden min-h-11 border border-slate-300 bg-surface rounded-lg p-1 text-xs w-36" type="password" value={resetToken} onChange={(e) => setResetToken(e.target.value)} placeholder="Reset token" autoComplete="off" />
+        <button onClick={reset} className="hidden min-h-11 text-xs border border-slate-300 bg-surface rounded-lg px-2">Reset demo data</button>
       </div>
       {resetMsg && <p className="text-xs text-slate-600 mb-2">{resetMsg}</p>}
       <div className="bg-[#efeae2] rounded-xl border border-line p-3 h-[420px] overflow-y-auto space-y-2">

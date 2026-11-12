@@ -26,6 +26,11 @@ function buildingKind(type?: string) {
   return null;
 }
 
+// Chat thread in an expanded job: tenant on the left, Velo on the right, system notes centred.
+const note = "self-center rounded-xl bg-surface px-3 py-1 text-center text-[11px] ring-1 ring-line";
+const fromTenant = "max-w-[88%] self-start rounded-2xl rounded-bl-md bg-surface px-3 py-2 shadow-sm ring-1 ring-line";
+const fromVelo = "max-w-[92%] self-end rounded-2xl rounded-br-md bg-brand-tint px-3 py-2 ring-1 ring-brand-soft";
+const who = "text-[10px] font-semibold uppercase tracking-wide text-slate-500";
 const chip = "rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide";
 const short: Intl.DateTimeFormatOptions = { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" };
 const mark = (status: string) => (status === "green" ? "🟢" : status === "amber" ? "🟠" : "🔴");
@@ -104,28 +109,26 @@ export default async function Dashboard() {
         </>
       ),
       body: (
-        <div className="grid gap-3 text-xs md:grid-cols-2">
-          <div className="space-y-1 md:col-span-2">
-            <p className={overdue ? "font-semibold text-red-600" : "text-slate-600"}>
-              {j.status === "completed" && j.completion
-                ? `Completed ${new Date(j.completion.at).toLocaleString("en-GB", short)}`
-                : overdue
-                  ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days`
-                  : `Due ${due.toLocaleString("en-GB", short)}`}
-              {" "}· {j.priority.clock.label} · {j.proposal.room}
-              {j.lastAgencyReplyAt === null ? " · no agency reply yet" : ""}
-            </p>
-            {j.status === "booked" && slot && (
-              <p className="flex flex-wrap items-center gap-2 font-semibold text-green-700">
-                <span>✅ Booked: {op?.name}, {new Date(slot.start).toLocaleString("en-GB", short)}</span>
-                <Link href={`/jobs/${j.id}/complete`} className="text-brand-strong underline">Complete job</Link>
+        <div className="mx-auto flex max-w-3xl flex-col gap-2 rounded-2xl bg-canvas p-3 text-xs ring-1 ring-line sm:p-4">
+          <p className={`${note} ${overdue ? "font-semibold text-red-600" : "text-slate-600"}`}>
+            {j.status === "completed" && j.completion
+              ? `Completed ${new Date(j.completion.at).toLocaleString("en-GB", short)}`
+              : overdue
+                ? `OVERDUE by ${Math.round((now - due.getTime()) / 86400000)} days`
+                : `Due ${due.toLocaleString("en-GB", short)}`}
+            {" "}· {j.priority.clock.label} · {j.proposal.room}
+            {j.lastAgencyReplyAt === null ? " · no agency reply yet" : ""}
+          </p>
+          {j.messages.map((m, i) => (
+            <FadeIn key={`${m.at}-${i}`} delay={i * 0.05} className={m.direction === "in" ? fromTenant : fromVelo}>
+              <p className={who}>
+                {m.direction === "in" ? "Tenant" : "Velo"} · {new Date(m.at).toLocaleString("en-GB", short)} · {m.channel}
               </p>
-            )}
-            {j.status === "completed" && (
-              <p><Link href={`/jobs/${j.id}/complete`} className="text-brand-strong underline">View completion record</Link></p>
-            )}
-            <TimeSavedLine job={j} now={new Date(now)} />
-            {photo && (
+              <p className="mt-0.5 whitespace-pre-wrap text-sm text-ink">{m.body}</p>
+            </FadeIn>
+          ))}
+          {photo && (
+            <div className={fromTenant}>
               <p className="flex items-center gap-2">
                 {/^data:image\//i.test(photo) || /^https:\/\//i.test(photo) ? (
                   <a href={photo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-brand-strong">
@@ -138,11 +141,11 @@ export default async function Dashboard() {
                 )}
                 {j.photoObservation ? <span className="text-slate-600">· {j.photoObservation}</span> : null}
               </p>
-            )}
-          </div>
+            </div>
+          )}
           {rows.length > 0 && (
-            <div>
-              <h3 className="font-semibold uppercase tracking-wide text-slate-500">Fact checks</h3>
+            <FadeIn delay={0.1} className={fromVelo}>
+              <h3 className={who}>Velo · fact checks</h3>
               <ul className="mt-1 grid gap-0.5">
                 {rows.map((c) => (
                   <li key={c.id}>
@@ -151,10 +154,10 @@ export default async function Dashboard() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </FadeIn>
           )}
-          <div>
-            <h3 className="font-semibold uppercase tracking-wide text-slate-500">Why {j.priority.priority}?</h3>
+          <FadeIn delay={0.16} className={fromVelo}>
+            <h3 className={who}>Velo · why {j.priority.priority}?</h3>
             <ul className="ml-4 mt-1 list-disc">
               {j.priority.firedRules.map((r) => (
                 <li key={r.id} className="mt-0.5">
@@ -178,10 +181,22 @@ export default async function Dashboard() {
             )}
             {j.proposal.by === "fallback" && <p className="mt-1 text-[11px] text-slate-500">Keyword fallback — Grok was not used for this proposal. Priority and checks are decided by code.</p>}
             {dwelly && <p className="mt-1 text-[11px] text-slate-500">Synthetic Dwelly hackathon case; ZZ postcode; original thread was not WhatsApp.</p>}
+          </FadeIn>
+          {j.status === "booked" && slot && (
+            <p className={`${note} flex flex-wrap items-center justify-center gap-2 font-semibold text-green-700`}>
+              <span>✅ Booked: {op?.name}, {new Date(slot.start).toLocaleString("en-GB", short)}</span>
+              <Link href={`/jobs/${j.id}/complete`} className="text-brand-strong underline">Complete job</Link>
+            </p>
+          )}
+          {j.status === "completed" && (
+            <p className={note}><Link href={`/jobs/${j.id}/complete`} className="text-brand-strong underline">View completion record</Link></p>
+          )}
+          <div className={note}>
+            <TimeSavedLine job={j} now={new Date(now)} />
           </div>
           {history.length > 0 && (
-            <div className="md:col-span-2">
-              <h3 className="font-semibold uppercase tracking-wide text-slate-500">Unit history ({history.length})</h3>
+            <div className="mt-1">
+              <h3 className="text-center text-[11px] font-semibold uppercase tracking-wide text-slate-500">Unit history ({history.length})</h3>
               <ul className="mt-1 space-y-1">
                 {history.map((w) => (
                   <VerifiedHistory key={w.id} work={w} />
