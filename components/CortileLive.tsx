@@ -25,7 +25,7 @@ function BuildingCard({
 }) {
   if (!b.ok) {
     return (
-      <section className="rounded-lg border border-dashed border-slate-300 bg-white p-4">
+      <section className="vf-glass border-dashed p-4">
         <h3 className="text-lg font-semibold">Cortile {b.id}</h3>
         <p className="mt-2 text-sm text-amber-800">Cortile live data unavailable</p>
       </section>
@@ -45,7 +45,7 @@ function BuildingCard({
   const cert = cortileGasCertCheck(gas);
 
   return (
-    <section className="rounded-lg bg-white p-4 shadow">
+    <section className="vf-glass p-4">
       <div className="flex items-start gap-2">
         <h3 className="text-lg font-semibold">{b.name}</h3>
         <span className="mt-1 shrink-0 rounded bg-teal-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-800">

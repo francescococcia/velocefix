@@ -33,7 +33,7 @@ function Figures({
 export function SatisfactionTile({ summary }: { summary: SatisfactionSummary }) {
   const live = summary.n > 0;
   return (
-    <section className="rounded-lg bg-white p-4 shadow">
+    <section className="vf-glass p-4">
       <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Tenant satisfaction</h2>
       {live ? (
         <Figures {...summary} />
@@ -66,7 +66,7 @@ export function SatisfactionTile({ summary }: { summary: SatisfactionSummary }) 
 
 export function SatisfactionCard({ summary }: { summary: SatisfactionSummary }) {
   return (
-    <section className="rounded-lg bg-white p-4 shadow">
+    <section className="vf-glass p-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Tenant satisfaction</p>
       <div className="mt-1">
         {summary.n > 0 ? (

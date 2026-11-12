@@ -4,6 +4,7 @@ import { cortileGet, hasCortileKey, CORTILE_DEMO } from "./cortile";
 import { fetchOutcodeArea } from "./areaPrices";
 import { getStore } from "./store";
 import type { Job, Priority } from "./types";
+import { summariseRatings, type SatisfactionSummary } from "./rating";
 
 export interface MapTicket {
   id: string;
@@ -39,9 +40,16 @@ export interface MapBuilding {
   lat: number;
   lng: number;
   placementSource: string;
+  unitCount: number;
+  occupied?: number;
+  occupancyPercent?: number | null;
   openTickets: number;
   closedTickets: number;
   overdueCompliance: number;
+  dueSoonCompliance: number;
+  medianContractorHours?: number | null;
+  contractorSampleN?: number;
+  satisfaction?: SatisfactionSummary;
   priorities: Priority[];
   tickets: MapTicket[];
   compliance: MapCompliance[];
@@ -60,7 +68,10 @@ type ApiBuilding = {
   development_id: string;
   name: string;
   city: string;
+  unit_count?: number;
 };
+
+type ApiUnit = { id: string; occupancy?: string };
 
 type ApiDevelopment = {
   id: string;
@@ -77,12 +88,31 @@ type ApiTicket = {
   resolved_at?: string | null;
 };
 
+type ApiTicketDetail = ApiTicket & {
+  updates?: Array<{ author_role?: string; created_at?: string }>;
+};
+
 type ApiCompliance = {
   id: string;
   label: string;
   status: string;
   next_due_on?: string;
 };
+
+function hoursBetween(fromIso?: string, toIso?: string) {
+  if (!fromIso || !toIso) return null;
+  const a = Date.parse(fromIso);
+  const b = Date.parse(toIso);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
+  return (b - a) / 3_600_000;
+}
+
+function median(values: number[]): number | null {
+  if (values.length === 0) return null;
+  const s = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 === 1 ? s[mid]! : (s[mid - 1]! + s[mid]!) / 2;
+}
 
 function isClosed(status: string) {
   return status === "closed" || status === "resolved";
@@ -144,9 +174,10 @@ async function loadOne(id: string): Promise<MapBuilding | { omit: { id: string; 
     return { omit: { id, name: building.name, reason: `postcodes.io had no centroid for ${district}.` } };
   }
 
-  const [ticketRows, complianceRows] = await Promise.all([
+  const [ticketRows, complianceRows, unitRows] = await Promise.all([
     cortileGet<ApiTicket[]>(`/v1/buildings/${id}/tickets?limit=100`).catch(() => [] as ApiTicket[]),
     cortileGet<ApiCompliance[]>(`/v1/buildings/${id}/compliance?limit=100`).catch(() => [] as ApiCompliance[]),
+    cortileGet<ApiUnit[]>(`/v1/buildings/${id}/units?limit=100`).catch(() => [] as ApiUnit[]),
   ]);
   const tickets: MapTicket[] = (Array.isArray(ticketRows) ? ticketRows : []).map((t) => ({
     id: t.id,
@@ -164,6 +195,19 @@ async function loadOne(id: string): Promise<MapBuilding | { omit: { id: string; 
   const jobs = veloceJobsFor(id);
   const openTickets = tickets.filter((t) => !isClosed(t.status)).length;
   const closedTickets = tickets.filter((t) => isClosed(t.status)).length;
+  const units = Array.isArray(unitRows) ? unitRows : [];
+  const occupied = units.filter((u) => u.occupancy === "occupied").length;
+  const unitCount = building.unit_count ?? units.length;
+  let contractorHours: number[] = [];
+  if (tickets.length > 0 && tickets.length <= 40) {
+    const details = await Promise.allSettled(tickets.map((t) => cortileGet<ApiTicketDetail>(`/v1/tickets/${t.id}`)));
+    details.forEach((d, i) => {
+      if (d.status !== "fulfilled") return;
+      const first = d.value.updates?.find((u) => u.author_role === "contractor" && u.created_at);
+      const h = hoursBetween(tickets[i]?.reportedAt ?? d.value.reported_at, first?.created_at);
+      if (h != null) contractorHours.push(h);
+    });
+  }
 
   return {
     id: building.id,
@@ -173,9 +217,16 @@ async function loadOne(id: string): Promise<MapBuilding | { omit: { id: string; 
     lat: area.latitude,
     lng: area.longitude,
     placementSource: `postcodes.io outcode centroid for ${area.outcode}`,
+    unitCount,
+    occupied: units.length ? occupied : undefined,
+    occupancyPercent: units.length ? (occupied / units.length) * 100 : null,
     openTickets,
     closedTickets,
     overdueCompliance: compliance.filter((c) => c.status === "overdue").length,
+    dueSoonCompliance: compliance.filter((c) => c.status === "due_soon").length,
+    medianContractorHours: median(contractorHours),
+    contractorSampleN: contractorHours.length,
+    satisfaction: summariseRatings(getStore().jobs.filter((j) => jobs.some((x) => x.id === j.id))),
     priorities: [...new Set(jobs.map((j) => j.priority).filter((p): p is Priority => Boolean(p)))],
     tickets,
     compliance,

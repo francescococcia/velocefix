@@ -19,7 +19,7 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
 
 export function SiteHeader() {
   return (
-    <header className="bg-slate-900 text-white">
+    <header className="relative z-10 bg-slate-900 text-white">
       <div className="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-3">
         <span className="text-2xl" aria-hidden>
           🔧

@@ -13,7 +13,7 @@ export function TimeSavedWeekTile({ jobs, now }: { jobs: Job[]; now: Date }) {
   const week = timeSavedThisWeek(jobs, now);
   const label = APP.timeSaved.estimateLabel;
   return (
-    <section className="rounded-lg bg-white p-4 shadow">
+    <section className="vf-glass p-4">
       <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
         Time saved this week ({label})
       </h2>
