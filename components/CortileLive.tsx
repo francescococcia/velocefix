@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import {
   CORTILE_DEMO,
   CORTILE_DOCS,
@@ -52,6 +53,11 @@ function BuildingCard({
         </span>
       </div>
       <p className="text-xs text-slate-500">Cortile {b.id}</p>
+      <p className="mt-1 text-sm">
+        <Link className="text-sm font-medium text-teal-800 underline" href={`/buildings/${b.id}`}>
+          Asset view
+        </Link>
+      </p>
       <p className="mt-1 text-sm text-slate-600">{facts.join(" · ")}</p>
       {gas && (
         <div className="mt-3 text-sm">

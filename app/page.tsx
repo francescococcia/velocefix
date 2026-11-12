@@ -39,6 +39,11 @@ export default async function Dashboard() {
                 <h2 className="text-lg font-semibold">{b.name}</h2>
                 {b.label && <span className="mt-1 shrink-0 rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">{b.label}</span>}
               </div>
+              {b.id.startsWith("bld_") && (
+                <p className="text-sm">
+                  <Link className="font-medium text-teal-800 underline" href={`/buildings/${b.id}`}>Asset view</Link>
+                </p>
+              )}
               <p className="text-sm text-slate-600">
                 {[kind, b.yearBuilt ? `built ${b.yearBuilt}` : null, `${b.tenure} let`, b.area, b.warrantyUntil ? `warranty to ${b.warrantyUntil}` : null].filter(Boolean).join(" · ")}
               </p>

@@ -81,7 +81,7 @@ function cacheMap() {
   return g.__velocefixCortileCache;
 }
 
-class CortileError extends Error {
+export class CortileError extends Error {
   code: CortileUnavailableReason;
   constructor(code: CortileUnavailableReason) {
     super(code === "missing_key" ? "Cortile key missing" : "Cortile live data unavailable");
@@ -94,12 +94,16 @@ function baseUrl() {
   return (raw && raw.length > 0 ? raw : DEFAULT_BASE).replace(/\/$/, "");
 }
 
+export function hasCortileKey() {
+  return hasKey();
+}
+
 function hasKey() {
   return Boolean(process.env.CORTILE_API_KEY?.trim());
 }
 
 /** GET /v1/... and unwrap the `{ data }` envelope. Never logs the key. */
-async function cortileGet<T>(path: string): Promise<T> {
+export async function cortileGet<T>(path: string): Promise<T> {
   if (!hasKey()) throw new CortileError("missing_key");
   const hit = cacheMap().get(path);
   if (hit && Date.now() - hit.at < CACHE_TTL_MS) return hit.data as T;
