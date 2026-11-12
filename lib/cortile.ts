@@ -3,10 +3,12 @@
 
 import type { BuildingType, CheckRow, CheckStatus } from "./types";
 import { SRC } from "./sources";
+import { safeLog } from "./privacy";
 
 export const CORTILE_DOCS = "https://hackathon.cortile.com/";
 const DEFAULT_BASE = "https://hackathon.cortile.com";
-const TIMEOUT_MS = 2500;
+const TIMEOUT_MS = 10_000;
+const USER_AGENT = "VeloceFix/0.1 (+https://velocefix.vercel.app)";
 const CACHE_TTL_MS = 60_000;
 
 /** Record ids we fetch live for the dashboard demo pair. */
@@ -98,8 +100,17 @@ export function hasCortileKey() {
   return hasKey();
 }
 
+function apiKey() {
+  // Trim whitespace, a leading BOM, and accidental wrapping quotes from the Vercel env UI.
+  return (process.env.CORTILE_API_KEY ?? "")
+    .trim()
+    .replace(/^\uFEFF/, "")
+    .replace(/^["']|["']$/g, "")
+    .trim();
+}
+
 function hasKey() {
-  return Boolean(process.env.CORTILE_API_KEY?.trim());
+  return apiKey().length > 0;
 }
 
 /** GET /v1/... and unwrap the `{ data }` envelope. Never logs the key. */
@@ -108,31 +119,56 @@ export async function cortileGet<T>(path: string): Promise<T> {
   const hit = cacheMap().get(path);
   if (hit && Date.now() - hit.at < CACHE_TTL_MS) return hit.data as T;
 
-  let res: Response;
-  try {
-    res = await fetch(`${baseUrl()}${path}`, {
-      method: "GET",
-      headers: {
-        "x-api-key": process.env.CORTILE_API_KEY!.trim(),
-        accept: "application/json",
-      },
-      cache: "no-store",
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
-  } catch {
-    throw new CortileError("unavailable");
-  }
-  if (!res.ok) throw new CortileError("unavailable");
+  const url = `${baseUrl()}${path}`;
+  const headers = {
+    "x-api-key": apiKey(),
+    accept: "application/json",
+    "user-agent": USER_AGENT,
+  };
 
-  let body: { data?: T };
-  try {
-    body = (await res.json()) as { data?: T };
-  } catch {
-    throw new CortileError("unavailable");
+  let cause: "timeout" | "network" | "http" | "envelope" = "network";
+  let status: number | undefined;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    let res: Response;
+    try {
+      res = await fetch(url, {
+        method: "GET",
+        headers,
+        cache: "no-store",
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+      });
+    } catch (err) {
+      const name = err instanceof Error ? err.name : "";
+      cause = name === "TimeoutError" || name === "AbortError" ? "timeout" : "network";
+      status = undefined;
+      if (attempt < 2) continue;
+      break;
+    }
+    if (!res.ok) {
+      cause = "http";
+      status = res.status;
+      // Retry transient Cloudflare / edge failures, not auth errors.
+      if ((res.status === 429 || res.status >= 500) && attempt < 2) continue;
+      break;
+    }
+    try {
+      const body = (await res.json()) as { data?: T };
+      if (body.data === undefined) {
+        cause = "envelope";
+        status = res.status;
+        break;
+      }
+      cacheMap().set(path, { at: Date.now(), data: body.data });
+      return body.data;
+    } catch {
+      cause = "envelope";
+      status = res.status;
+      break;
+    }
   }
-  if (body.data === undefined) throw new CortileError("unavailable");
-  cacheMap().set(path, { at: Date.now(), data: body.data });
-  return body.data;
+
+  safeLog("cortile_unavailable", { path, cause, status, timeoutMs: TIMEOUT_MS });
+  throw new CortileError("unavailable");
 }
 
 function kindFromYear(year?: number): BuildingType | undefined {

@@ -4,6 +4,7 @@ import { APP } from "@/config/app";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = { title: APP.name, description: APP.tagline };
+export const preferredRegion = "lhr1";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
