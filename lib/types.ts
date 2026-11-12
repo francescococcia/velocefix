@@ -257,6 +257,12 @@ export interface Job {
   source?: string;
   sourceRef?: string;
   quote?: string;
+  /** Slots already offered and skipped on a reschedule. */
+  skippedSlotIds?: string[];
+  /** One-line Grok vision note; omitted when skipped or unavailable. */
+  photoObservation?: string;
+  /** P4 job where self-help steps were sent; visit waits for BOOK. */
+  selfHelpOffered?: boolean;
 }
 
 export interface NoticeDraft {

@@ -62,7 +62,7 @@ export function runChecks(i: CheckInput): CheckResult {
         detail: "Not clearly a s.11 repair — need more detail", source: SRC.s11.source, sourceUrl: SRC.s11.url });
 
   // 3. Right trade (code decides the trade from the issue; Grok's guess is only compared)
-  const trade = TRADE_FOR_ISSUE[i.proposal.issue];
+  const trade = i.proposal.issue === "other" ? i.proposal.trade : TRADE_FOR_ISSUE[i.proposal.issue];
   const operator = i.store.operators.find((o) => o.trade === trade);
   const mismatch = i.proposal.trade !== trade ? ` (proposal said ${i.proposal.trade}; code uses ${trade})` : "";
   rows.push({ id: "TRADE_MATCH", label: "Right trade on the approved list", status: operator ? "green" : "red",

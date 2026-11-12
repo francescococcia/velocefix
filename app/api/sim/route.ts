@@ -22,13 +22,15 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { from, body, reset, resetToken } = (await req.json()) as { from?: string; body?: string; reset?: boolean; resetToken?: string };
+  const { from, body, mediaUrl, reset, resetToken } = (await req.json()) as {
+    from?: string; body?: string; mediaUrl?: string; reset?: boolean; resetToken?: string;
+  };
   if (reset) {
     if (!resetAuthorized(req, resetToken)) return NextResponse.json(resetDenied(), { status: 401 });
     resetStore();
     return NextResponse.json({ reply: "Demo data reset to seed." });
   }
-  if (!from || !body) return NextResponse.json({ error: "from and body required" }, { status: 400 });
-  const r = await handleInbound({ from, body, channel: "sim" });
+  if (!from || (!(body ?? "").trim() && !mediaUrl)) return NextResponse.json({ error: "from and a message or photo required" }, { status: 400 });
+  const r = await handleInbound({ from, body: body ?? "", channel: "sim", mediaUrl });
   return NextResponse.json({ reply: r.reply, priority: r.job?.priority, proposal: r.job?.proposal, checks: r.job?.checks ?? [], status: r.job?.status });
 }

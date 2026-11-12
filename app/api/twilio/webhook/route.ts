@@ -31,12 +31,14 @@ export async function POST(req: Request) {
   const body = params.Body ?? "";
   const numMedia = Number(params.NumMedia || "0");
   const mediaUrl = numMedia > 0 && params.MediaUrl0 ? params.MediaUrl0 : undefined;
+  const mediaContentType = numMedia > 0 ? params.MediaContentType0 : undefined;
 
   const r = await handleInbound({
     from,
     body,
     channel: "whatsapp",
     mediaUrl,
+    mediaContentType,
   });
   return twiml(r.reply);
 }

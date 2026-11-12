@@ -9,8 +9,7 @@ body:has(.vf-dash-bg) { background: transparent; }
 .vf-dash-bg {
   position: fixed;
   inset: 0;
-  /* -1: stay behind every in-flow block inside <main>, not only the glass cards */
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   background: linear-gradient(120deg, #eef2ff 0%, #f0fdfa 35%, #f8fafc 70%, #e0f2fe 100%);
   background-size: 200% 200%;

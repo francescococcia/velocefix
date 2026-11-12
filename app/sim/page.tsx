@@ -19,14 +19,39 @@ export default function Sim() {
   const [busy, setBusy] = useState(false);
   const [resetToken, setResetToken] = useState("");
   const [resetMsg, setResetMsg] = useState("");
+  const [photoName, setPhotoName] = useState("");
+  const [photoBusy, setPhotoBusy] = useState(false);
 
   useEffect(() => { fetch("/api/sim").then((r) => r.json()).then((d) => setTenants(d.tenants)); }, []);
 
-  async function send(body: string) {
-    if (!body.trim()) return;
-    setMsgs((m) => [...m, { dir: "in", text: body }]);
+  async function fileToDataUrl(file: File) {
+    if (!file.type.startsWith("image/")) return { error: "Please choose a photo." };
+    const bmp = await createImageBitmap(file);
+    const scale = Math.min(1, 800 / Math.max(bmp.width, bmp.height));
+    const w = Math.max(1, Math.round(bmp.width * scale));
+    const h = Math.max(1, Math.round(bmp.height * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return { error: "Could not read that photo." };
+    ctx.drawImage(bmp, 0, 0, w, h);
+    let quality = 0.85;
+    let url = canvas.toDataURL("image/jpeg", quality);
+    const max = Math.round(1.5 * 1024 * 1024);
+    while (url.length > max && quality > 0.4) {
+      quality -= 0.15;
+      url = canvas.toDataURL("image/jpeg", quality);
+    }
+    if (url.length > max) return { error: "That photo is still too large after shrinking (max about 1.5MB)." };
+    return { url };
+  }
+
+  async function send(body: string, mediaUrl?: string) {
+    if (!body.trim() && !mediaUrl) return;
+    setMsgs((m) => [...m, { dir: "in", text: body || "(tenant photo)", meta: mediaUrl ? "tenant photo attached" : undefined }]);
     setText(""); setBusy(true);
-    const r = await fetch("/api/sim", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ from, body }) });
+    const r = await fetch("/api/sim", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ from, body, mediaUrl }) });
     const d = await r.json();
     setBusy(false);
     setMsgs((m) => [...m, { dir: "out", text: d.reply ?? d.error, meta: d.priority ? `${d.priority.priority} · ${d.status} · proposal by ${d.proposal?.by}` : undefined, checks: d.checks }]);
@@ -72,8 +97,30 @@ export default function Sim() {
       <div className="flex flex-wrap gap-1 mb-2">
         {RATE.map((q) => <MotionButton type="button" key={q} onClick={() => send(q)} className="min-h-11 text-xs bg-teal-50 border border-teal-200 rounded px-2 py-1">Rate {q}</MotionButton>)}
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); send(text); }} className="flex gap-2">
+      <form onSubmit={(e) => { e.preventDefault(); send(text); }} className="flex flex-wrap gap-2">
         <input className="flex-1 min-h-11 border rounded p-2 text-sm" value={text} onChange={(e) => setText(e.target.value)} placeholder="Type a repair or rating, e.g. 5 4" />
+        <label className="inline-flex min-h-11 cursor-pointer items-center rounded border bg-white px-3 text-xs font-medium">
+          {photoBusy ? "Shrinking…" : photoName ? photoName : "Add photo"}
+          <input
+            type="file"
+            accept="image/*"
+            className="sr-only"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              e.target.value = "";
+              if (!file) return;
+              setPhotoBusy(true);
+              const out = await fileToDataUrl(file);
+              setPhotoBusy(false);
+              if ("error" in out && out.error) { setResetMsg(out.error); return; }
+              if ("url" in out && out.url) {
+                setPhotoName(file.name);
+                await send(text, out.url);
+                setPhotoName("");
+              }
+            }}
+          />
+        </label>
         <MotionButton type="submit" className="min-h-11 bg-green-600 text-white rounded px-4 text-sm font-semibold">Send</MotionButton>
       </form>
     </FadeIn>

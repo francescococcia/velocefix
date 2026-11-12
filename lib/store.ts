@@ -3,6 +3,7 @@ import path from "path";
 import seed from "../data/seed.json";
 import type { StoreData, Tenant } from "./types";
 import { hashPhone, normalisePhone } from "./privacy";
+import { clearConversations } from "./conversation";
 
 /**
  * JSON store. In-memory singleton, seeded from data/seed.json.
@@ -50,6 +51,7 @@ export function saveStore(): void {
 
 export function resetStore(): StoreData {
   g.__slotrightStore = freshSeed();
+  clearConversations();
   saveStore();
   return g.__slotrightStore;
 }

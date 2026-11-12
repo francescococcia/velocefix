@@ -27,7 +27,6 @@ export function TimeSavedWeekTile({ jobs, now }: { jobs: Job[]; now: Date }) {
         {week.jobCount === 0
           ? `No VeloceFix offer or booking in the last ${week.windowHours / 24} days. The tile sums realised savings only, once a job has both an old-path date and a VeloceFix offer or booking timestamp.`
           : `From ${week.jobCount} job${week.jobCount === 1 ? "" : "s"} with a VeloceFix offer or booking in the last ${week.windowHours / 24} days.`}
-        {jobs.some((j) => j.exampleData && compareTimeSaved(j, now).inWeek) ? " Includes seeded example bookings." : ""}
         {" "}Old-path dates are from this job's own records (seed, Dwelly history, or Cortile). Not a published statistic.
       </p>
     </section>

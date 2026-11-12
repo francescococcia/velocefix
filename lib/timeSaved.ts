@@ -41,8 +41,7 @@ function reportAt(job: Job) {
 
 /** First offer or booking timestamp actually present on the job in the store. */
 export function velocefixStop(job: Job): { at: string; kind: "offer" | "booking" } | undefined {
-  // completed jobs keep their booking time, or the weekly tile drops to 0 when a job is closed
-  if (job.status === "booked" || job.status === "completed") {
+  if (job.status === "booked") {
     const bookedMsg = [...job.messages].reverse().find(
       (m) => m.direction === "out" && (/✅\s*Booked/i.test(m.body) || /Booked:/i.test(m.body)),
     );
