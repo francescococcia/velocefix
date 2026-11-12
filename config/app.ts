@@ -10,6 +10,11 @@ export const APP = {
   winterWindow: { startMonth: 10, endMonth: 3 }, // 1 Oct – 31 Mar (agency policy)
   boilerOldAgeYears: 10, // agency policy threshold
   maxSlotsOffered: 3,
+  xai: {
+    apiUrl: "https://api.x.ai/v1/chat/completions",
+    defaultModel: "grok-4.7",
+    timeoutMs: 6000,
+  },
   // Time-saved comparison (always labelled "estimate" on screen).
   // Old-path figures are case-specific dates from the seed, Dwelly histories,
   // or Cortile ticket timestamps — not a published average and not a study.

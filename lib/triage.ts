@@ -1,8 +1,9 @@
-// Chunk-1 triage: keyword fallback proposal -> deterministic priority -> reply.
-// Grok (lib/grok.ts) and lib/checks.ts plug in at the marked TODOs.
+// Keyword fallback or Grok proposal -> deterministic priority -> checks -> reply.
+// Grok never overrides the priority engine or the fact checks.
 import { getStore, findTenantByPhone, unitContext, saveStore } from "./store";
 import { prioritise } from "./priority";
 import { runChecks, TRADE_FOR_ISSUE } from "./checks";
+import { grokProposal, hazardForIssue } from "./grok";
 import type { Asset, IssueCategory, Job, Proposal, Tenant } from "./types";
 
 
@@ -24,35 +25,36 @@ export function keywordProposal(text: string, rooms: string[] = []): Proposal {
     ?? (issue === "floor_damage" || issue === "door_lock" ? "hallway"
       : issue === "blocked_toilet" || issue === "shower_leak" ? "bathroom"
       : "unspecified");
-  const hazardType = issue === "no_hot_water" || issue === "no_heating" ? "excess_cold" : issue === "gas_smell" ? "fire_and_explosions" : issue === "floor_damage" ? "falls_on_level_surfaces" : "none";
-  return { issue, room, trade: TRADE_FOR_ISSUE[issue], hazardType, summary: text.slice(0, 200), by: "fallback" };
+  return { issue, room, trade: TRADE_FOR_ISSUE[issue], hazardType: hazardForIssue(issue), summary: text.slice(0, 200), by: "fallback" };
 }
 
 export interface InboundResult { reply: string; job?: Job }
 
 const fmt = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 
-export async function handleInbound(input: { from: string; body: string; channel: "whatsapp" | "sim"; now?: Date }): Promise<InboundResult> {
+export async function handleInbound(input: { from: string; body: string; channel: "whatsapp" | "sim"; now?: Date; mediaUrl?: string }): Promise<InboundResult> {
   const store = getStore();
   const now = input.now ?? new Date();
+  const body = input.body ?? "";
   const tenant = findTenantByPhone(store, input.from);
   if (!tenant) return { reply: "We can't match this number to a tenancy. Please contact your letting agency directly." };
   const ctx = unitContext(store, tenant.unitId);
   if (!ctx.building || !ctx.unit) return { reply: "Unit record missing." };
 
   // Reply "1".."9" books from the saved offer (session keyed by phone hash, never the raw number).
-  const pick = input.body.trim().match(/^([1-9])$/);
+  const pick = body.trim().match(/^([1-9])$/);
   const session = store.sessions[tenant.phoneHash];
   if (pick && session) return bookFromOffer(Number(pick[1]), session, tenant, ctx.boiler, input.channel, now);
 
-  const proposal = keywordProposal(input.body, ctx.unit.rooms); // TODO chunk: Grok proposal with this as fallback
+  const proposal = (await grokProposal(body, ctx.unit.rooms)) ?? keywordProposal(body, ctx.unit.rooms);
   const priority = prioritise({ issue: proposal.issue, building: ctx.building, tenant, boiler: ctx.boiler, works: ctx.works, now });
   const checks = runChecks({ store, tenant, proposal, priority, boiler: ctx.boiler });
+  const inboundMsg = { at: now.toISOString(), direction: "in" as const, body, channel: input.channel, ...(input.mediaUrl ? { hasMedia: true as const, mediaUrl: input.mediaUrl } : {}) };
   const job: Job = {
     id: "j-" + now.getTime().toString(36), unitId: tenant.unitId, createdAt: now.toISOString(), lastAgencyReplyAt: now.toISOString(),
     status: priority.destination === "gas_emergency" ? "emergency_instructed" : priority.destination === "refer_developer" ? "referred" : priority.destination === "question" ? "awaiting_info" : "open",
     proposal, priority, checks: checks.rows, overrides: [],
-    messages: [{ at: now.toISOString(), direction: "in", body: input.body, channel: input.channel }],
+    messages: [inboundMsg],
   };
   delete store.sessions[tenant.phoneHash]; // a new report replaces any older open offer
 

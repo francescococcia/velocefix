@@ -157,6 +157,8 @@ export interface Proposal {
   summary: string;
   by: "grok" | "fallback" | "seed";
   model?: string;
+  confidence?: number;
+  followUpQuestion?: string;
 }
 
 export type JobStatus =
@@ -173,6 +175,7 @@ export interface Message {
   direction: "in" | "out";
   body: string;
   hasMedia?: boolean;
+  mediaUrl?: string; // reference only — never downloaded
   channel: "whatsapp" | "sim" | "portal";
 }
 

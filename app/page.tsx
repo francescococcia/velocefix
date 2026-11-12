@@ -62,6 +62,8 @@ export default async function Dashboard() {
                         {dwelly && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">Dwelly</span>}
                         {j.source?.startsWith("Cortile") && <span className="rounded bg-teal-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-800">Cortile demo replay</span>}
                         <span className="text-slate-500">· {unit?.label} · {j.proposal.room}</span>
+                        {j.proposal.by === "grok" && <span className="rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-violet-800">Proposed by Grok{j.proposal.model ? ` · ${j.proposal.model}` : ""}</span>}
+                        {j.proposal.by === "fallback" && <span className="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-700">Keyword fallback</span>}
                         <span className="ml-auto text-xs">{j.status}</span>
                       </div>
                       <div className={`text-xs ${overdue ? "text-red-600 font-semibold" : "text-slate-500"}`}>
@@ -69,6 +71,9 @@ export default async function Dashboard() {
                         {j.lastAgencyReplyAt === null ? " · no agency reply yet" : ""}
                       </div>
                       <TimeSavedLine job={j} now={new Date(now)} />
+                      {j.messages.some((m) => m.mediaUrl) && (
+                        <p className="text-xs text-slate-500">Photo reference (not downloaded): {j.messages.find((m) => m.mediaUrl)?.mediaUrl}</p>
+                      )}
                       {j.status === "booked" && j.slotId && (() => {
                         const op = s.operators.find((o) => o.id === j.operatorId);
                         const slot = op?.slots.find((x) => x.id === j.slotId);
@@ -105,6 +110,13 @@ export default async function Dashboard() {
                             </li>
                           )}
                         </ul>
+                        {j.proposal.by === "grok" && (
+                          <p className="mt-1 text-[11px] text-slate-500">
+                            Proposed by Grok{j.proposal.model ? ` (${j.proposal.model})` : ""}{j.proposal.confidence != null ? ` · confidence ${Math.round(j.proposal.confidence * 100)}%` : ""}. Proposal only — priority and checks are decided by code.
+                            {j.proposal.followUpQuestion ? ` Follow-up: ${j.proposal.followUpQuestion}` : ""}
+                          </p>
+                        )}
+                        {j.proposal.by === "fallback" && <p className="mt-1 text-[11px] text-slate-500">Keyword fallback — Grok was not used for this proposal. Priority and checks are decided by code.</p>}
                         {dwelly && <p className="mt-1 text-[11px] text-slate-500">Synthetic Dwelly hackathon case; ZZ postcode; original thread was not WhatsApp.</p>}
                       </details>
                       {history.length > 0 && (
