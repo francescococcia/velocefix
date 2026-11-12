@@ -154,6 +154,12 @@ Code freeze **23:00** Europe/London. Feature freeze **~22:10**. Work in parallel
 - Done when: a dashboard section runs one report (no hot water, no heating, water leak, blocked toilet, gas smell) through `prioritise()` for each building's own record and shows priority, clock, what happens next and the rules that fired, side by side. Preview only; nothing is logged or booked.
 - Note: this is the spec's "how the same ticket would score elsewhere". "No hot water" shows P1 on Albion Terrace and P3 refer-to-developer on Riverside Wharf. Only buildings with a type and a boiler on record appear, so Gorse House and the Dwelly book are not in it. Still not built: in-app Grok ops assistant, Complete job form redesign, unit page, override control, role banner.
 
+### UI13 — Complete job form redesign ✅ (done 23:40)
+- Lane: UI
+- Files: `app/jobs/[id]/complete/page.tsx`
+- Done when: the form is four short titled groups (what was done; cause and parts; follow-up and safety; signed off by) instead of one stack; "Work done" and "Follow-up needed" are tap-target radio groups; optional fields say so in the label; the job summary (where, assigned, visit, reference) sits beside the form on desktop; the saved record shows the notice and satisfaction cards side by side.
+- Note: same field names, values and validation; still a plain form post, so there is no loading state on the button and a server-side error clears what was typed (the browser's own required-field check stops that in practice). Checked at phone width only.
+
 ### SEC1 — Identity hash, no-PII logs, role banner (time-box 15 min)
 - Lane: API for hashing/logging helpers (`lib/privacy.ts` + do not weaken `/api/ops`); UI may add a `?role=` banner in `components/role-banner.tsx` only
 - Files: `lib/privacy.ts`, `components/role-banner.tsx`
