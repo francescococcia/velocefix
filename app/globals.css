@@ -14,6 +14,7 @@
   --color-brand-tint: #f0fdfa;   /* washes */
 }
 
+html { background: var(--color-canvas); }
 body { background: var(--color-canvas); color: var(--color-ink); }
 body:has(.vf-dash-bg) { background: transparent; }
 
