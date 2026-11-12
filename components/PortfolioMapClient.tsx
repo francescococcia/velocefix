@@ -6,10 +6,8 @@ import type { MapData } from "@/lib/mapData";
 const PortfolioMap = nextDynamic(() => import("./PortfolioMap"), {
   ssr: false,
   loading: () => (
-    <section className="relative left-1/2 w-screen max-w-none -translate-x-1/2">
-      <div className="flex h-[55vh] min-h-[22rem] items-center justify-center bg-slate-950 text-sm text-white/70 sm:h-[70vh]">
-        Loading portfolio map…
-      </div>
+    <section className="flex h-72 items-center justify-center rounded-2xl border border-slate-200 bg-white/80 text-sm text-slate-500 sm:h-[30rem]">
+      Loading portfolio map…
     </section>
   ),
 });

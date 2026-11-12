@@ -141,6 +141,12 @@ Code freeze **23:00** Europe/London. Feature freeze **~22:10**. Work in parallel
 - Done when: every job sits in one filterable list (All / Open / Overdue / High priority / Booked / Completed); a job opens on click with its fact checks, WHY and unit history; stat tiles, the needs-attention list and building cards all jump to the right filter or job; Framer Motion on filter pill, list and expand, off under reduced motion.
 - Note: the list is driven by the URL hash (`#show-overdue`, `#job-<id>`), so server-rendered links control it with no shared state. Also fixed the fixed gradient layer painting over the header, example-data banner and the map's fallback panel. Map and Cortile cards still need `CORTILE_API_KEY` in `.env.local` on a dev machine.
 
+### UI8 — Compact portfolio map with recap panel ✅ (done 22:25)
+- Lane: UI
+- Files: `components/PortfolioMap.tsx`, `components/PortfolioMapClient.tsx`
+- Done when: the map is a card inside the page (not full-bleed, about 26rem tall) with the building panel beside it instead of on top of it; buildings are classed by colour (needs attention / watch / on track) with counts, a filter and a plain "why this colour" line; the panel opens on a recap with three question buttons answered from the records (what is overdue, what is open, where repairs are slowest) and a clickable building list.
+- Note: the ticket / compliance / priority pill groups were replaced by the one colour filter. Checked locally with sample buildings only, because the real map needs `CORTILE_API_KEY`. Not done: 3D view (needs MapLibre GL in place of Leaflet — split into its own card), and the phone-width zoom-out seen on live before this card.
+
 ### SEC1 — Identity hash, no-PII logs, role banner (time-box 15 min)
 - Lane: API for hashing/logging helpers (`lib/privacy.ts` + do not weaken `/api/ops`); UI may add a `?role=` banner in `components/role-banner.tsx` only
 - Files: `lib/privacy.ts`, `components/role-banner.tsx`
