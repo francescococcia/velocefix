@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { handleInbound } from "@/lib/triage";
 import { resetStore } from "@/lib/store";
+import { resetAuthorized, resetDenied } from "@/lib/resetAuth";
 
 export const dynamic = "force-dynamic";
 
@@ -21,8 +22,12 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { from, body, reset } = (await req.json()) as { from?: string; body?: string; reset?: boolean };
-  if (reset) { resetStore(); return NextResponse.json({ reply: "Demo data reset to seed." }); }
+  const { from, body, reset, resetToken } = (await req.json()) as { from?: string; body?: string; reset?: boolean; resetToken?: string };
+  if (reset) {
+    if (!resetAuthorized(req, resetToken)) return NextResponse.json(resetDenied(), { status: 401 });
+    resetStore();
+    return NextResponse.json({ reply: "Demo data reset to seed." });
+  }
   if (!from || !body) return NextResponse.json({ error: "from and body required" }, { status: 400 });
   const r = await handleInbound({ from, body, channel: "sim" });
   return NextResponse.json({ reply: r.reply, priority: r.job?.priority, proposal: r.job?.proposal, checks: r.job?.checks ?? [], status: r.job?.status });

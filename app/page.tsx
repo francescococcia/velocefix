@@ -5,6 +5,8 @@ import { CortileLive } from "@/components/CortileLive";
 import { cortileGasCertCheck, loadCortileDemo } from "@/lib/cortile";
 import { isGasWork } from "@/lib/checks";
 import { TimeSavedLine, TimeSavedWeekTile } from "@/components/TimeSaved";
+import { VerifiedHistory } from "@/components/VerifiedHistory";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -77,8 +79,16 @@ export default async function Dashboard() {
                       {j.status === "booked" && j.slotId && (() => {
                         const op = s.operators.find((o) => o.id === j.operatorId);
                         const slot = op?.slots.find((x) => x.id === j.slotId);
-                        return <div className="text-xs text-green-700 font-semibold">✅ Booked: {op?.name}, {slot && new Date(slot.start).toLocaleString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</div>;
+                        return (
+                          <div className="text-xs text-green-700 font-semibold flex flex-wrap items-center gap-2">
+                            <span>✅ Booked: {op?.name}, {slot && new Date(slot.start).toLocaleString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</span>
+                            <Link href={`/jobs/${j.id}/complete`} className="underline text-teal-800">Complete job</Link>
+                          </div>
+                        );
                       })()}
+                      {j.status === "completed" && (
+                        <div className="text-xs"><Link href={`/jobs/${j.id}/complete`} className="underline text-teal-800">View completion record</Link></div>
+                      )}
                       {(() => {
                         const boiler = s.assets.find((a) => a.unitId === j.unitId && a.type === "boiler") ?? s.assets.find((a) => a.buildingId === unit?.buildingId && a.type === "boiler" && !a.unitId);
                         const extra = cortileCert && isGasWork(j.proposal.issue, boiler) ? [cortileCert] : [];
@@ -122,13 +132,9 @@ export default async function Dashboard() {
                       {history.length > 0 && (
                         <details className="text-xs mt-1">
                           <summary className="cursor-pointer text-slate-600">Unit history ({history.length})</summary>
-                          <ul className="ml-4 list-disc">
+                          <ul className="mt-1 space-y-1">
                             {history.map((w) => (
-                              <li key={w.id} className="mt-0.5">
-                                {w.date} · {w.summary}{" "}
-                                <span className="text-slate-500">[{w.source}]</span>
-                                {w.quote && <blockquote className="mt-0.5 border-l-2 border-sky-200 pl-2 text-slate-600 italic">“{w.quote}”</blockquote>}
-                              </li>
+                              <VerifiedHistory key={w.id} work={w} />
                             ))}
                           </ul>
                         </details>

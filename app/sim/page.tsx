@@ -15,6 +15,8 @@ export default function Sim() {
   const [text, setText] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [busy, setBusy] = useState(false);
+  const [resetToken, setResetToken] = useState("");
+  const [resetMsg, setResetMsg] = useState("");
 
   useEffect(() => { fetch("/api/sim").then((r) => r.json()).then((d) => setTenants(d.tenants)); }, []);
 
@@ -29,7 +31,10 @@ export default function Sim() {
   }
 
   async function reset() {
-    await fetch("/api/sim", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ reset: true }) });
+    const r = await fetch("/api/sim", { method: "POST", headers: { "content-type": "application/json", "x-reset-token": resetToken }, body: JSON.stringify({ reset: true, resetToken }) });
+    const d = await r.json();
+    if (!r.ok) { setResetMsg(d.error ?? "Reset denied"); return; }
+    setResetMsg("Demo data reset to seed.");
     setMsgs([]);
   }
 
@@ -40,8 +45,10 @@ export default function Sim() {
         <select className="border rounded p-1 text-sm flex-1" value={from} onChange={(e) => { setFrom(e.target.value); setMsgs([]); }}>
           {tenants.map((t) => <option key={t.phone} value={t.phone}>{t.label}</option>)}
         </select>
+        <input className="border rounded p-1 text-xs w-36" type="password" value={resetToken} onChange={(e) => setResetToken(e.target.value)} placeholder="Reset token" autoComplete="off" />
         <button onClick={reset} className="text-xs border rounded px-2">Reset demo data</button>
       </div>
+      {resetMsg && <p className="text-xs text-slate-600 mb-2">{resetMsg}</p>}
       <div className="bg-[#e5ddd5] rounded p-3 h-[420px] overflow-y-auto space-y-2">
         {msgs.map((m, i) => (
           <div key={i} className={`max-w-[85%] rounded-lg p-2 text-sm whitespace-pre-wrap shadow ${m.dir === "in" ? "ml-auto bg-[#dcf8c6]" : "bg-white"}`}>

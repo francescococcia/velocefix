@@ -260,7 +260,8 @@
           "id": "s-pl-1",
           "start": "2026-11-13T08:00:00Z",
           "end": "2026-11-13T10:00:00Z",
-          "booked": false
+          "booked": true,
+          "jobId": "j-cortile-000096"
         },
         {
           "id": "s-pl-2",
@@ -815,7 +816,7 @@
       "unitId": "unt_00164",
       "createdAt": "2026-11-12T20:30:00Z",
       "lastAgencyReplyAt": null,
-      "status": "open",
+      "status": "booked",
       "exampleData": true,
       "source": "Cortile tkt_000096",
       "quote": "The heating isn't coming on at all. Thermostat shows it calling for heat.",
@@ -911,7 +912,9 @@
           "hasMedia": false,
           "channel": "whatsapp"
         }
-      ]
+      ],
+      "operatorId": "op-plumber",
+      "slotId": "s-pl-1"
     }
   ],
   "notices": [],

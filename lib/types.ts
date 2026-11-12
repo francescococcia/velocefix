@@ -111,9 +111,22 @@ export interface Work {
   category: IssueCategory;
   summary: string;
   intermittent?: boolean;
-  source: "seed" | "completed" | "Dwelly case 002" | "Dwelly case 037" | "Dwelly case 022";
+  /** Seed / Dwelly / or e.g. "Operator completion form, <operator>, <timestamp>" */
+  source: string;
   quote?: string;
   sourceRef?: string;
+  verified?: boolean;
+  workDone?: string;
+  workNote?: string;
+  parts?: string;
+  cause?: string;
+  followUpNeeded?: boolean;
+  followUp?: string;
+  safetyObservation?: string;
+  photoUrl?: string;
+  operatorName?: string;
+  operatorTrade?: Trade;
+  completedAt?: string;
 }
 
 export type RuleKind = "agency-policy" | "statute" | "safety" | "partner-data";
@@ -194,6 +207,12 @@ export interface Completion {
   parts: string;
   fixed: boolean;
   followUp: string;
+  workDone: string;
+  workNote?: string;
+  followUpNeeded: boolean;
+  safetyObservation?: string;
+  operatorName: string;
+  operatorTrade?: Trade;
 }
 
 export interface Job {
