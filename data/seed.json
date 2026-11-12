@@ -1,6 +1,6 @@
 {
   "meta": {
-    "label": "EXAMPLE DATA \u2014 two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call \u2014 the demo intake channel is WhatsApp. Also a labelled demo replay of Cortile ticket tkt_000096 on Gorse House unit 103 (no leaseholder names).",
+    "label": "EXAMPLE DATA — two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call — the demo intake channel is WhatsApp. Also a labelled demo replay of Cortile ticket tkt_000096 on Gorse House unit 103 (no leaseholder names).",
     "seededAt": "2026-11-12T20:15:00Z"
   },
   "buildings": [
@@ -253,7 +253,7 @@
       "name": "Hartley Plumbing & Heating (example)",
       "trade": "plumbing_heating",
       "gasSafeRegNo": "000000-EXAMPLE",
-      "gasSafeRegNoLabel": "Example registration number \u2014 not a real Gas Safe ID",
+      "gasSafeRegNoLabel": "Example registration number — not a real Gas Safe ID",
       "gasSafeVerified": true,
       "slots": [
         {
@@ -389,7 +389,7 @@
       "date": "2026-01-15",
       "trade": "plumbing_heating",
       "category": "other",
-      "summary": "Annual gas safety check \u2014 pass. Example.",
+      "summary": "Annual gas safety check — pass. Example.",
       "source": "seed"
     },
     {
@@ -408,7 +408,7 @@
       "date": "2026-08-21",
       "trade": "plumbing_heating",
       "category": "no_hot_water",
-      "summary": "Intermittent no hot water \u2014 developer's engineer reset, no fault found. Example.",
+      "summary": "Intermittent no hot water — developer's engineer reset, no fault found. Example.",
       "intermittent": true,
       "source": "seed"
     },
@@ -419,7 +419,7 @@
       "date": "2026-10-09",
       "trade": "plumbing_heating",
       "category": "no_hot_water",
-      "summary": "Intermittent no hot water again \u2014 logged with developer warranty, monitoring. Example.",
+      "summary": "Intermittent no hot water again — logged with developer warranty, monitoring. Example.",
       "intermittent": true,
       "source": "seed"
     },
@@ -562,7 +562,7 @@
           {
             "id": "DWELLY_CASE_002",
             "label": "Prior agency ticket: blocked toilet, no backup WC during works",
-            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Dwelly case 002",
             "sourceRef": "Real Estate Agency Synthetic/002/index.md",
@@ -597,7 +597,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -605,7 +605,7 @@
           "label": "Gas Safe registered engineer",
           "status": "green",
           "detail": "Not gas work",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -666,7 +666,7 @@
           {
             "id": "DWELLY_CASE_037",
             "label": "Prior agency ticket: leaking shower hose replaced by Birch Utilities",
-            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Dwelly case 037",
             "sourceRef": "Real Estate Agency Synthetic/037/index.md",
@@ -701,7 +701,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -709,7 +709,7 @@
           "label": "Gas Safe registered engineer",
           "status": "green",
           "detail": "Not gas work",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -770,7 +770,7 @@
           {
             "id": "DWELLY_CASE_022",
             "label": "Prior agency ticket: front door lock changed; new key added to the office set",
-            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Dwelly case 022",
             "sourceRef": "Real Estate Agency Synthetic/022/index.md",
@@ -805,7 +805,7 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Arthur Stuart (Dwelly case 022, example) \u2014 locksmith",
+          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
           "source": "Agency approved-contractor list (example data)"
         },
         {
@@ -813,7 +813,7 @@
           "label": "Gas Safe registered engineer",
           "status": "green",
           "detail": "Not gas work",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -865,16 +865,16 @@
           },
           {
             "id": "SEASON_WINTER",
-            "label": "Winter window (1 Oct \u2013 31 Mar)",
+            "label": "Winter window (1 Oct – 31 Mar)",
             "effect": "Escalate to P1",
             "kind": "agency-policy",
-            "source": "Shelter Legal \u2014 heating, hot water and power problems (reasonable time can depend on season)",
+            "source": "Shelter Legal — heating, hot water and power problems (reasonable time can depend on season)",
             "sourceUrl": "https://england.shelter.org.uk/professional_resources/legal/housing_conditions/responsibility_for_repairs/heating_hot_water_and_power_problems"
           },
           {
             "id": "CORTILE_TKT_000096",
             "label": "Demo replay of Cortile ticket tkt_000096 (Heating not working, unit 103)",
-            "effect": "Cite partner ticket; does not change P1\u2013P4 thresholds",
+            "effect": "Cite partner ticket; does not change P1–P4 thresholds",
             "kind": "partner-data",
             "source": "Cortile tkt_000096",
             "sourceUrl": "https://hackathon.cortile.com/"
@@ -908,15 +908,15 @@
           "id": "TRADE_MATCH",
           "label": "Right trade on the approved list",
           "status": "green",
-          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
           "source": "Agency approved-contractor list (example data)"
         },
         {
           "id": "GAS_SAFE",
           "label": "Gas Safe registered engineer",
           "status": "green",
-          "detail": "Reg 000000-EXAMPLE (example \u2014 not a real registration)",
-          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "detail": "Reg 000000-EXAMPLE (example — not a real registration)",
+          "source": "HSE — check an engineer is Gas Safe registered",
           "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
         },
         {
@@ -939,6 +939,1219 @@
       ],
       "operatorId": "op-plumber",
       "slotId": "s-pl-1"
+    },
+    {
+      "id": "j-ex-01",
+      "unitId": "u-old-2",
+      "createdAt": "2026-09-08T07:40:00Z",
+      "lastAgencyReplyAt": "2026-09-08T07:52:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "no_heating",
+        "room": "unspecified",
+        "trade": "plumbing_heating",
+        "hazardType": "excess_cold",
+        "summary": "No heating or hot water, boiler showing low pressure. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P1",
+        "firedRules": [
+          {
+            "id": "S11_HEATING_HOT_WATER",
+            "label": "Landlord must keep heating and hot water installations in repair",
+            "effect": "Landlord responsibility",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "SEASON_WINTER",
+            "label": "Winter window (1 Oct – 31 Mar)",
+            "effect": "Escalate to P1",
+            "kind": "agency-policy",
+            "source": "Shelter Legal — heating, hot water and power problems (reasonable time can depend on season)",
+            "sourceUrl": "https://england.shelter.org.uk/professional_resources/legal/housing_conditions/responsibility_for_repairs/heating_hot_water_and_power_problems"
+          },
+          {
+            "id": "CORTILE_TKT_000096",
+            "label": "Demo replay of Cortile ticket tkt_000096 (Heating not working, unit 103)",
+            "effect": "Cite partner ticket; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Cortile tkt_000096",
+            "sourceUrl": "https://hackathon.cortile.com/"
+          }
+        ],
+        "clock": {
+          "hours": 24,
+          "label": "P1: 24h (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit unt_00164",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(c): installations for space heating and heating water",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Reg 000000-EXAMPLE (example — not a real registration)",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-09-08T07:40:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "No heating or hot water, boiler showing low pressure."
+        },
+        {
+          "at": "2026-09-08T07:52:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-09-08T15:10:00Z",
+        "cause": "Boiler pressure dropped after a radiator bleed",
+        "parts": "None",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Repressurised boiler, checked expansion vessel",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 5,
+        "quality": 5,
+        "at": "2026-09-08T18:10:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-02",
+      "unitId": "u-old-1",
+      "createdAt": "2026-09-15T18:05:00Z",
+      "lastAgencyReplyAt": "2026-09-15T18:11:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "blocked_toilet",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "Toilet blocked and slow to drain. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P2",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; urgent amenity",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "URGENT_AMENITY_CLOCK",
+            "label": "Urgent repair clock: 3 days",
+            "effect": "P2, 72h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_002",
+            "label": "Prior agency ticket: blocked toilet, no backup WC during works",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 002",
+            "sourceRef": "Real Estate Agency Synthetic/002/index.md",
+            "quote": "The provider advised that removal could damage it because the screws were rusted and no backup toilet was available."
+          }
+        ],
+        "clock": {
+          "hours": 72,
+          "label": "Urgent: 72h / 3 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-002",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-09-15T18:05:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Toilet blocked and slow to drain."
+        },
+        {
+          "at": "2026-09-15T18:11:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-09-16T10:30:00Z",
+        "cause": "Wipes in the soil pipe",
+        "parts": "None",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Cleared blockage with drain rods",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 4,
+        "quality": 5,
+        "at": "2026-09-16T13:30:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-03",
+      "unitId": "u-new-403",
+      "createdAt": "2026-09-22T08:20:00Z",
+      "lastAgencyReplyAt": "2026-09-22T08:38:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "shower_leak",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "Shower leaking at the tray seal. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_037",
+            "label": "Prior agency ticket: leaking shower hose replaced by Birch Utilities",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 037",
+            "sourceRef": "Real Estate Agency Synthetic/037/index.md",
+            "quote": "a repair visit was arranged for Thursday, 4 April 2024, between 12 and 4"
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-037",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for the supply of water and sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-09-22T08:20:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Shower leaking at the tray seal."
+        },
+        {
+          "at": "2026-09-22T08:38:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-09-24T12:00:00Z",
+        "cause": "Failed silicone seal",
+        "parts": "Sanitary silicone",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Removed and resealed shower tray",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 4,
+        "quality": 4,
+        "at": "2026-09-24T15:00:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-04",
+      "unitId": "u-dwelly-002",
+      "createdAt": "2026-10-01T21:15:00Z",
+      "lastAgencyReplyAt": "2026-10-01T21:21:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "door_lock",
+        "room": "hallway",
+        "trade": "locksmith",
+        "hazardType": "none",
+        "summary": "Front door lock sticking, key hard to turn. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_STRUCTURE",
+            "label": "Landlord repairs structure and exterior (incl. doors)",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_022",
+            "label": "Prior agency ticket: front door lock changed; new key added to the office set",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 022",
+            "sourceRef": "Real Estate Agency Synthetic/022/index.md",
+            "quote": "The contractor confirmed the work was complete, including replacement of the lock; the new key was then added to the office set and copied."
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-022",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(a): structure and exterior (doors, windows)",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-10-01T21:15:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Front door lock sticking, key hard to turn."
+        },
+        {
+          "at": "2026-10-01T21:21:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Arthur Stuart (Dwelly case 022, example). Example data."
+        }
+      ],
+      "operatorId": "op-dwelly-locksmith",
+      "completion": {
+        "at": "2026-10-02T09:00:00Z",
+        "cause": "Worn lock cylinder",
+        "parts": "Euro cylinder, anti-snap",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Replaced cylinder, issued 3 keys",
+        "followUpNeeded": false,
+        "operatorName": "Arthur Stuart (Dwelly case 022, example)",
+        "operatorTrade": "locksmith"
+      },
+      "rating": {
+        "speed": 5,
+        "quality": 4,
+        "at": "2026-10-02T12:00:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-05",
+      "unitId": "unt_00164",
+      "createdAt": "2026-10-07T06:55:00Z",
+      "lastAgencyReplyAt": "2026-10-07T07:07:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "no_heating",
+        "room": "unspecified",
+        "trade": "plumbing_heating",
+        "hazardType": "excess_cold",
+        "summary": "Radiators cold in living room. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P1",
+        "firedRules": [
+          {
+            "id": "S11_HEATING_HOT_WATER",
+            "label": "Landlord must keep heating and hot water installations in repair",
+            "effect": "Landlord responsibility",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "SEASON_WINTER",
+            "label": "Winter window (1 Oct – 31 Mar)",
+            "effect": "Escalate to P1",
+            "kind": "agency-policy",
+            "source": "Shelter Legal — heating, hot water and power problems (reasonable time can depend on season)",
+            "sourceUrl": "https://england.shelter.org.uk/professional_resources/legal/housing_conditions/responsibility_for_repairs/heating_hot_water_and_power_problems"
+          },
+          {
+            "id": "CORTILE_TKT_000096",
+            "label": "Demo replay of Cortile ticket tkt_000096 (Heating not working, unit 103)",
+            "effect": "Cite partner ticket; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Cortile tkt_000096",
+            "sourceUrl": "https://hackathon.cortile.com/"
+          }
+        ],
+        "clock": {
+          "hours": 24,
+          "label": "P1: 24h (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit unt_00164",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(c): installations for space heating and heating water",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Reg 000000-EXAMPLE (example — not a real registration)",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-10-07T06:55:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Radiators cold in living room."
+        },
+        {
+          "at": "2026-10-07T07:07:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-10-07T13:40:00Z",
+        "cause": "Airlocked radiators",
+        "parts": "None",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Bled radiators, balanced system",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 5,
+        "quality": 5,
+        "at": "2026-10-07T16:40:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-06",
+      "unitId": "u-dwelly-037",
+      "createdAt": "2026-10-13T12:10:00Z",
+      "lastAgencyReplyAt": "2026-10-13T12:40:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "shower_leak",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "Water dripping through ceiling under the shower. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_037",
+            "label": "Prior agency ticket: leaking shower hose replaced by Birch Utilities",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 037",
+            "sourceRef": "Real Estate Agency Synthetic/037/index.md",
+            "quote": "a repair visit was arranged for Thursday, 4 April 2024, between 12 and 4"
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-037",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for the supply of water and sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-10-13T12:10:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Water dripping through ceiling under the shower."
+        },
+        {
+          "at": "2026-10-13T12:40:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-10-16T11:00:00Z",
+        "cause": "Loose waste connection",
+        "parts": "Shower waste trap",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Replaced waste trap, tested for leaks",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 3,
+        "quality": 4,
+        "at": "2026-10-16T14:00:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-07",
+      "unitId": "u-dwelly-022",
+      "createdAt": "2026-10-20T19:30:00Z",
+      "lastAgencyReplyAt": "2026-10-20T19:42:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "door_lock",
+        "room": "hallway",
+        "trade": "locksmith",
+        "hazardType": "none",
+        "summary": "Back door will not lock. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_STRUCTURE",
+            "label": "Landlord repairs structure and exterior (incl. doors)",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_022",
+            "label": "Prior agency ticket: front door lock changed; new key added to the office set",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 022",
+            "sourceRef": "Real Estate Agency Synthetic/022/index.md",
+            "quote": "The contractor confirmed the work was complete, including replacement of the lock; the new key was then added to the office set and copied."
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-022",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(a): structure and exterior (doors, windows)",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Arthur Stuart (Dwelly case 022, example) — locksmith",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-10-20T19:30:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Back door will not lock."
+        },
+        {
+          "at": "2026-10-20T19:42:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Arthur Stuart (Dwelly case 022, example). Example data."
+        }
+      ],
+      "operatorId": "op-dwelly-locksmith",
+      "completion": {
+        "at": "2026-10-21T10:15:00Z",
+        "cause": "Misaligned keep",
+        "parts": "None",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Realigned keep and adjusted hinges",
+        "followUpNeeded": false,
+        "operatorName": "Arthur Stuart (Dwelly case 022, example)",
+        "operatorTrade": "locksmith"
+      },
+      "rating": {
+        "speed": 4,
+        "quality": 5,
+        "at": "2026-10-21T13:15:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-08",
+      "unitId": "u-old-1",
+      "createdAt": "2026-10-27T10:00:00Z",
+      "lastAgencyReplyAt": "2026-10-27T11:00:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "proposal": {
+        "issue": "floor_damage",
+        "room": "hallway",
+        "trade": "flooring_general",
+        "hazardType": "falls_on_level_surfaces",
+        "summary": "Loose floorboard in the bedroom. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_STRUCTURE",
+            "label": "Landlord repairs structure and exterior (incl. floors)",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-10-27T10:00:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Loose floorboard in the bedroom."
+        },
+        {
+          "at": "2026-10-27T11:00:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Northside Floors & Handyman (example). Example data."
+        }
+      ],
+      "source": "seed",
+      "operatorId": "op-handyman",
+      "completion": {
+        "at": "2026-10-30T14:30:00Z",
+        "cause": "Nails backed out of joist",
+        "parts": "Floor screws",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Screwed board down to joist",
+        "followUpNeeded": false,
+        "operatorName": "Northside Floors & Handyman (example)",
+        "operatorTrade": "flooring_general"
+      },
+      "rating": {
+        "speed": 3,
+        "quality": 3,
+        "at": "2026-10-30T17:30:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-09",
+      "unitId": "u-new-403",
+      "createdAt": "2026-11-03T08:45:00Z",
+      "lastAgencyReplyAt": "2026-11-03T08:51:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "blocked_toilet",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "Kitchen sink not draining. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P2",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; urgent amenity",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "URGENT_AMENITY_CLOCK",
+            "label": "Urgent repair clock: 3 days",
+            "effect": "P2, 72h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_002",
+            "label": "Prior agency ticket: blocked toilet, no backup WC during works",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 002",
+            "sourceRef": "Real Estate Agency Synthetic/002/index.md",
+            "quote": "The provider advised that removal could damage it because the screws were rusted and no backup toilet was available."
+          }
+        ],
+        "clock": {
+          "hours": 72,
+          "label": "Urgent: 72h / 3 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-002",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-03T08:45:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Kitchen sink not draining."
+        },
+        {
+          "at": "2026-11-03T08:51:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-11-03T16:20:00Z",
+        "cause": "Grease build-up in trap",
+        "parts": "None",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Cleared trap and flushed waste",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 5,
+        "quality": 5,
+        "at": "2026-11-03T19:20:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
+    },
+    {
+      "id": "j-ex-10",
+      "unitId": "unt_00164",
+      "createdAt": "2026-11-06T09:30:00Z",
+      "lastAgencyReplyAt": "2026-11-06T09:48:00Z",
+      "status": "completed",
+      "exampleData": true,
+      "source": "seed",
+      "proposal": {
+        "issue": "shower_leak",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "Bath tap dripping constantly. Example data.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_037",
+            "label": "Prior agency ticket: leaking shower hose replaced by Birch Utilities",
+            "effect": "Cite partner case history; does not change P1–P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 037",
+            "sourceRef": "Real Estate Agency Synthetic/037/index.md",
+            "quote": "a repair visit was arranged for Thursday, 4 April 2024, between 12 and 4"
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-037",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for the supply of water and sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) — plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE — check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-06T09:30:00Z",
+          "direction": "in",
+          "channel": "whatsapp",
+          "body": "Bath tap dripping constantly."
+        },
+        {
+          "at": "2026-11-06T09:48:00Z",
+          "direction": "out",
+          "channel": "whatsapp",
+          "body": "Booked with Hartley Plumbing & Heating (example). Example data."
+        }
+      ],
+      "operatorId": "op-plumber",
+      "completion": {
+        "at": "2026-11-07T11:45:00Z",
+        "cause": "Worn tap washer",
+        "parts": "Tap washer",
+        "fixed": true,
+        "followUp": "None",
+        "workDone": "Replaced washer, tap tested",
+        "followUpNeeded": false,
+        "operatorName": "Hartley Plumbing & Heating (example)",
+        "operatorTrade": "plumbing_heating"
+      },
+      "rating": {
+        "speed": 4,
+        "quality": 5,
+        "at": "2026-11-07T14:45:00Z",
+        "channel": "whatsapp",
+        "exampleData": true
+      }
     }
   ],
   "notices": [],
