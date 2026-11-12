@@ -144,13 +144,19 @@ export function CortileLive({ data }: { data: CortileDemoData }) {
           {data.unavailable ? " " : data.fetchedAt ? ` Last fetched ${formatLondonDate(data.fetchedAt)} Europe/London.` : ""}
         </p>
         {data.unavailable && (
-          <p className="mt-1 text-sm text-amber-800">Cortile live data unavailable</p>
+          <p className="mt-1 text-sm text-amber-800">
+            {data.reason === "missing_key"
+              ? "Cortile key is not set on this server (CORTILE_API_KEY), so Gorse House and Juniper House are not fetched here."
+              : "Cortile live data unavailable"}
+          </p>
         )}
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <BuildingCard b={gorse} extra={gorseExtra} />
-        <BuildingCard b={juniper} />
-      </div>
+      {data.reason !== "missing_key" && (
+        <div className="grid gap-4 md:grid-cols-2">
+          <BuildingCard b={gorse} extra={gorseExtra} />
+          <BuildingCard b={juniper} />
+        </div>
+      )}
     </section>
   );
 }

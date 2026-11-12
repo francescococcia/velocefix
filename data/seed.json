@@ -839,7 +839,7 @@
       "id": "j-cortile-000096",
       "unitId": "unt_00164",
       "createdAt": "2026-11-12T20:30:00Z",
-      "lastAgencyReplyAt": null,
+      "lastAgencyReplyAt": "2026-11-12T20:31:12Z",
       "status": "booked",
       "exampleData": true,
       "source": "Cortile tkt_000096",
@@ -934,6 +934,12 @@
           "direction": "in",
           "body": "The heating isn't coming on at all. Thermostat shows it calling for heat.",
           "hasMedia": false,
+          "channel": "whatsapp"
+        },
+        {
+          "at": "2026-11-12T20:31:12Z",
+          "direction": "out",
+          "body": "✅ Booked: Hartley Plumbing & Heating (example), Fri 13 Nov, 08:00–10:00. Seeded demo replay.",
           "channel": "whatsapp"
         }
       ],
