@@ -13,10 +13,17 @@ export function keywordProposal(text: string, rooms: string[] = []): Proposal {
   else if (/spark|burning smell|exposed wire|electric shock/.test(t)) issue = "electrical_danger";
   else if (/no hot water|hot water (is ?n.t|not|won.t)|tap stuck|shut the (hot )?water/.test(t)) issue = "no_hot_water";
   else if (/no heating|heating (is ?n.t|not|won.t)|radiators? (are |is )?cold|boiler/.test(t)) issue = "no_heating";
+  else if (/blocked toilet|toilet.*block|blockage|pan connector/.test(t)) issue = "blocked_toilet";
+  else if (/shower (cable|hose|handle).*(leak|damaged)|leaking.*shower (cable|hose)/.test(t)) issue = "shower_leak";
   else if (/leak|flood|burst|pouring/.test(t)) issue = "water_leak";
+  else if (/hard to turn|fiddling with the keys|front door lock/.test(t)) issue = "door_lock";
   else if (/break.?in|won.t lock|lock (is )?broken/.test(t)) issue = "insecure_entry";
   else if (/floor/.test(t)) issue = "floor_damage";
-  const room = rooms.find((r) => t.includes(r.toLowerCase())) ?? (issue === "floor_damage" ? "hallway" : "unspecified");
+  const roomFromText = rooms.find((r) => t.includes(r.toLowerCase()));
+  const room = roomFromText
+    ?? (issue === "floor_damage" || issue === "door_lock" ? "hallway"
+      : issue === "blocked_toilet" || issue === "shower_leak" ? "bathroom"
+      : "unspecified");
   const hazardType = issue === "no_hot_water" || issue === "no_heating" ? "excess_cold" : issue === "gas_smell" ? "fire_and_explosions" : issue === "floor_damage" ? "falls_on_level_surfaces" : "none";
   return { issue, room, trade: TRADE_FOR_ISSUE[issue], hazardType, summary: text.slice(0, 200), by: "fallback" };
 }

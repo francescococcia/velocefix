@@ -57,6 +57,18 @@ export function prioritise(i: PriorityInput): PriorityResult {
       const age = i.boiler ? now.getUTCFullYear() - i.boiler.yearInstalled : 0;
       if (age >= APP.boilerOldAgeYears) { level -= 1; add({ id: "ASSET_BOILER_AGE", label: `Boiler is ${age} years old`, effect: "Escalate one level", kind: "agency-policy", source: SRC.agency.source }); }
     }
+  } else if (i.issue === "blocked_toilet") {
+    level = 2;
+    add({ id: "S11_SANITARY", label: "Landlord must keep sanitation installations in repair", effect: "Landlord responsibility; urgent amenity", kind: "statute", source: SRC.s11.source, sourceUrl: SRC.s11.url });
+    add({ id: "URGENT_AMENITY_CLOCK", label: "Urgent repair clock: 3 days", effect: "P2, 72h agency-policy clock", kind: "agency-policy", source: SRC.agency.source });
+  } else if (i.issue === "shower_leak") {
+    level = 3;
+    add({ id: "S11_SANITARY", label: "Landlord must keep sanitation installations in repair", effect: "Landlord responsibility; routine repair", kind: "statute", source: SRC.s11.source, sourceUrl: SRC.s11.url });
+    add({ id: "ROUTINE_CLOCK", label: "Routine repair clock: 7 days", effect: "P3, 168h agency-policy clock", kind: "agency-policy", source: SRC.agency.source });
+  } else if (i.issue === "door_lock") {
+    level = 3;
+    add({ id: "S11_STRUCTURE", label: "Landlord repairs structure and exterior (incl. doors)", effect: "Landlord responsibility; routine repair", kind: "statute", source: SRC.s11.source, sourceUrl: SRC.s11.url });
+    add({ id: "ROUTINE_CLOCK", label: "Routine repair clock: 7 days", effect: "P3, 168h agency-policy clock", kind: "agency-policy", source: SRC.agency.source });
   } else if (i.issue === "floor_damage") {
     add({ id: "S11_STRUCTURE", label: "Landlord repairs structure and exterior (incl. floors)", effect: "Landlord responsibility; routine", kind: "statute", source: SRC.s11.source, sourceUrl: SRC.s11.url });
     if (warranty) { destination = "refer_developer"; add({ id: "WARRANTY_DEVELOPER", label: "New build under warranty", effect: "Refer to developer", kind: "agency-policy", source: SRC.agency.source }); }

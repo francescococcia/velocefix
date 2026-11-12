@@ -4,21 +4,33 @@ import { PriorityBadge } from "@/components/PriorityBadge";
 
 export const dynamic = "force-dynamic";
 
+function buildingKind(type?: string) {
+  if (type === "period") return "Period house";
+  if (type === "new_build") return "New build";
+  return null;
+}
+
 export default function Dashboard() {
   const s = getStore();
   const now = Date.now();
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Agency desk — portfolio</h1>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {s.buildings.map((b) => {
           const units = s.units.filter((u) => u.buildingId === b.id);
           const jobs = s.jobs.filter((j) => units.some((u) => u.id === j.unitId));
           const boilers = s.assets.filter((a) => a.buildingId === b.id && a.type === "boiler");
+          const kind = buildingKind(b.type);
           return (
             <section key={b.id} className="bg-white rounded-lg shadow p-4">
-              <h2 className="text-lg font-semibold">{b.name}</h2>
-              <p className="text-sm text-slate-600">{b.type === "period" ? "Period house" : "New build"} · built {b.yearBuilt} · {b.tenure} let · {b.area}{b.warrantyUntil ? ` · warranty to ${b.warrantyUntil}` : ""}</p>
+              <div className="flex items-start gap-2">
+                <h2 className="text-lg font-semibold">{b.name}</h2>
+                {b.label && <span className="mt-1 shrink-0 rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">{b.label}</span>}
+              </div>
+              <p className="text-sm text-slate-600">
+                {[kind, b.yearBuilt ? `built ${b.yearBuilt}` : null, `${b.tenure} let`, b.area, b.warrantyUntil ? `warranty to ${b.warrantyUntil}` : null].filter(Boolean).join(" · ")}
+              </p>
               <ul className="text-xs text-slate-600 mt-2">
                 {boilers.map((a) => (
                   <li key={a.id}>Boiler {a.make}, {new Date().getFullYear() - a.yearInstalled}y old · Gas Safe due {a.gasSafeNextDue}</li>
@@ -31,11 +43,14 @@ export default function Dashboard() {
                   const due = dueAt(j.createdAt, j.priority.clock.hours);
                   const overdue = j.status !== "completed" && j.priority.clock.hours > 0 && due.getTime() < now;
                   const unit = units.find((u) => u.id === j.unitId);
+                  const dwelly = !!(j.source?.startsWith("Dwelly") || unit?.source?.startsWith("Dwelly"));
+                  const history = s.works.filter((w) => w.unitId === j.unitId);
                   return (
                     <li key={j.id} className="py-2 text-sm">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <PriorityBadge p={j.priority.priority} />
                         <span className="font-medium">{j.proposal.issue.replace(/_/g, " ")}</span>
+                        {dwelly && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-800">Dwelly</span>}
                         <span className="text-slate-500">· {unit?.label} · {j.proposal.room}</span>
                         <span className="ml-auto text-xs">{j.status}</span>
                       </div>
@@ -59,10 +74,29 @@ export default function Dashboard() {
                         <summary className="cursor-pointer text-slate-600">Why {j.priority.priority}?</summary>
                         <ul className="ml-4 list-disc">
                           {j.priority.firedRules.map((r) => (
-                            <li key={r.id}>{r.label} → {r.effect} <span className="text-slate-500">[{r.kind}] {r.sourceUrl ? <a className="underline" href={r.sourceUrl} target="_blank">{r.source}</a> : r.source}</span></li>
+                            <li key={r.id} className="mt-0.5">
+                              {r.label} → {r.effect}{" "}
+                              <span className="text-slate-500">[{r.kind}] {r.sourceUrl ? <a className="underline" href={r.sourceUrl} target="_blank">{r.source}</a> : r.source}</span>
+                              {r.quote && <blockquote className="mt-0.5 border-l-2 border-sky-200 pl-2 text-slate-600 italic">“{r.quote}”</blockquote>}
+                            </li>
                           ))}
                         </ul>
+                        {dwelly && <p className="mt-1 text-[11px] text-slate-500">Synthetic Dwelly hackathon case; ZZ postcode; original thread was not WhatsApp.</p>}
                       </details>
+                      {history.length > 0 && (
+                        <details className="text-xs mt-1">
+                          <summary className="cursor-pointer text-slate-600">Unit history ({history.length})</summary>
+                          <ul className="ml-4 list-disc">
+                            {history.map((w) => (
+                              <li key={w.id} className="mt-0.5">
+                                {w.date} · {w.summary}{" "}
+                                <span className="text-slate-500">[{w.source}]</span>
+                                {w.quote && <blockquote className="mt-0.5 border-l-2 border-sky-200 pl-2 text-slate-600 italic">“{w.quote}”</blockquote>}
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      )}
                     </li>
                   );
                 })}

@@ -6,7 +6,8 @@ import type { Asset, CheckRow, IssueCategory, Operator, PriorityResult, Proposal
 export const TRADE_FOR_ISSUE: Record<IssueCategory, Trade> = {
   no_hot_water: "plumbing_heating", no_heating: "plumbing_heating", water_leak: "plumbing_heating",
   gas_smell: "plumbing_heating", electrical_danger: "electrical", insecure_entry: "locksmith",
-  floor_damage: "flooring_general", other: "flooring_general",
+  floor_damage: "flooring_general", blocked_toilet: "plumbing_heating", shower_leak: "plumbing_heating",
+  door_lock: "locksmith", other: "flooring_general",
 };
 
 const S11_PART: Partial<Record<IssueCategory, string>> = {
@@ -17,6 +18,9 @@ const S11_PART: Partial<Record<IssueCategory, string>> = {
   electrical_danger: "s.11(1)(b): installations for the supply of electricity",
   floor_damage: "s.11(1)(a): structure and exterior",
   insecure_entry: "s.11(1)(a): structure and exterior (doors, windows)",
+  blocked_toilet: "s.11(1)(b): installations for sanitation",
+  shower_leak: "s.11(1)(b): installations for the supply of water and sanitation",
+  door_lock: "s.11(1)(a): structure and exterior (doors, windows)",
 };
 
 export function isGasWork(issue: IssueCategory, boiler?: Asset) {

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "label": "EXAMPLE DATA — two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo.",
+    "label": "EXAMPLE DATA \u2014 two fictional private buildings seeded from Francesco's two real repair stories (stuck hot-water tap, broken floor). Names, numbers, dates, certificates, registration numbers and slots are invented for the demo. Also includes short excerpts from Dwelly's synthetic letting-agency cases (Dwelly cases 002, 037, 022). Names and ZZ-postcode addresses are as supplied in the hackathon pack. Referenced photos/invoices in those histories were unavailable in the download. Original channels were email/SMS/call \u2014 the demo intake channel is WhatsApp.",
     "seededAt": "2026-11-12T20:15:00Z"
   },
   "buildings": [
@@ -25,12 +25,86 @@
       "warrantyProvider": "Developer / new-home warranty (example)",
       "description": "2024 new-build apartment block, still under developer warranty. Private tenancy. Example data.",
       "exampleData": true
+    },
+    {
+      "id": "b-dwelly-northbridge",
+      "name": "Northbridge Lettings book",
+      "label": "Dwelly partner data (synthetic)",
+      "area": "Alderhill (synthetic ZZ postcodes)",
+      "tenure": "private",
+      "description": "Synthetic private-let cases from the Dwelly hackathon partner pack (cases 002, 037, 022). Property strings and ZZ postcodes are as supplied. Referenced photos and invoices in those histories were unavailable in the download.",
+      "exampleData": true,
+      "source": "Dwelly cases 002, 037, 022"
     }
   ],
   "units": [
-    { "id": "u-old-1", "buildingId": "b-old-house", "label": "Flat 1 (ground floor)", "bedrooms": 1, "rooms": ["kitchen", "bathroom", "living room", "bedroom", "hallway"] },
-    { "id": "u-old-2", "buildingId": "b-old-house", "label": "Flat 2 (first floor)", "bedrooms": 2, "rooms": ["kitchen", "bathroom", "living room", "bedroom 1", "bedroom 2", "hallway"] },
-    { "id": "u-new-403", "buildingId": "b-new-build", "label": "Flat 4.03", "bedrooms": 2, "rooms": ["kitchen", "bathroom", "living room", "bedroom 1", "bedroom 2"] }
+    {
+      "id": "u-old-1",
+      "buildingId": "b-old-house",
+      "label": "Flat 1 (ground floor)",
+      "bedrooms": 1,
+      "rooms": [
+        "kitchen",
+        "bathroom",
+        "living room",
+        "bedroom",
+        "hallway"
+      ]
+    },
+    {
+      "id": "u-old-2",
+      "buildingId": "b-old-house",
+      "label": "Flat 2 (first floor)",
+      "bedrooms": 2,
+      "rooms": [
+        "kitchen",
+        "bathroom",
+        "living room",
+        "bedroom 1",
+        "bedroom 2",
+        "hallway"
+      ]
+    },
+    {
+      "id": "u-new-403",
+      "buildingId": "b-new-build",
+      "label": "Flat 4.03",
+      "bedrooms": 2,
+      "rooms": [
+        "kitchen",
+        "bathroom",
+        "living room",
+        "bedroom 1",
+        "bedroom 2"
+      ]
+    },
+    {
+      "id": "u-dwelly-002",
+      "buildingId": "b-dwelly-northbridge",
+      "label": "Flat 3, 15 Willowdale Road, Alderhill, ZZ3 2ZZ",
+      "rooms": [
+        "bathroom"
+      ],
+      "source": "Dwelly case 002"
+    },
+    {
+      "id": "u-dwelly-037",
+      "buildingId": "b-dwelly-northbridge",
+      "label": "Flat 14, 44 Lamplight Quay, Alderhill, ZZ9 8ZZ",
+      "rooms": [
+        "bathroom"
+      ],
+      "source": "Dwelly case 037"
+    },
+    {
+      "id": "u-dwelly-022",
+      "buildingId": "b-dwelly-northbridge",
+      "label": "Flat 23, 155 Willowdale Road, Alderhill, ZZ5 2ZZ",
+      "rooms": [
+        "hallway"
+      ],
+      "source": "Dwelly case 022"
+    }
   ],
   "tenants": [
     {
@@ -54,6 +128,30 @@
       "displayName": "Tenant C (example)",
       "phoneHash": "738591552cbeb39087e91b524a0d94d71d62e40cc5f25aa32cba2dc5cc8a3174",
       "vulnerableOccupant": false
+    },
+    {
+      "id": "t-dwelly-002",
+      "unitId": "u-dwelly-002",
+      "displayName": "Tenant (Dwelly case 002)",
+      "phoneHash": "3250e84b492ec37d0a24709a411e9bfb3a208bedcac61828bd2b88e5cad9f8da",
+      "vulnerableOccupant": false,
+      "source": "Dwelly case 002"
+    },
+    {
+      "id": "t-dwelly-037",
+      "unitId": "u-dwelly-037",
+      "displayName": "Tenant (Dwelly case 037)",
+      "phoneHash": "2c5255a8b9b44280c7125b074e564e5d9754a6332ccbe4f620cfc46e1145be69",
+      "vulnerableOccupant": false,
+      "source": "Dwelly case 037"
+    },
+    {
+      "id": "t-dwelly-022",
+      "unitId": "u-dwelly-022",
+      "displayName": "Tenant (Dwelly case 022)",
+      "phoneHash": "b37fa6f6da109f73af47e27395bdbadcc6cf1c72a16e863feb5f896d70789453",
+      "vulnerableOccupant": false,
+      "source": "Dwelly case 022"
     }
   ],
   "assets": [
@@ -128,13 +226,33 @@
       "name": "Hartley Plumbing & Heating (example)",
       "trade": "plumbing_heating",
       "gasSafeRegNo": "000000-EXAMPLE",
-      "gasSafeRegNoLabel": "Example registration number — not a real Gas Safe ID",
+      "gasSafeRegNoLabel": "Example registration number \u2014 not a real Gas Safe ID",
       "gasSafeVerified": true,
       "slots": [
-        { "id": "s-pl-1", "start": "2026-11-13T08:00:00Z", "end": "2026-11-13T10:00:00Z", "booked": false },
-        { "id": "s-pl-2", "start": "2026-11-13T12:00:00Z", "end": "2026-11-13T14:00:00Z", "booked": false },
-        { "id": "s-pl-3", "start": "2026-11-13T16:00:00Z", "end": "2026-11-13T18:00:00Z", "booked": false },
-        { "id": "s-pl-4", "start": "2026-11-14T09:00:00Z", "end": "2026-11-14T11:00:00Z", "booked": false }
+        {
+          "id": "s-pl-1",
+          "start": "2026-11-13T08:00:00Z",
+          "end": "2026-11-13T10:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-pl-2",
+          "start": "2026-11-13T12:00:00Z",
+          "end": "2026-11-13T14:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-pl-3",
+          "start": "2026-11-13T16:00:00Z",
+          "end": "2026-11-13T18:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-pl-4",
+          "start": "2026-11-14T09:00:00Z",
+          "end": "2026-11-14T11:00:00Z",
+          "booked": false
+        }
       ]
     },
     {
@@ -142,19 +260,161 @@
       "name": "Northside Floors & Handyman (example)",
       "trade": "flooring_general",
       "slots": [
-        { "id": "s-hm-1", "start": "2026-11-13T09:00:00Z", "end": "2026-11-13T11:00:00Z", "booked": false },
-        { "id": "s-hm-2", "start": "2026-11-13T14:00:00Z", "end": "2026-11-13T16:00:00Z", "booked": false },
-        { "id": "s-hm-3", "start": "2026-11-16T09:00:00Z", "end": "2026-11-16T11:00:00Z", "booked": false },
-        { "id": "s-hm-4", "start": "2026-11-17T13:00:00Z", "end": "2026-11-17T15:00:00Z", "booked": false }
+        {
+          "id": "s-hm-1",
+          "start": "2026-11-13T09:00:00Z",
+          "end": "2026-11-13T11:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-hm-2",
+          "start": "2026-11-13T14:00:00Z",
+          "end": "2026-11-13T16:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-hm-3",
+          "start": "2026-11-16T09:00:00Z",
+          "end": "2026-11-16T11:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-hm-4",
+          "start": "2026-11-17T13:00:00Z",
+          "end": "2026-11-17T15:00:00Z",
+          "booked": false
+        }
+      ]
+    },
+    {
+      "id": "op-dwelly-locksmith",
+      "name": "Arthur Stuart (Dwelly case 022, example)",
+      "trade": "locksmith",
+      "source": "Dwelly case 022",
+      "slots": [
+        {
+          "id": "s-lk-1",
+          "start": "2026-11-13T10:00:00Z",
+          "end": "2026-11-13T12:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-lk-2",
+          "start": "2026-11-13T14:00:00Z",
+          "end": "2026-11-13T16:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-lk-3",
+          "start": "2026-11-14T09:00:00Z",
+          "end": "2026-11-14T11:00:00Z",
+          "booked": false
+        },
+        {
+          "id": "s-lk-4",
+          "start": "2026-11-16T13:00:00Z",
+          "end": "2026-11-16T15:00:00Z",
+          "booked": false
+        }
       ]
     }
   ],
   "works": [
-    { "id": "w-1", "unitId": "u-old-2", "assetId": "a-old-2-boiler", "date": "2025-12-02", "trade": "plumbing_heating", "category": "no_heating", "summary": "Boiler lost pressure; repressurised, replaced PRV. Example.", "source": "seed" },
-    { "id": "w-2", "unitId": "u-old-2", "assetId": "a-old-2-boiler", "date": "2026-01-15", "trade": "plumbing_heating", "category": "other", "summary": "Annual gas safety check — pass. Example.", "source": "seed" },
-    { "id": "w-3", "unitId": "u-old-1", "date": "2025-06-10", "trade": "flooring_general", "category": "floor_damage", "summary": "Kitchen vinyl patched. Example.", "source": "seed" },
-    { "id": "w-4", "unitId": "u-new-403", "assetId": "a-new-403-boiler", "date": "2026-08-21", "trade": "plumbing_heating", "category": "no_hot_water", "summary": "Intermittent no hot water — developer's engineer reset, no fault found. Example.", "intermittent": true, "source": "seed" },
-    { "id": "w-5", "unitId": "u-new-403", "assetId": "a-new-403-boiler", "date": "2026-10-09", "trade": "plumbing_heating", "category": "no_hot_water", "summary": "Intermittent no hot water again — logged with developer warranty, monitoring. Example.", "intermittent": true, "source": "seed" }
+    {
+      "id": "w-1",
+      "unitId": "u-old-2",
+      "assetId": "a-old-2-boiler",
+      "date": "2025-12-02",
+      "trade": "plumbing_heating",
+      "category": "no_heating",
+      "summary": "Boiler lost pressure; repressurised, replaced PRV. Example.",
+      "source": "seed"
+    },
+    {
+      "id": "w-2",
+      "unitId": "u-old-2",
+      "assetId": "a-old-2-boiler",
+      "date": "2026-01-15",
+      "trade": "plumbing_heating",
+      "category": "other",
+      "summary": "Annual gas safety check \u2014 pass. Example.",
+      "source": "seed"
+    },
+    {
+      "id": "w-3",
+      "unitId": "u-old-1",
+      "date": "2025-06-10",
+      "trade": "flooring_general",
+      "category": "floor_damage",
+      "summary": "Kitchen vinyl patched. Example.",
+      "source": "seed"
+    },
+    {
+      "id": "w-4",
+      "unitId": "u-new-403",
+      "assetId": "a-new-403-boiler",
+      "date": "2026-08-21",
+      "trade": "plumbing_heating",
+      "category": "no_hot_water",
+      "summary": "Intermittent no hot water \u2014 developer's engineer reset, no fault found. Example.",
+      "intermittent": true,
+      "source": "seed"
+    },
+    {
+      "id": "w-5",
+      "unitId": "u-new-403",
+      "assetId": "a-new-403-boiler",
+      "date": "2026-10-09",
+      "trade": "plumbing_heating",
+      "category": "no_hot_water",
+      "summary": "Intermittent no hot water again \u2014 logged with developer warranty, monitoring. Example.",
+      "intermittent": true,
+      "source": "seed"
+    },
+    {
+      "id": "w-dwelly-002-visit",
+      "unitId": "u-dwelly-002",
+      "date": "2026-08-08",
+      "trade": "plumbing_heating",
+      "category": "blocked_toilet",
+      "summary": "The engineer from Riverside Works attended the scheduled appointment for a blocked toilet at the provided address. The toilet requires repiping, but there is a risk of damaging it during removal due to rusted screws and no backup is available.",
+      "source": "Dwelly case 002",
+      "sourceRef": "Real Estate Agency Synthetic/002/history.md",
+      "quote": "The toilet requires repiping, but there is a risk of damaging it during removal due to rusted screws and no backup is available."
+    },
+    {
+      "id": "w-dwelly-002-complete",
+      "unitId": "u-dwelly-002",
+      "date": "2026-08-15",
+      "trade": "plumbing_heating",
+      "category": "blocked_toilet",
+      "summary": "The provider confirmed the toilet work was completed and supplied a completion image and invoice.",
+      "source": "Dwelly case 002",
+      "sourceRef": "Real Estate Agency Synthetic/002/index.md",
+      "quote": "The provider confirmed the toilet work was completed and supplied a completion image and invoice."
+    },
+    {
+      "id": "w-dwelly-037-complete",
+      "unitId": "u-dwelly-037",
+      "date": "2024-04-06",
+      "trade": "plumbing_heating",
+      "category": "shower_leak",
+      "summary": "The contractor replaced the snapped shower hose.",
+      "source": "Dwelly case 037",
+      "sourceRef": "Real Estate Agency Synthetic/037/index.md",
+      "quote": "The contractor replaced the snapped shower hose."
+    },
+    {
+      "id": "w-dwelly-022-complete",
+      "unitId": "u-dwelly-022",
+      "date": "2024-11-21",
+      "trade": "locksmith",
+      "category": "door_lock",
+      "summary": "The contractor confirmed the work was complete, including replacement of the lock; the new key was then added to the office set and copied.",
+      "source": "Dwelly case 022",
+      "sourceRef": "Real Estate Agency Synthetic/022/index.md",
+      "quote": "21.11.24 Maia brought new key in added to keys and copied - Ada"
+    }
   ],
   "jobs": [
     {
@@ -191,14 +451,336 @@
             "source": "Agency repair policy (example)"
           }
         ],
-        "clock": { "hours": 168, "label": "Routine: 7 days (agency policy)", "basis": "agency-policy" },
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
         "destination": "book",
         "autoBookAllowed": true
       },
       "checks": [],
       "overrides": [],
       "messages": [
-        { "at": "2026-10-22T09:12:00Z", "direction": "in", "body": "Floorboards in the hallway are broken and lifting, photos attached.", "hasMedia": true, "channel": "portal" }
+        {
+          "at": "2026-10-22T09:12:00Z",
+          "direction": "in",
+          "body": "Floorboards in the hallway are broken and lifting, photos attached.",
+          "hasMedia": true,
+          "channel": "portal"
+        }
+      ]
+    },
+    {
+      "id": "j-dwelly-002",
+      "unitId": "u-dwelly-002",
+      "createdAt": "2026-11-12T19:00:00Z",
+      "lastAgencyReplyAt": null,
+      "status": "open",
+      "exampleData": true,
+      "source": "Dwelly case 002",
+      "sourceRef": "Real Estate Agency Synthetic/002/index.md",
+      "quote": "The provider advised that removal could damage it because the screws were rusted and no backup toilet was available.",
+      "proposal": {
+        "issue": "blocked_toilet",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "The tenant reported a blocked toilet. The landlord approved contractor attendance, and the initial visit found that the toilet required repiping; the provider advised that removal could damage it because the screws were rusted and no backup toilet was available.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P2",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; urgent amenity",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "URGENT_AMENITY_CLOCK",
+            "label": "Urgent repair clock: 3 days",
+            "effect": "P2, 72h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_002",
+            "label": "Prior agency ticket: blocked toilet, no backup WC during works",
+            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 002",
+            "sourceRef": "Real Estate Agency Synthetic/002/index.md",
+            "quote": "The provider advised that removal could damage it because the screws were rusted and no backup toilet was available."
+          }
+        ],
+        "clock": {
+          "hours": 72,
+          "label": "Urgent: 72h / 3 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-002",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-12T19:00:00Z",
+          "direction": "in",
+          "body": "Toilet need to be removed to clear blockage. Run block lodged by pan connector.",
+          "hasMedia": false,
+          "channel": "whatsapp"
+        }
+      ]
+    },
+    {
+      "id": "j-dwelly-037",
+      "unitId": "u-dwelly-037",
+      "createdAt": "2026-11-12T19:05:00Z",
+      "lastAgencyReplyAt": null,
+      "status": "open",
+      "exampleData": true,
+      "source": "Dwelly case 037",
+      "sourceRef": "Real Estate Agency Synthetic/037/index.md",
+      "quote": "a repair visit was arranged for Thursday, 4 April 2024, between 12 and 4",
+      "proposal": {
+        "issue": "shower_leak",
+        "room": "bathroom",
+        "trade": "plumbing_heating",
+        "hazardType": "none",
+        "summary": "The tenant reported a leaking, damaged shower cable and asked for it to be replaced.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_SANITARY",
+            "label": "Landlord must keep sanitation installations in repair",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_037",
+            "label": "Prior agency ticket: leaking shower hose replaced by Birch Utilities",
+            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 037",
+            "sourceRef": "Real Estate Agency Synthetic/037/index.md",
+            "quote": "a repair visit was arranged for Thursday, 4 April 2024, between 12 and 4"
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-037",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(b): installations for the supply of water and sanitation",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Hartley Plumbing & Heating (example) \u2014 plumbing_heating",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-12T19:05:00Z",
+          "direction": "in",
+          "body": "Shower cable leading to the shower handle is damaged and leaking. \nPlease replace",
+          "hasMedia": false,
+          "channel": "whatsapp"
+        }
+      ]
+    },
+    {
+      "id": "j-dwelly-022",
+      "unitId": "u-dwelly-022",
+      "createdAt": "2026-11-12T19:10:00Z",
+      "lastAgencyReplyAt": null,
+      "status": "open",
+      "exampleData": true,
+      "source": "Dwelly case 022",
+      "sourceRef": "Real Estate Agency Synthetic/022/index.md",
+      "quote": "The contractor confirmed the work was complete, including replacement of the lock; the new key was then added to the office set and copied.",
+      "proposal": {
+        "issue": "door_lock",
+        "room": "hallway",
+        "trade": "locksmith",
+        "hazardType": "none",
+        "summary": "The tenant reported that the front door keys were difficult to turn, sometimes leaving them at the door for a couple of minutes.",
+        "by": "seed"
+      },
+      "priority": {
+        "priority": "P3",
+        "firedRules": [
+          {
+            "id": "S11_STRUCTURE",
+            "label": "Landlord repairs structure and exterior (incl. doors)",
+            "effect": "Landlord responsibility; routine repair",
+            "kind": "statute",
+            "source": "Landlord and Tenant Act 1985, s.11",
+            "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+          },
+          {
+            "id": "ROUTINE_CLOCK",
+            "label": "Routine repair clock: 7 days",
+            "effect": "P3, 168h agency-policy clock",
+            "kind": "agency-policy",
+            "source": "Agency repair policy (example)"
+          },
+          {
+            "id": "DWELLY_CASE_022",
+            "label": "Prior agency ticket: front door lock changed; new key added to the office set",
+            "effect": "Cite partner case history; does not change P1\u2013P4 thresholds",
+            "kind": "partner-data",
+            "source": "Dwelly case 022",
+            "sourceRef": "Real Estate Agency Synthetic/022/index.md",
+            "quote": "The contractor confirmed the work was complete, including replacement of the lock; the new key was then added to the office set and copied."
+          }
+        ],
+        "clock": {
+          "hours": 168,
+          "label": "Routine: 7 days (agency policy)",
+          "basis": "agency-policy"
+        },
+        "destination": "book",
+        "autoBookAllowed": true
+      },
+      "checks": [
+        {
+          "id": "UNIT_MATCH",
+          "label": "Tenant matched to unit",
+          "status": "green",
+          "detail": "Hashed number matches unit u-dwelly-022",
+          "source": "Agency tenancy record (example data)"
+        },
+        {
+          "id": "RESPONSIBILITY",
+          "label": "Landlord responsible (s.11 LTA 1985)",
+          "status": "green",
+          "detail": "s.11(1)(a): structure and exterior (doors, windows)",
+          "source": "Landlord and Tenant Act 1985, s.11",
+          "sourceUrl": "https://www.legislation.gov.uk/ukpga/1985/70/section/11"
+        },
+        {
+          "id": "TRADE_MATCH",
+          "label": "Right trade on the approved list",
+          "status": "green",
+          "detail": "Arthur Stuart (Dwelly case 022, example) \u2014 locksmith",
+          "source": "Agency approved-contractor list (example data)"
+        },
+        {
+          "id": "GAS_SAFE",
+          "label": "Gas Safe registered engineer",
+          "status": "green",
+          "detail": "Not gas work",
+          "source": "HSE \u2014 check an engineer is Gas Safe registered",
+          "sourceUrl": "https://www.hse.gov.uk/gas/gas-safe-register-check.htm"
+        },
+        {
+          "id": "SLOT_AVAILABLE",
+          "label": "Slot free",
+          "status": "green",
+          "detail": "4 free slot(s)",
+          "source": "Contractor diary (seeded example slots)"
+        }
+      ],
+      "overrides": [],
+      "messages": [
+        {
+          "at": "2026-11-12T19:10:00Z",
+          "direction": "in",
+          "body": "Front door lock, the keys gets very hard to turn to unlock, thos sometimes leads to me standing at the door fiddling with the keys for a couple of minutes just so I can go outside.",
+          "hasMedia": false,
+          "channel": "whatsapp"
+        }
       ]
     }
   ],

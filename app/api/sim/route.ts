@@ -9,6 +9,9 @@ const SIM_TENANTS = [
   { phone: "+447700900101", label: "Tenant A — Albion Terrace Flat 2 (old house, vulnerable flag)" },
   { phone: "+447700900102", label: "Tenant B — Albion Terrace Flat 1 (old house)" },
   { phone: "+447700900201", label: "Tenant C — Riverside Wharf 4.03 (new build, warranty)" },
+  { phone: "+447700900422", label: "Tenant (Dwelly case 002) — Flat 3, 15 Willowdale Road (blocked toilet)" },
+  { phone: "+447700900758", label: "Tenant (Dwelly case 037) — Flat 14, 44 Lamplight Quay (shower hose)" },
+  { phone: "+447700900246", label: "Tenant (Dwelly case 022) — Flat 23, 155 Willowdale Road (front door lock)" },
   { phone: "+447700900999", label: "Unknown number" },
 ];
 

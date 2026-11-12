@@ -13,6 +13,9 @@ export type IssueCategory =
   | "electrical_danger"
   | "insecure_entry"
   | "floor_damage"
+  | "blocked_toilet"
+  | "shower_leak"
+  | "door_lock"
   | "other";
 
 export type Trade = "plumbing_heating" | "electrical" | "flooring_general" | "locksmith";
@@ -33,21 +36,24 @@ export interface Building {
   id: string;
   name: string;
   area: string; // rough area only, no full address
-  type: BuildingType;
-  yearBuilt: number;
+  type?: BuildingType; // omitted when the source pack does not give a building type
+  yearBuilt?: number;
   tenure: Tenure;
   warrantyUntil?: string; // ISO date
   warrantyProvider?: string;
   description: string;
   exampleData: true;
+  label?: string; // honesty label, e.g. "Dwelly partner data (synthetic)"
+  source?: string;
 }
 
 export interface Unit {
   id: string;
   buildingId: string;
   label: string;
-  bedrooms: number;
+  bedrooms?: number; // omitted when the source pack does not give a count
   rooms: string[];
+  source?: string;
 }
 
 export interface Tenant {
@@ -57,6 +63,7 @@ export interface Tenant {
   phoneHash: string; // sha256 of E.164 number; raw number never stored
   vulnerableOccupant: boolean; // AGENCY-POLICY flag, not a medical record
   vulnerabilityNote?: string;
+  source?: string;
 }
 
 export interface Asset {
@@ -92,6 +99,7 @@ export interface Operator {
   gasSafeRegNoLabel?: string; // e.g. "example — not a real registration"
   gasSafeVerified?: boolean; // seeded; PAR1 may replace with a live cited lookup
   slots: Slot[];
+  source?: string;
 }
 
 export interface Work {
@@ -103,10 +111,12 @@ export interface Work {
   category: IssueCategory;
   summary: string;
   intermittent?: boolean;
-  source: "seed" | "completed";
+  source: "seed" | "completed" | "Dwelly case 002" | "Dwelly case 037" | "Dwelly case 022";
+  quote?: string;
+  sourceRef?: string;
 }
 
-export type RuleKind = "agency-policy" | "statute" | "safety";
+export type RuleKind = "agency-policy" | "statute" | "safety" | "partner-data";
 
 export interface FiredRule {
   id: string;
@@ -115,6 +125,8 @@ export interface FiredRule {
   kind: RuleKind;
   source: string; // human-readable source
   sourceUrl?: string;
+  sourceRef?: string;
+  quote?: string; // short exact quote from a cited partner case
 }
 
 export type Destination = "book" | "refer_developer" | "gas_emergency" | "question";
@@ -197,6 +209,9 @@ export interface Job {
   messages: Message[];
   completion?: Completion;
   exampleData?: boolean;
+  source?: string;
+  sourceRef?: string;
+  quote?: string;
 }
 
 export interface NoticeDraft {

@@ -19,4 +19,8 @@ export const SRC = {
     url: "https://www.gov.uk/government/publications/awaabs-law-guidance-for-social-landlords/awaabs-law-guidance-for-social-landlords-timeframes-for-repairs-in-the-social-rented-sector",
   },
   agency: { source: "Agency repair policy (example, set in config/app.ts and lib/priority.ts)" },
+  dwelly: { source: "Dwelly partner data (synthetic letting-agency cases, hackathon pack)" },
+  dwelly002: { source: "Dwelly case 002", sourceRef: "Real Estate Agency Synthetic/002/index.md" },
+  dwelly037: { source: "Dwelly case 037", sourceRef: "Real Estate Agency Synthetic/037/index.md" },
+  dwelly022: { source: "Dwelly case 022", sourceRef: "Real Estate Agency Synthetic/022/index.md" },
 } as const;
